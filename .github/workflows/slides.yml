@@ -1,0 +1,45 @@
+name: Build and deploy Marp slides
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'OSSJ_2025/**'
+      - '.github/workflows/slides.yml'
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Marp CLI
+        run: npm install -g @marp-team/marp-cli
+
+      - name: Build slides (HTML + PDF)
+        run: |
+          mkdir -p dist/OSSJ_2025
+          marp OSSJ_2025/OSSJ_2025_kernelci-cli.md \
+            --theme-set OSSJ_2025/gyaru.css \
+            --html \
+            --output dist/OSSJ_2025/index.html
+
+          marp OSSJ_2025/OSSJ_2025_kernelci-cli.md \
+            --theme-set OSSJ_2025/gyaru.css \
+            --pdf \
+            --output dist/OSSJ_2025/OSSJ_2025_kernelci-cli.pdf
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./dist

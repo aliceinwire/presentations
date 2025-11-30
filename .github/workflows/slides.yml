@@ -25,17 +25,14 @@ jobs:
         run: npm install -g @marp-team/marp-cli
 
       - name: Build slides (HTML + PDF)
+        working-directory: OSSJ_2025
+        run: make
+
+      - name: Prepare distribution directory
         run: |
           mkdir -p dist/OSSJ_2025
-          marp OSSJ_2025/OSSJ_2025_kernelci-cli.md \
-            --theme-set OSSJ_2025/gyaru.css \
-            --html \
-            --output dist/OSSJ_2025/index.html
-
-          marp OSSJ_2025/OSSJ_2025_kernelci-cli.md \
-            --theme-set OSSJ_2025/gyaru.css \
-            --pdf \
-            --output dist/OSSJ_2025/OSSJ_2025_kernelci-cli.pdf
+          cp OSSJ_2025/OSSJ_2025_kernelci-cli.html dist/OSSJ_2025/index.html
+          cp OSSJ_2025/OSSJ_2025_kernelci-cli.pdf dist/OSSJ_2025/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

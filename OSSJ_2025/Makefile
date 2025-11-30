@@ -3,7 +3,7 @@ THEME   = gyaru.css
 PDF_OUT = OSSJ_2025_kernelci-cli.pdf
 HTML_OUT = OSSJ_2025_kernelci-cli.html
 
-all: pdf
+all: html pdf
 
 pdf:
 	marp $(MARPDOC) --theme-set $(THEME) --pdf -o $(PDF_OUT)
@@ -16,3 +16,5 @@ watch:
 
 clean:
 	rm -f $(PDF_OUT) $(HTML_OUT)
+
+.PHONY: all pdf html watch clean

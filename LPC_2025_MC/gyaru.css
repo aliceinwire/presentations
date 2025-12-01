@@ -1,0 +1,55 @@
+/* @theme gyaru */
+
+@import 'default';
+
+/* Global slide style */
+section {
+  background: linear-gradient(135deg, #ffb6e1, #ffe6f5);
+  color: #301020;
+  font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
+}
+
+/* Titles */
+section h1 {
+  font-size: 2.2em;
+  letter-spacing: 0.03em;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.7);
+}
+
+section h2,
+section h3 {
+  color: #c2185b;
+}
+
+/* Lists */
+section ul li {
+  margin: 0.3em 0;
+}
+
+/* Code blocks */
+section pre {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  padding: 0.6em 0.8em;
+  font-size: 0.9em;
+}
+
+/* Tiny sparkle in the corner */
+section::after {
+  content: "✨";
+  position: absolute;
+  bottom: 10px;
+  right: 16px;
+  opacity: 0.7;
+  font-size: 1.2em;
+}
+
+/* Optional special classes */
+section.big-title h1 {
+  font-size: 2.8em;
+}
+
+section.highlight {
+  background: radial-gradient(circle at top left, #fff, #ffb6e1, #ff85b3);
+}
+

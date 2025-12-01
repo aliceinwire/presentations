@@ -3,15 +3,15 @@ marp: true
 theme: gyaru
 title: Getting Started With New KernelCI CLI Tools
 paginate: true
-footer: "Your Name – OSS Japan 2025"
+footer: "Arisu Tachibana – OSS Japan 2025"
 ---
 
 # Getting Started With New KernelCI CLI Tools
 
 ### Automating Linux Kernel Testing and Validation
 
-Your Name  
-KernelCI / Gentoo / etc.
+Arisu Tachibana
+KernelCI / Gentoo
 
 ---
 
@@ -48,7 +48,9 @@ KernelCI / Gentoo / etc.
 ## Introducing the KernelCI CLI Tools
 
 - **kci-dev**
-  - Developer-focused CLI for interacting with KernelCI
+  - Developer-focused CLI to interact with KernelCI dashboards and Maestro
+  - Installable from PyPI (`pip install kci-dev`) with shell completions for bash/zsh/fish
+  - Ships `results` (dashboard) and Maestro-centric commands in one binary
 - **kci-deploy** *(work in progress)*
   - Tool for deploying local / internal KernelCI maestro stacks
 - Goal: make KernelCI a first-class tool in your terminal
@@ -59,35 +61,50 @@ KernelCI / Gentoo / etc.
 
 ## kci-dev: What You Can Do Today
 
-Examples (adapt to real syntax):
+Dashboard (`results`) commands
 
 ```bash
-kci-dev builds list --branch topic/foo
-kci-dev results summary --commit <sha>
-kci-dev builds retry --build-id <id>
+kci-dev results summary --giturl https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git --branch master --history
+kci-dev results compare --giturl <git url> --branch <branch> <older> <newer>
+kci-dev results tests --giturl <git url> --branch <branch> --commit <sha>
+```
+
+Maestro commands (need config/token)
+
+```bash
+kci-dev checkout --branch <branch> --giturl <git url> --commit <sha>
+kci-dev testretry --id maestro:<node-id>
+kci-dev watch --id maestro:<node-id> --json
 ```
 
 ---
 
 ## kci-dev: Everyday Workflow
 
-1. **Discover builds**
-   - Filter by branch, commit, maintainer or config
-2. **Inspect results quickly**
-   - Summaries by status, platform, architecture
-3. **Retrigger or bisect**
-   - Kick a rebuild or boot test when needed
-4. **Download artifacts**
-   - Logs, dmesg, reports for offline inspection
+1. **Install & configure**
+   - `pip install kci-dev`; optional `virtualenv` + completions
+   - `kci-dev config` creates `~/.config/kci-dev/kci-dev.toml`
+   - Request API tokens from KernelCI GitHub issue template
+2. **Discover context**
+   - `kci-dev results trees` to see tracked repos/branches
+   - `kci-dev results summary --history` for recent pass/fail trends
+3. **Inspect and compare**
+   - `kci-dev results build|boot|test --id … --download-logs`
+   - `kci-dev results compare` to spot regressions between commits
+4. **Retrigger or watch jobs**
+   - `kci-dev testretry` for Maestro node IDs
+   - `kci-dev watch` to follow progress in the terminal
 
 ---
 
 ## kci-dev: Quality-of-Life Details
 
-- Rich output modes: table, JSON, and quiet for scripts
-- Persistent auth + endpoint profiles
-- Smart defaults (branch from git, latest results)
-- Designed for piping into jq, fzf, or notebooks
+- Rich output modes: table, JSON, quiet for scripts
+- `--history` summaries with pass/fail/inconclusive color coding
+- `compare` highlights regressions with dashboard/log links
+- `results hardware` views boards + per-board summaries
+- Profiles via `--instance` / `--settings` to switch endpoints
+- Designed for piping into `jq`, `fzf`, notebooks
 
 ---
 
@@ -95,7 +112,7 @@ kci-dev builds retry --build-id <id>
 
 - Simplifies standing up a Maestro stack
 - Encodes best practices for networking and storage
-- Same CLI UX as kci-dev
+- Shares the same UX patterns as kci-dev
 - Early previews welcome: help shape the roadmap!
 
 ---
@@ -113,16 +130,18 @@ kci-dev builds retry --build-id <id>
 
 ```bash
 # Configure once
-kci-dev profile add ossj --url https://linux.kernelci.org --token $TOKEN
+virtualenv .venv && source .venv/bin/activate
+pip install kci-dev
+kci-dev config  # writes ~/.config/kci-dev/kci-dev.toml
 
 # Morning health check
-kci-dev results summary --branch main --since 2d
+kci-dev results summary --giturl https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git --branch master --history
 
 # Investigate a failure
-kci-dev logs show --job <id> | less
+kci-dev results boot --id maestro:<node-id> --download-logs | less
 
 # Nudge infra
-kci-dev builds retry --build-id <id>
+kci-dev testretry --id maestro:<node-id>
 ```
 
 ---

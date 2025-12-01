@@ -4,7 +4,10 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'OSSJ_2025/**'
+      - '**/*.md'
+      - '**/*.css'
+      - 'Makefile'
+      - 'presentation.mk'
       - '.github/workflows/slides.yml'
   workflow_dispatch:
 
@@ -25,14 +28,63 @@ jobs:
         run: npm install -g @marp-team/marp-cli
 
       - name: Build slides (HTML + PDF)
-        working-directory: OSSJ_2025
         run: make
 
       - name: Prepare distribution directory
         run: |
-          mkdir -p dist/OSSJ_2025
-          cp OSSJ_2025/OSSJ_2025_kernelci-cli.html dist/OSSJ_2025/index.html
-          cp OSSJ_2025/OSSJ_2025_kernelci-cli.pdf dist/OSSJ_2025/
+          set -euo pipefail
+          rm -rf dist
+          mkdir -p dist
+
+          presentations=()
+          for md in */*.md; do
+            [ -f "$md" ] || continue
+            dir="${md%%/*}"
+            base="$(basename "$md" .md)"
+            html="$dir/$base.html"
+            pdf="$dir/$base.pdf"
+
+            [ -f "$html" ] || continue
+
+            mkdir -p "dist/$dir"
+            cp "$html" "dist/$dir/index.html"
+            if [ -f "$pdf" ]; then
+              cp "$pdf" "dist/$dir/"
+            fi
+
+            presentations+=("$dir|$base")
+          done
+
+          {
+            echo '<!doctype html>'
+            echo '<html lang="en">'
+            echo '<head>'
+            echo '  <meta charset="UTF-8" />'
+            echo '  <meta name="viewport" content="width=device-width, initial-scale=1.0" />'
+            echo '  <title>Presentations</title>'
+            echo '  <style>body{font-family:Arial,sans-serif;margin:2rem;}h1{margin-bottom:0.5rem;}ul{line-height:1.8;}li{margin-bottom:0.25rem;}</style>'
+            echo '</head>'
+            echo '<body>'
+            echo '  <h1>Available presentations</h1>'
+            echo '  <ul>'
+
+            for entry in "${presentations[@]}"; do
+              dir="${entry%%|*}"
+              base="${entry##*|}"
+              pdf_path="./${dir}/${base}.pdf"
+
+              echo -n "    <li><strong>${dir}</strong>: <a href=\"./${dir}/\">HTML</a>"
+              if [ -f "dist/${dir}/${base}.pdf" ]; then
+                echo " | <a href=\"${pdf_path}\">PDF</a></li>"
+              else
+                echo '</li>'
+              fi
+            done
+
+            echo '  </ul>'
+            echo '</body>'
+            echo '</html>'
+          } > dist/index.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

@@ -214,6 +214,8 @@ kci-dev maestro validate builds --all-checkouts --days 7 --table-output
 
 # Thank You!
 
-Slides: https://example.com  
-@yourhandle  
+Slides: https://aliceinwire.github.io/presentations/OSSJ_2025/
+X: https://x.com/arisu_gyaru
+Instagram: https://www.instagram.com/gyaru_arisu/
+GitHub: https://github.com/aliceinwire
 Questions welcome

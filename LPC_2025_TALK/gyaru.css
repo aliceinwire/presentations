@@ -4,7 +4,9 @@
 
 /* Global slide style */
 section {
-  background: linear-gradient(135deg, #ffb6e1, #ffe6f5);
+  background-image: linear-gradient(135deg, rgba(255, 182, 225, 0.75), rgba(255, 230, 245, 0.65)), url('./background.jpg');
+  background-size: cover;
+  background-position: center;
   color: #301020;
   font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
 }

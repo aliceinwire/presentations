@@ -3,7 +3,7 @@ marp: true
 theme: gyaru
 title: KernelCI kci-dev Closing the developer feedback loop
 paginate: true
-footer: "Your Name – OSS Japan 2025"
+footer: "Arisu Tachibana – LPC 2025"
 ---
 
 #  KernelCI kci-dev: Closing the developer feedback loop

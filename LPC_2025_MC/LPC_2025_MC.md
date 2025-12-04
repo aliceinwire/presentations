@@ -3,7 +3,7 @@ marp: true
 theme: gyaru
 title: Welcome to Kernel Testing & Dependability MC
 paginate: true
-footer: "Your Name – OSS Japan 2025"
+footer: "Arisu Tachibana – LPC 2025"
 ---
 
 # Welcome to Kernel Testing & Dependability MC

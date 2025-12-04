@@ -48,9 +48,13 @@ section::after {
 
 /* Footer positioning */
 section footer {
-  left: auto;
-  right: 1.2em;
+  position: absolute;
+  bottom: 0.8em;
+  left: 1.2em;
+  right: 3.5em;
   text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Optional special classes */

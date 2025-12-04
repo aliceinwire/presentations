@@ -8,7 +8,7 @@ footer: "Arisu Tachibana – LPC 2025"
 
 #  KernelCI kci-dev: Closing the developer feedback loop
 
-Your Name  
+Arisu Tachibana  
 KernelCI / Gentoo / etc.
 
 ---

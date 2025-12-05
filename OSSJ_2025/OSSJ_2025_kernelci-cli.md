@@ -11,7 +11,24 @@ footer: "Arisu Tachibana – OSS Japan 2025"
 ### Automating Linux Kernel Testing and Validation
 
 Arisu Tachibana
-KernelCI / Gentoo
+KernelCI / Gentoo Kernel leader
+
+---
+
+## What you'll learn in 40 minutes
+
+- How KernelCI fits into everyday kernel work
+- How `kci-dev` keeps you in the terminal instead of dashboards
+- A concrete workflow you can copy for your own trees
+- Where we're going next with `kci-dev` + `kci-deploy`
+
+---
+
+## Who this talk is for
+
+- Kernel developers who *don’t* have time to babysit dashboards
+- Maintainers juggling multiple trees and branches
+- CI / lab folks who want developers to actually look at results
 
 ---
 
@@ -29,14 +46,14 @@ KernelCI / Gentoo
 
 - Upstream, open testing for the Linux kernel
 - Builds, boots and tests across distributed labs
-- Great data, but interaction is:
+- Huge amount of data, but interaction is:
   - Mostly via web UI
   - Raw REST APIs
 - Need something ergonomic in the terminal
 
 ---
 
-## Real-World Context: gentoo-sources
+## Real-World Context: CIP
 
 - Fast-moving tree with many patches
 - High pressure to avoid regressions
@@ -45,7 +62,7 @@ KernelCI / Gentoo
 
 ---
 
-## Introducing the KernelCI CLI Tools
+## KernelCI CLI: bringing CI into your terminal
 
 - **kci-dev**
   - Developer-focused CLI to interact with KernelCI dashboards and Maestro
@@ -102,24 +119,22 @@ kci-dev maestro results --nodeid <node-id> --json
 
 ---
 
-## kci-dev: Everyday Workflow
+## kci-dev: Everyday workflow (story)
 
-1. **Install & configure**
-   - `pip install kci-dev`; optional `virtualenv` + completions
-   - `kci-dev config` creates `~/.config/kci-dev/kci-dev.toml` (Maestro only)
-   - Request API tokens from KernelCI GitHub issue template
-2. **Discover context**
-   - `kci-dev results trees` to see tracked repos/branches
-   - `kci-dev results summary --history` for recent pass/fail trends
-   - `kci-dev results hardware summary` to see per-board coverage
-3. **Inspect and compare**
-   - `kci-dev results build|boot|test --id … --download-logs`
-   - `kci-dev results compare` to spot regressions between commits
-   - `--filter filter.yaml` to limit to boards/tests, `--arch` to scope architectures
-4. **Retrigger or watch jobs**
-   - `kci-dev testretry --nodeid <node-id>` for Maestro node IDs
-   - `kci-dev checkout ... --watch` to trigger & track ad-hoc runs
-   - `kci-dev watch --nodeid <node-id>` to follow progress in the terminal
+1. **Start your day in the terminal**
+   - `kci-dev results summary --history`
+   - `kci-dev results hardware summary` for your key boards
+
+2. **Spot something suspicious**
+   - `kci-dev results boots|tests --status fail --download-logs`
+   - Jump straight into logs without touching the browser
+
+3. **Decide: bug or infra?**
+   - `kci-dev results compare` across commits to see real regressions
+   - `kci-dev testretry` / `kci-dev checkout --watch` for flaky or infra cases
+
+4. **Capture it for automation**
+   - Turn the commands you just ran into a script or CI job
 
 ---
 
@@ -161,30 +176,49 @@ kci-dev maestro results --nodeid <node-id> --json
 
 ---
 
-## Demo Script (Idea)
+## Demo: from dashboard noise to a focused terminal workflow
+
 
 ```bash
 # Configure once
 virtualenv .venv && source .venv/bin/activate
 pip install kci-dev
-kci-dev config  # writes ~/.config/kci-dev/kci-dev.toml
+kci-dev config     # writes ~/.config/kci-dev/kci-dev.toml
 
 # Morning health check
-kci-dev results summary --giturl https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git --branch master --history
-kci-dev results hardware summary --name mediatek,mt8195 --origin maestro --json
+kci-dev results summary \
+  --giturl https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git \
+  --branch master \
+  --history
+
+kci-dev results hardware summary \
+  --name mediatek,mt8195 \
+  --origin maestro \
+  --json
 
 # Investigate a failure
-kci-dev results boot --id maestro:<node-id> --download-logs | less
+kci-dev results boot --id maestro:<boot-node-id> --download-logs | less
 
-# Nudge infra
+# Nudge infra if it's flaky
 kci-dev testretry --nodeid <node-id>
 
-# Validate dashboard vs Maestro for the last week
+# Look at raw Maestro nodes when needed
+kci-dev maestro-results --nodeid <node-id> --json
+
+# (Optional) validate that dashboard & Maestro agree for the last week
 kci-dev maestro validate builds --all-checkouts --days 7 --table-output
 ```
 
 ---
 
+## Key takeaways
+
+- KernelCI already has the data – kci-dev makes it feel local to your terminal
+- You can start today with read-only results – no tokens needed
+- Maestro-powered commands let you move from “observing” to “acting” on CI
+- kci-deploy is the next step for making this flow the default in more trees
+
+---
 ## Roadmap & Collaboration
 
 - Deeper git integration (auto-pick branch/commit)
@@ -194,7 +228,6 @@ kci-dev maestro validate builds --all-checkouts --days 7 --table-output
 - Looking for testers, lab partners, and feedback
 
 ---
-
 ## Documentation & Updates
 
 - Docs: https://kernelci.github.io/kci-dev/
@@ -202,7 +235,6 @@ kci-dev maestro validate builds --all-checkouts --days 7 --table-output
 - Token requests and issues: KernelCI GitHub templates
 
 ---
-
 ## Getting Started After This Talk
 
 - Try **kci-dev** with your tree this week
@@ -211,7 +243,6 @@ kci-dev maestro validate builds --all-checkouts --days 7 --table-output
 - Contribute docs, plugins, and issue repros
 
 ---
-
 # Thank You!
 
 Slides: https://aliceinwire.github.io/presentations/OSSJ_2025/

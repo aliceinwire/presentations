@@ -136,6 +136,7 @@ kci-dev maestro results --nodeid <node-id> --json
 
 ---
 
+<!-- _class: compact -->
 ## kci-dev: Everyday workflow (story)
 
 1. **Start your day in the terminal**

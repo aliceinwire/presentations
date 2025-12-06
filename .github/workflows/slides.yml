@@ -6,6 +6,8 @@ on:
     paths:
       - '**/*.md'
       - '**/*.css'
+      - '**/diagrams/**'
+      - '**/images/**'
       - 'Makefile'
       - 'presentation.mk'
       - '.github/workflows/slides.yml'
@@ -51,6 +53,13 @@ jobs:
             if [ -f "$pdf" ]; then
               cp "$pdf" "dist/$dir/"
             fi
+
+            for assets in diagrams images; do
+              if [ -d "$dir/$assets" ]; then
+                mkdir -p "dist/$dir/$assets"
+                cp -R "$dir/$assets/." "dist/$dir/$assets/"
+              fi
+            done
 
             presentations+=("$dir|$base")
           done

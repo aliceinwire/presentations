@@ -4,6 +4,7 @@ theme: gyaru
 title: Getting Started With New KernelCI CLI Tools
 paginate: true
 footer: "Arisu Tachibana – OSS Japan 2025"
+html: true
 ---
 
 # Getting Started With New KernelCI CLI Tools
@@ -14,6 +15,12 @@ Arisu Tachibana
 KernelCI / Gentoo Kernel leader
 
 ---
+<!-- Mermaid loader -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true });
+</script>
+
 
 ## What you'll learn in 40 minutes
 
@@ -53,12 +60,45 @@ KernelCI / Gentoo Kernel leader
 
 ---
 
-## Real-World Context: CIP
+## Real-World Context: gentoo-sources
 
-- Fast-moving tree with many patches
+- Fast-moving tree with few gentoo patches
 - High pressure to avoid regressions
 - Need quick, scriptable visibility into CI results
+- Patterns also used for CIP SLTS / long-term branches
 - KernelCI CLI tools are built with this reality in mind
+
+---
+
+## How kci-dev fits into KernelCI
+
+<div class="mermaid">
+  flowchart TD
+    subgraph kci-dev CLI Commands
+        checkout["checkout\n→ Trigger kernel build/test via Maestro"]
+        watch["watch\n→ Monitor pipeline node/job status"]
+        results["results\n→ Fetch build/boot/test data from Dashboard"]
+        maestro["maestro\n→ Validate Dashboard ↔ Maestro consistency"]
+        bisect["bisect\n→ Kernel regression bisection using KernelCI"]
+        testretry["testretry\n→ Retry a specific failed test job"]
+        config["config\n→ Set up API credentials, endpoints"]
+        hardware["results hardware\n→ Query known hardware platforms"]
+        summary["results summary\n→ Aggregated pass/fail overview"]
+        compare["results compare\n→ Compare results across commits"]
+    end
+    results --> summary
+    results --> compare
+    results --> hardware
+    maestro -->|validate| validateBuilds["validate builds"]
+    maestro -->|validate| validateBoots["validate boots"]
+    style checkout fill:#f9f,stroke:#333,stroke-width:1px
+    style bisect fill:#bbf,stroke:#333,stroke-width:1px
+    style results fill:#cfc,stroke:#333,stroke-width:1px
+    style maestro fill:#ffc,stroke:#333,stroke-width:1px
+    style watch fill:#eee,stroke:#333,stroke-width:1px
+    style testretry fill:#ffe,stroke:#333,stroke-width:1px
+    style config fill:#ddd,stroke:#333,stroke-width:1px
+</div>
 
 ---
 
@@ -74,6 +114,7 @@ KernelCI / Gentoo Kernel leader
 - Goal: make KernelCI a first-class tool in your terminal
 
 ---
+
 
 ## Install & Configure Fast
 
@@ -250,3 +291,4 @@ X: https://x.com/arisu_gyaru
 Instagram: https://www.instagram.com/gyaru_arisu/
 GitHub: https://github.com/aliceinwire
 Questions welcome
+

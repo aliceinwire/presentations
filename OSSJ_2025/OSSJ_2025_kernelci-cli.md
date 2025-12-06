@@ -7,6 +7,12 @@ footer: "Arisu Tachibana – OSS Japan 2025"
 html: true
 ---
 
+<!-- Mermaid loader -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true });
+</script>
+
 # Getting Started With New KernelCI CLI Tools
 
 ### Automating Linux Kernel Testing and Validation
@@ -15,11 +21,6 @@ Arisu Tachibana
 KernelCI / Gentoo Kernel leader
 
 ---
-<!-- Mermaid loader -->
-<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
-<script>
-  mermaid.initialize({ startOnLoad: true });
-</script>
 
 
 ## What you'll learn in 40 minutes
@@ -72,33 +73,7 @@ KernelCI / Gentoo Kernel leader
 
 ## How kci-dev fits into KernelCI
 
-<div class="mermaid">
-  flowchart TD
-    subgraph kci-dev CLI Commands
-        checkout["checkout → Trigger kernel build/test via Maestro"]
-        watch["watch → Monitor pipeline node/job status"]
-        results["results → Fetch build/boot/test data from Dashboard"]
-        maestro["maestro → Validate Dashboard ↔ Maestro consistency"]
-        bisect["bisect → Kernel regression bisection using KernelCI"]
-        testretry["testretry → Retry a specific failed test job"]
-        config["config → Set up API credentials, endpoints"]
-        hardware["results hardware → Query known hardware platforms"]
-        summary["results summary → Aggregated pass/fail overview"]
-        compare["results compare → Compare results across commits"]
-    end
-    results --> summary
-    results --> compare
-    results --> hardware
-    maestro -->|validate| validateBuilds["validate builds"]
-    maestro -->|validate| validateBoots["validate boots"]
-    style checkout fill:#f9f,stroke:#333,stroke-width:1px
-    style bisect fill:#bbf,stroke:#333,stroke-width:1px
-    style results fill:#cfc,stroke:#333,stroke-width:1px
-    style maestro fill:#ffc,stroke:#333,stroke-width:1px
-    style watch fill:#eee,stroke:#333,stroke-width:1px
-    style testretry fill:#ffe,stroke:#333,stroke-width:1px
-    style config fill:#ddd,stroke:#333,stroke-width:1px
-</div>
+![kci-dev CLI commands](diagrams/kci_dev_01.svg)
 
 ---
 

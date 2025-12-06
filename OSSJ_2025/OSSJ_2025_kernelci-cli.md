@@ -75,16 +75,16 @@ KernelCI / Gentoo Kernel leader
 <div class="mermaid">
   flowchart TD
     subgraph kci-dev CLI Commands
-        checkout["checkout\n→ Trigger kernel build/test via Maestro"]
-        watch["watch\n→ Monitor pipeline node/job status"]
-        results["results\n→ Fetch build/boot/test data from Dashboard"]
-        maestro["maestro\n→ Validate Dashboard ↔ Maestro consistency"]
-        bisect["bisect\n→ Kernel regression bisection using KernelCI"]
-        testretry["testretry\n→ Retry a specific failed test job"]
-        config["config\n→ Set up API credentials, endpoints"]
-        hardware["results hardware\n→ Query known hardware platforms"]
-        summary["results summary\n→ Aggregated pass/fail overview"]
-        compare["results compare\n→ Compare results across commits"]
+        checkout["checkout → Trigger kernel build/test via Maestro"]
+        watch["watch → Monitor pipeline node/job status"]
+        results["results → Fetch build/boot/test data from Dashboard"]
+        maestro["maestro → Validate Dashboard ↔ Maestro consistency"]
+        bisect["bisect → Kernel regression bisection using KernelCI"]
+        testretry["testretry → Retry a specific failed test job"]
+        config["config → Set up API credentials, endpoints"]
+        hardware["results hardware → Query known hardware platforms"]
+        summary["results summary → Aggregated pass/fail overview"]
+        compare["results compare → Compare results across commits"]
     end
     results --> summary
     results --> compare

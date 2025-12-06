@@ -53,3 +53,10 @@ section.highlight {
   background: radial-gradient(circle at top left, #fff, #ffb6e1, #ff85b3);
 }
 
+/* For slides I mark with <!-- _class: compact --> */
+section.compact p,
+section.compact li {
+  font-size: 0.9em;
+  line-height: 1.25;
+  margin-bottom: 0.25em;
+}

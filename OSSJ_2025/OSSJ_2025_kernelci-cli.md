@@ -77,6 +77,7 @@ KernelCI / Gentoo Kernel leader
 
 ---
 
+<!-- _class: compact -->
 ## KernelCI CLI: bringing CI into your terminal
 
 - **kci-dev**

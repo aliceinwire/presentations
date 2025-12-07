@@ -91,20 +91,20 @@ Cybertrust Japan Co., Ltd.
 
 ## How kci-dev fits into KernelCI #1
 
-![kci-dev CLI commands](diagrams/kci_dev_01.svg)
-
----
-
-## How kci-dev fits into KernelCI #2
-
-![kci-dev CLI commands](diagrams/kci_dev_02.svg)
+![kci-dev CLI commands](diagrams/kci_dev_04.svg)
 
 ---
 
 <!-- _class: diagram-big -->
-## How kci-dev fits into KernelCI #3
+## kci-dev commands summary
 
 ![kci-dev CLI commands](diagrams/kci_dev_03.svg)
+
+---
+
+## kci-dev workflow example
+
+![kci-dev CLI commands](diagrams/kci_dev_04.svg)
 
 ---
 
@@ -289,6 +289,7 @@ kci-dev maestro validate builds --all-checkouts --days 7 --table-output
 - Caching for dashboard
 - Triggering builds with local patches (uploaded somewhere)
 - More distributions packages
+- Adding user agent information to kci-dev for prioritize kci-dev query
 
 ---
 ## Documentation & Updates

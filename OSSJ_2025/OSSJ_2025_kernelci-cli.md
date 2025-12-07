@@ -4,6 +4,7 @@ theme: gyaru
 title: Getting Started With New KernelCI CLI Tools
 paginate: true
 footer: "Arisu Tachibana – OSS Japan 2025"
+html: true
 ---
 
 # Getting Started With New KernelCI CLI Tools
@@ -366,6 +367,28 @@ Invite early adopters to share network/storage pain points.
 <!--
 Give one concrete example for each pattern (e.g., nightly Matrix digest, pre-merge hook).
 Highlight that CLI output formats make these automations simple.
+-->
+
+---
+
+<div style="max-width: 960px;max-height: 600px; margin: 0 auto; overflow: hidden;">
+<script src="https://asciinema.org/a/eYMpzYP4SGrQFWMoUzBfsRkJv.js" id="asciicast-eYMpzYP4SGrQFWMoUzBfsRkJv" async="true" data-size="medium" data-rows="20"></script>
+</div>
+
+---
+
+<div style="max-width: 960px;max-height: 600px; margin: 0 auto; overflow: hidden;">
+<script src="https://asciinema.org/a/R4sEEcvQMNEacqbdgDFHLvFM9.js" id="asciicast-R4sEEcvQMNEacqbdgDFHLvFM9" async="true" data-size="medium" data-rows="20"></script>
+</div>
+
+<!-- _note:
+Here I explain what the three result states in kci-dev really mean.
+
+“pass” means we have strong evidence things are OK: the build/boot/tests actually ran to completion and all relevant checks are green. These are our known-good reference points when we look for regressions or do bisects.
+
+“fail” means we have strong evidence something is broken in the kernel/config/test combo: builds that really fail, boots that don’t come up, or tests with clear assertion failures. These are the ones we treat as real bugs and worth debugging or bisecting.
+
+“inconclusive” means CI didn’t give us a trustworthy answer: jobs errored out, timed out, got cancelled, or data is missing/partial. It’s not a confirmed regression — it just tells us we need to re-run or fix infra before we can call it pass or fail.
 -->
 
 ---

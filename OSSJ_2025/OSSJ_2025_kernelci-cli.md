@@ -22,7 +22,7 @@ footer: "Arisu Tachibana – OSS Japan 2025"
 ---
 
 
-## What you'll learn in 40 minutes
+## What you'll learn in 35 minutes + QA
 
 - How KernelCI fits into everyday kernel work
 - How `kci-dev` keeps you in the terminal instead of dashboards
@@ -273,6 +273,52 @@ Encourage saving commands to a script or chat message for team visibility.
 Share that quiet/JSON modes make it easy to integrate with `jq` and CI scripts.
 Mention color-coded history view and how it surfaces regressions quickly.
 -->
+
+---
+
+## Under the hood: results vs Maestro
+
+- `kci-dev` talks to two logical APIs:
+  - **results (dashboard)**  
+    - Read-only view of builds, boots, and tests  
+    - Great for: “What is the status of my tree today?”
+  - **Maestro**  
+    - Lower-level jobs and nodes  
+    - Powers `checkout`, `watch`, `testretry`, `maestro results`, `maestro validate`
+- Same config file (`kci-dev.toml`) selects:
+  - Base URLs for each instance
+  - API tokens (only needed for Maestro / write-like actions)
+- Typical journey:
+  1. Start with **results-only** (no config, no token)
+  2. Add Maestro + tokens when you’re ready to act on CI
+
+---
+
+## Adapting kci-dev to different roles
+
+- **Maintainer of a busy tree**
+  - Morning:
+    - `kci-dev results summary --history`
+    - `kci-dev results hardware summary` for your key boards
+  - Before release:
+    - `kci-dev results compare` across the last few commits
+    - Scripted checks in your release pipeline
+
+- **Feature / patch series developer**
+  - While hacking:
+    - `kci-dev results tests --commit <sha>` to confirm fixes
+    - `kci-dev results boots --status fail --download-logs`
+  - When CI is noisy:
+    - `kci-dev testretry --nodeid <id>`
+    - `kci-dev checkout --watch` on interesting jobs
+
+- **Lab / CI person**
+  - Keep infra honest:
+    - `kci-dev maestro validate builds --all-checkouts --days 7 --table-output`
+  - Handle flaky boards:
+    - `kci-dev testretry` recipes instead of ad-hoc scripts
+  - Reporting:
+    - Cron jobs that send Matrix / mail summaries using `--json`
 
 ---
 

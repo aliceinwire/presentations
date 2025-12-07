@@ -10,7 +10,9 @@ footer: "Arisu Tachibana – OSS Japan 2025"
 
 ### Automating Linux Kernel Testing and Validation
 
-Arisu Tachibana
+##### Arisu Tachibana
+
+<!-- _class: compact -->
 KernelCI Infra WG member
 kci-dev creator / maintainer
 Gentoo Kernel leader / CIP testing member

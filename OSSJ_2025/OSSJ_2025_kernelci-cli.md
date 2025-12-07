@@ -260,7 +260,7 @@ kci-dev results boot --id maestro:<boot-node-id> --download-logs | less
 kci-dev testretry --nodeid <node-id>
 
 # Look at raw Maestro nodes when needed
-kci-dev maestro-results --nodeid <node-id> --json
+kci-dev maestro results --nodeid <node-id> --json
 
 # (Optional) validate that dashboard & Maestro agree for the last week
 kci-dev maestro validate builds --all-checkouts --days 7 --table-output

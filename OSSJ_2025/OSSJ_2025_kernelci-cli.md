@@ -59,13 +59,33 @@ Cybertrust Japan Co., Ltd.
 
 ---
 
-## Real-World Context: gentoo-sources
+## Real-World Context: gentoo-sources & CI
 
-- Fast-moving tree with few gentoo patches
-- High pressure to avoid regressions
-- Need quick, scriptable visibility into CI results
-- Patterns also used for CIP SLTS / long-term branches
-- KernelCI CLI tools are built with this reality in mind
+- For `gentoo-sources` I already use:
+  - `buildbot-try` to submit kernel builds/tests
+  - `gkernelci` integration around Buildbot
+- Nice properties of this workflow:
+  - I stay in the terminal
+  - CI is scriptable from my normal dev environment
+- This experience is the main inspiration for **kci-dev**
+  - “What if KernelCI felt like buildbot-try, but for any tree?”
+
+---
+
+## From buildbot-try to kci-dev
+
+- What I like about `buildbot-try`:
+  - One command: “Here is my change, please test it”
+  - Results come back to the console
+- KernelCI already has:
+  - Distributed labs and lots of coverage
+  - Dashboards and APIs
+- Missing piece:
+  - A developer-first CLI that feels like `buildbot-try`
+- **kci-dev** is that missing piece:
+  - Unified CLI for querying KernelCI jobs and tests
+  - Designed from real needs on `gentoo-sources`
+  - But usable for *any* KernelCI-managed tree
 
 ---
 
@@ -255,7 +275,7 @@ kci-dev maestro validate builds --all-checkouts --days 7 --table-output
 - kci-deploy is the next step for making this flow the default in more trees
 
 ---
-## Roadmap & Collaboration
+## Roadmap & Collaboration #1
 
 - Deeper git integration (auto-pick branch/commit)
 - Better diffing between runs
@@ -264,9 +284,16 @@ kci-dev maestro validate builds --all-checkouts --days 7 --table-output
 - Looking for testers, lab partners, and feedback
 
 ---
+## Roadmap & Collaboration #2
+
+- Caching for dashboard
+- Triggering builds with local patches (uploaded somewhere)
+- More distributions packages
+
+---
 ## Documentation & Updates
 
-- Docs: https://kernelci.github.io/kci-dev/
+- Docs: https://kci.dev
 - Source: https://github.com/kernelci/kci-dev
 - Token requests and issues: KernelCI GitHub templates
 
@@ -276,7 +303,7 @@ kci-dev maestro validate builds --all-checkouts --days 7 --table-output
 - Try **kci-dev** with your tree this week
 - Share your top 3 pain points in Kernel QA
 - Join the KernelCI community calls / Matrix
-- Contribute docs, plugins, and issue repros
+- Contribute docs, plugins, and issue reports
 
 ---
 # Thank You!
@@ -285,5 +312,7 @@ Slides: https://aliceinwire.github.io/presentations/OSSJ_2025/
 X: https://x.com/arisu_gyaru
 Instagram: https://www.instagram.com/gyaru_arisu/
 GitHub: https://github.com/aliceinwire
-Questions welcome
+
+Questions welcome!
+Will help shape the future of kci-dev
 

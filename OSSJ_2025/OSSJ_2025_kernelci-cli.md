@@ -29,6 +29,11 @@ footer: "Arisu Tachibana – OSS Japan 2025"
 - A concrete workflow you can copy for your own trees
 - Where we're going next with `kci-dev` + `kci-deploy`
 
+<!--
+Emphasize that the talk is practical: attendees should leave with a copy/paste workflow and a sense of the roadmap.
+Underline the “stay in the terminal” theme to set expectations for the demos.
+-->
+
 ---
 
 ## Who this talk is for
@@ -36,6 +41,11 @@ footer: "Arisu Tachibana – OSS Japan 2025"
 - Kernel developers who *don’t* have time to babysit dashboards
 - Maintainers juggling multiple trees and branches
 - CI / lab folks who want developers to actually look at results
+
+<!--
+Ask the audience to raise hands if they touch dashboards daily—highlight empathy for people who live in terminals.
+Frame the tools as lowering friction for both developers and lab owners.
+-->
 
 ---
 
@@ -47,6 +57,11 @@ footer: "Arisu Tachibana – OSS Japan 2025"
 - Developers still click UIs or write ad-hoc scripts
 - Command-line tools keep context in the terminal
 
+<!--
+Share quick anecdote about juggling Gentoo, CIP, and upstream trees.
+Point out that CI fragmentation leads to context switching and delays.
+-->
+
 ---
 
 ## KernelCI in One Slide
@@ -57,6 +72,11 @@ footer: "Arisu Tachibana – OSS Japan 2025"
   - Mostly via web UI
   - Raw REST APIs
 - Need something ergonomic in the terminal
+
+<!--
+Remind audience that KernelCI is already rich; the gap is ergonomics, not coverage.
+Explain that the CLI layers on top of existing dashboards and APIs.
+-->
 
 ---
 
@@ -70,6 +90,11 @@ footer: "Arisu Tachibana – OSS Japan 2025"
   - CI is scriptable from my normal dev environment
 - This experience is the main inspiration for **kci-dev**
   - “What if KernelCI felt like buildbot-try, but for any tree?”
+
+<!--
+Describe how buildbot-try shaped expectations: one command to submit, readable output.
+Position kci-dev as bringing that comfort to KernelCI for more trees.
+-->
 
 ---
 
@@ -89,11 +114,21 @@ footer: "Arisu Tachibana – OSS Japan 2025"
   - Designed from real needs on `gentoo-sources`
   - But usable for *any* KernelCI-managed tree
 
+<!--
+Highlight the “single binary” value: fewer bespoke scripts.
+Stress that defaults are tuned for developers, not dashboard operators.
+-->
+
 ---
 
 ## How kci-dev fits into KernelCI
 
 ![kci-dev CLI commands](diagrams/kci_dev_04.svg)
+
+<!--
+Walk through arrows briefly: where commands talk to dashboard vs Maestro.
+Mention that the same CLI can be pointed at different instances via config.
+-->
 
 ---
 
@@ -102,11 +137,21 @@ footer: "Arisu Tachibana – OSS Japan 2025"
 
 ![kci-dev CLI commands](diagrams/kci_dev_03.svg)
 
+<!--
+Call out that commands are grouped by task: results, Maestro control, validation.
+Note that defaults aim to be readable tables with JSON available for scripts.
+-->
+
 ---
 
 ## kci-dev workflow example
 
 ![kci-dev CLI commands](diagrams/kci_dev_02.svg)
+
+<!--
+Use this slide to narrate a “morning check” story from left to right.
+Emphasize how little configuration is needed for read-only results.
+-->
 
 ---
 
@@ -122,6 +167,11 @@ footer: "Arisu Tachibana – OSS Japan 2025"
   - Tool for deploying local / internal KernelCI maestro stacks
 - Goal: make KernelCI a first-class tool in your terminal
 
+<!--
+Clarify naming: kci-dev is for daily devs, kci-deploy is for lab owners.
+Invite folks to try PyPI first, then explore Maestro commands when they have tokens.
+-->
+
 ---
 
 
@@ -133,6 +183,11 @@ footer: "Arisu Tachibana – OSS Japan 2025"
 - Results-only workflows work **without** a config file
 - Request API tokens via the KernelCI GitHub issue template when you need Maestro access
 
+<!--
+Reassure that installation is lightweight: venv + pip is enough.
+Mention that config is only needed when hitting Maestro; results commands are open.
+-->
+
 ---
 
 ## Shell Completions Included
@@ -141,6 +196,11 @@ footer: "Arisu Tachibana – OSS Japan 2025"
 - Zsh: add completions directory to `$fpath` and run `compinit`
 - Fish: copy `completions/kci-dev.fish` to `~/.config/fish/completions/`
 - Keep completions in sync with the installed kci-dev version
+
+<!--
+Encourage audience to enable completions for discoverability.
+Show quick demo of pressing tab to list subcommands if time permits.
+-->
 
 ---
 
@@ -167,6 +227,11 @@ kci-dev maestro validate builds --all-checkouts --days 7 --table-output
 kci-dev maestro results --nodeid <node-id> --json
 ```
 
+<!--
+Explain that results commands need no tokens; Maestro ones do.
+Point out that `compare` and `hardware summary` are often the first useful entry points.
+-->
+
 ---
 
 <!-- _class: compact -->
@@ -187,6 +252,11 @@ kci-dev maestro results --nodeid <node-id> --json
 4. **Capture it for automation**
    - Turn the commands you just ran into a script or CI job
 
+<!--
+Tell the story quickly: morning summary, chase failures, decide if it’s infra, then automate.
+Encourage saving commands to a script or chat message for team visibility.
+-->
+
 ---
 
 ## kci-dev: Quality-of-Life Details
@@ -199,6 +269,11 @@ kci-dev maestro results --nodeid <node-id> --json
 - Profiles via `--instance` / `--settings` to switch endpoints
 - Designed for piping into `jq`, `fzf`, notebooks
 
+<!--
+Share that quiet/JSON modes make it easy to integrate with `jq` and CI scripts.
+Mention color-coded history view and how it surfaces regressions quickly.
+-->
+
 ---
 
 ## Dashboard Endpoint Reality Check
@@ -206,6 +281,11 @@ kci-dev maestro results --nodeid <node-id> --json
 - `kci-dev results` currently pulls a multi-megabyte dashboard payload
 - Initial download may take a few seconds; caching work is in progress
 - Known upstream issue is tracked in the KernelCI dashboard repo
+
+<!--
+Be transparent about current latency and that caching work is underway.
+Ask for patience and feedback—this is an area where contributors can help.
+-->
 
 ---
 
@@ -216,6 +296,11 @@ kci-dev maestro results --nodeid <node-id> --json
 - Shares the same UX patterns as kci-dev
 - Early previews welcome: help shape the roadmap!
 
+<!--
+Position kci-deploy as lowering setup time for new labs.
+Invite early adopters to share network/storage pain points.
+-->
+
 ---
 
 ## Automation Patterns
@@ -224,6 +309,11 @@ kci-dev maestro results --nodeid <node-id> --json
 - **Nightly reports**: email/Matrix summaries via cron
 - **Release readiness**: track blockers for RCs
 - **Local sanity tests**: run focused boards before shipping
+
+<!--
+Give one concrete example for each pattern (e.g., nightly Matrix digest, pre-merge hook).
+Highlight that CLI output formats make these automations simple.
+-->
 
 ---
 
@@ -249,6 +339,11 @@ kci-dev results hardware summary \
 
 ```
 
+<!--
+Narrate commands live if possible; otherwise explain what each does and why the options matter.
+Stress that the same pattern works for any git tree and branch.
+-->
+
 ---
 
 ## Demo: from dashboard noise to a focused terminal workflow #2
@@ -267,6 +362,11 @@ kci-dev maestro results --nodeid <node-id> --json
 kci-dev maestro validate builds --all-checkouts --days 7 --table-output
 ```
 
+<!--
+Explain how `--download-logs` keeps you out of the browser.
+Mention that `validate` helps catch mismatches between data sources.
+-->
+
 ---
 
 ## Key takeaways
@@ -275,6 +375,11 @@ kci-dev maestro validate builds --all-checkouts --days 7 --table-output
 - You can start today with read-only results – no tokens needed
 - Maestro-powered commands let you move from “observing” to “acting” on CI
 - kci-deploy is the next step for making this flow the default in more trees
+
+<!--
+Reinforce that the goal is faster iteration with less context switching.
+Prompt the audience to try one results command this week.
+-->
 
 ---
 ## Roadmap & Collaboration #1
@@ -285,6 +390,11 @@ kci-dev maestro validate builds --all-checkouts --days 7 --table-output
 - kci-deploy installer previews in Q2
 - Looking for testers, lab partners, and feedback
 
+<!--
+Ask for collaborators on diffing and git integration features.
+Invite labs to pilot kci-deploy and provide feedback on installers.
+-->
+
 ---
 ## Roadmap & Collaboration #2
 
@@ -293,12 +403,22 @@ kci-dev maestro validate builds --all-checkouts --days 7 --table-output
 - More distro packages
 - Adding user agent information to kci-dev for prioritize kci-dev query
 
+<!--
+Mention caching and trigger features as active research areas.
+Encourage distro maintainers to chime in on packaging needs.
+-->
+
 ---
 ## Documentation & Updates
 
 - Docs: https://kci.dev
 - Source: https://github.com/kernelci/kci-dev
 - Token requests and issues: KernelCI GitHub templates
+
+<!--
+Point attendees to kci.dev for guides and announce that contributions are welcome.
+Suggest filing issues for missing boards or data fields.
+-->
 
 ---
 ## Getting Started After This Talk
@@ -307,6 +427,11 @@ kci-dev maestro validate builds --all-checkouts --days 7 --table-output
 - Share your top 3 pain points in Kernel QA
 - Join the KernelCI community calls / Matrix
 - Contribute docs, plugins, and issue reports
+
+<!--
+Give a simple call to action: run one results command, then file feedback.
+Mention community calls as a good venue for follow-up questions.
+-->
 
 ---
 # Thank You!
@@ -318,4 +443,9 @@ GitHub: https://github.com/aliceinwire
 
 Questions welcome!
 Will help shape the future of kci-dev
+
+<!--
+Thank the audience and invite questions about specific workflows.
+Encourage them to ping on Matrix or GitHub after the session.
+-->
 

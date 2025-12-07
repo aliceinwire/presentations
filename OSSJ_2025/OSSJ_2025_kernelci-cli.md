@@ -4,21 +4,17 @@ theme: gyaru
 title: Getting Started With New KernelCI CLI Tools
 paginate: true
 footer: "Arisu Tachibana – OSS Japan 2025"
-html: true
 ---
-
-<!-- Mermaid loader -->
-<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
-<script>
-  mermaid.initialize({ startOnLoad: true });
-</script>
 
 # Getting Started With New KernelCI CLI Tools
 
 ### Automating Linux Kernel Testing and Validation
 
 Arisu Tachibana
-KernelCI / Gentoo Kernel leader
+KernelCI Infra WG member
+kci-dev creator / maintainer
+Gentoo Kernel leader / CIP testing member
+Cybertrust Japan Co., Ltd.
 
 ---
 

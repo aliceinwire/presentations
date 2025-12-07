@@ -8,8 +8,11 @@ footer: "Arisu Tachibana – LPC 2025"
 
 #  KernelCI kci-dev: Closing the developer feedback loop
 
-Arisu Tachibana  
-KernelCI / Gentoo / etc.
+Arisu Tachibana
+KernelCI Infra WG member
+kci-dev creator / maintainer
+Gentoo Kernel leader / CIP testing member
+Cybertrust Japan Co., Ltd.
 
 ---
 

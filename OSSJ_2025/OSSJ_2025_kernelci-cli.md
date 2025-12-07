@@ -105,7 +105,7 @@ Cybertrust Japan Co., Ltd.
 
 ## kci-dev workflow example
 
-![kci-dev CLI commands](diagrams/kci_dev_04.svg)
+![kci-dev CLI commands](diagrams/kci_dev_02.svg)
 
 ---
 

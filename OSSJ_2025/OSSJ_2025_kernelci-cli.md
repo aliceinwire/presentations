@@ -72,6 +72,7 @@ Cybertrust Japan Co., Ltd.
 
 ---
 
+<!-- _class: compact -->
 ## From buildbot-try to kci-dev
 
 - What I like about `buildbot-try`:
@@ -89,7 +90,7 @@ Cybertrust Japan Co., Ltd.
 
 ---
 
-## How kci-dev fits into KernelCI #1
+## How kci-dev fits into KernelCI
 
 ![kci-dev CLI commands](diagrams/kci_dev_04.svg)
 

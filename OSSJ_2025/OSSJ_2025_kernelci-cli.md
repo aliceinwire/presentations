@@ -13,10 +13,11 @@ footer: "Arisu Tachibana – OSS Japan 2025"
 ##### Arisu Tachibana
 
 <!-- _class: compact -->
-KernelCI Infra WG member
-kci-dev creator / maintainer
-Gentoo Kernel leader / CIP testing member
-Cybertrust Japan Co., Ltd.
+- KernelCI Infra WG member
+- kci-dev creator / maintainer
+- Gentoo Kernel leader
+- CIP testing member
+- Cybertrust Japan Co., Ltd.
 
 ---
 
@@ -289,7 +290,7 @@ kci-dev maestro validate builds --all-checkouts --days 7 --table-output
 
 - Caching for dashboard
 - Triggering builds with local patches (uploaded somewhere)
-- More distributions packages
+- More distro packages
 - Adding user agent information to kci-dev for prioritize kci-dev query
 
 ---

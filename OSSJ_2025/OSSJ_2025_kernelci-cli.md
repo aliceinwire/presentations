@@ -71,9 +71,22 @@ KernelCI / Gentoo Kernel leader
 
 ---
 
-## How kci-dev fits into KernelCI
+## How kci-dev fits into KernelCI #1
 
 ![kci-dev CLI commands](diagrams/kci_dev_01.svg)
+
+---
+
+## How kci-dev fits into KernelCI #2
+
+![kci-dev CLI commands](diagrams/kci_dev_02.svg)
+
+---
+
+<!-- _class: diagram-big -->
+## How kci-dev fits into KernelCI #3
+
+![kci-dev CLI commands](diagrams/kci_dev_03.svg)
 
 ---
 

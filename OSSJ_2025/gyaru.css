@@ -60,3 +60,19 @@ section.compact li {
   line-height: 1.25;
   margin-bottom: 0.25em;
 }
+
+section.diagram-slide img {
+  display: block;
+  margin: 0 auto;
+  max-height: 60vh;
+  width: auto;
+  max-width: 95%;
+}
+
+section.diagram-big img {
+  display: block;
+  margin: 0 auto;
+  max-height: 50vh;
+  width: auto;
+  max-width: 95%;
+}

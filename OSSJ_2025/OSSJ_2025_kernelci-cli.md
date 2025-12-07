@@ -276,6 +276,7 @@ Mention color-coded history view and how it surfaces regressions quickly.
 
 ---
 
+<!-- _class: compact -->
 ## Under the hood: results vs Maestro
 
 - `kci-dev` talks to two logical APIs:
@@ -294,6 +295,7 @@ Mention color-coded history view and how it surfaces regressions quickly.
 
 ---
 
+<!-- _class: compact -->
 ## Adapting kci-dev to different roles
 
 - **Maintainer of a busy tree**
@@ -311,6 +313,11 @@ Mention color-coded history view and how it surfaces regressions quickly.
   - When CI is noisy:
     - `kci-dev testretry --nodeid <id>`
     - `kci-dev checkout --watch` on interesting jobs
+
+---
+
+<!-- _class: compact -->
+## Adapting kci-dev to different roles #2
 
 - **Lab / CI person**
   - Keep infra honest:

@@ -205,7 +205,7 @@ kci-dev maestro results --nodeid <node-id> --json
 
 ---
 
-## Demo: from dashboard noise to a focused terminal workflow
+## Demo: from dashboard noise to a focused terminal workflow #1
 
 
 ```bash
@@ -225,6 +225,13 @@ kci-dev results hardware summary \
   --origin maestro \
   --json
 
+```
+
+---
+
+## Demo: from dashboard noise to a focused terminal workflow #2
+
+```bash
 # Investigate a failure
 kci-dev results boot --id maestro:<boot-node-id> --download-logs | less
 

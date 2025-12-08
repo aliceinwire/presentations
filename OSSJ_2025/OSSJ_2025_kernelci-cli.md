@@ -125,9 +125,23 @@ Stress that defaults are tuned for developers, not dashboard operators.
 
 ---
 
-## Real-World Context #2: CIP
+## Real-World Context #2: CIP & SLTS
 
-- using kci-dev for trigging new CIP kernel builds
+<!-- _class: compact -->
+- **Civil Infrastructure Platform (CIP)**  
+  - Linux Foundation project aiming to provide an *industrial-grade* Linux base layer for things like power grids, trains, factories, and other critical infrastructure.
+  - CIP maintains **Super Long-Term Support (SLTS)** kernels: LTS-based branches (e.g. 4.4-cip, 4.19-cip, 5.10-cip, 6.1-cip, 6.12-cip) with **~10 years of security and bug-fix maintenance**, beyond normal LTS lifetimes.
+
+- **Why CIP uses kci-dev**
+  - SLTS kernels live for a decade: regressions and security issues must be caught early and tracked over years.
+- `kci-dev` lets CIP trigger KernelCI jobs on SLTS trees directly from the terminal and reuse the same KernelCI infrastructure that already publishes SLTS test results.
+
+
+<!-- Explain verbally: - CIP = Civil Infrastructure Platform, industrial-grade Linux for long-lived systems. - SLTS kernels extend upstream LTS to ~10 years, so continuous testing of KernelCI data are critical to keep them safe over their whole lifetime. -->
+
+---
+
+## Triggering build for CIP & SLTS
 
 ```bash
 $ kci-dev checkout --giturl https://git.kernel.org/pub/scm/linux/kernel/git/cip/linux-cip.git --branch linux-6.1.y-cip --tipoftree
@@ -137,11 +151,8 @@ Commit to checkout: 81cb6c23dfa8aae5f1aa5f7a1f9518946503fc15
 OK
 treeid: ad4b54a7c4671982ae805d014fb43e6ceb7bd27b4f94be5ced0e3dac5f419127
 checkout_nodeid: 6937035a93bfb52307cd26b2
-
 ```
 
-<!-- explain that they also have a graph view report system
-explain a bit about civil infrastructure platform -->
 
 ---
 

@@ -81,7 +81,7 @@ Explain that the CLI layers on top of existing dashboards and APIs.
 
 ---
 
-## Real-World Context: gentoo-sources & CI
+## Real-World Context #1: gentoo-sources & CI
 
 - For `gentoo-sources` I already use:
   - `buildbot-try` to submit kernel builds/tests
@@ -119,6 +119,60 @@ Position kci-dev as bringing that comfort to KernelCI for more trees.
 Highlight the “single binary” value: fewer bespoke scripts.
 Stress that defaults are tuned for developers, not dashboard operators.
 -->
+
+---
+
+## Real-World Context #2: CIP
+
+- using kci-dev for trigging new CIP kernel builds
+
+```bash
+$ kci-dev checkout --giturl https://git.kernel.org/pub/scm/linux/kernel/git/cip/linux-cip.git --branch linux-6.1.y-cip --tipoftree
+No job filter defined. All jobs will be triggered!
+Retrieving latest commit on tree: https://git.kernel.org/pub/scm/linux/kernel/git/cip/linux-cip.git branch: linux-6.1.y-cip
+Commit to checkout: 81cb6c23dfa8aae5f1aa5f7a1f9518946503fc15
+OK
+treeid: ad4b54a7c4671982ae805d014fb43e6ceb7bd27b4f94be5ced0e3dac5f419127
+checkout_nodeid: 6937035a93bfb52307cd26b2
+
+```
+
+<!-- explain that they also have a graph view report system
+explain a bit about civil infrastructure platform -->
+
+---
+
+## Real-World Context #3: ChromiumOS tree
+
+- using kci-dev for code coverage statistics
+
+```bash
+$ kci-dev maestro coverage
+- Tree/branch: chromiumos/chromeos-6.12
+  Commit: 1d022843a344dd50b57600abc3e5b3f14f8a463f
+  Build: https://staging.kernelci.org:9000/viewer?node_id=68b83f8a18776824c891f55c
+  Function coverage: 19.3%
+  Line coverage: 15.5%
+  Coverage report: https://files-staging.kernelci.org/coverage-report-x86-68bac05fa6a30c5a1ec57f88/coverage-68b83f8a18776824c891f55c.html
+  Coverage logs: https://files-staging.kernelci.org/coverage-report-x86-68bac05fa6a30c5a1ec57f88/log.txt
+```
+
+<!-- explain that they also have a graph view report system -->
+
+---
+
+## Other Real-World Context #4: kernelci-pipeline
+
+- using kci-dev in a cronjob for finding builds/boots missing on dashboard
+- send results by email
+
+```bash
+$ kci-dev maestro validate
+```
+
+code is here: https://github.com/kernelci/kernelci-pipeline/pull/1320
+
+<!-- if there is interesting in check what kernelci-pipeline is doing, feel free to check the link -->
 
 ---
 
@@ -231,6 +285,13 @@ kci-dev maestro results --nodeid <node-id> --json
 <!--
 Explain that results commands need no tokens; Maestro ones do.
 Point out that `compare` and `hardware summary` are often the first useful entry points.
+This commands line up with the first two real questions
+1) “What changed between these two versions?” → results compare
+“This release looks broken. What changed between this and the last good one?”
+2) “What’s happening on this board / platform I care about?” → results
+hardware summary
+“Why is this SoC/lab/board red again?”
+“Is this regression just my board or across everything?”
 compare is for comparing between commits with summary and regressions.
 -->
 
@@ -257,6 +318,7 @@ compare is for comparing between commits with summary and regressions.
 <!--
 Tell the story quickly: morning summary, chase failures, decide if it’s infra, then automate.
 Encourage saving commands to a script or chat message for team visibility.
+I discovered yesterday that because of changes on api results compare is broken
 -->
 
 ---
@@ -435,7 +497,7 @@ Stress that the same pattern works for any git tree and branch.
 # Investigate a failure
 kci-dev results boot --id maestro:<boot-node-id> --download-logs | less
 
-# Nudge infra if it's flaky
+# Retry if needed
 kci-dev testretry --nodeid <node-id>
 
 # Look at raw Maestro nodes when needed
@@ -470,7 +532,7 @@ Prompt the audience to try one results command this week.
 - Deeper git integration (auto-pick branch/commit)
 - Better diffing between runs
 - Inline links back to dashboards
-- kci-deploy installer previews in Q2
+- kci-deploy installer
 - Looking for testers, lab partners, and feedback
 
 <!--
@@ -508,7 +570,7 @@ Suggest filing issues for missing boards or data fields.
 
 - Try **kci-dev** with your tree this week
 - Share your top 3 pain points in Kernel QA
-- Join the KernelCI community calls / Matrix
+- Join the KernelCI community calls / Discord
 - Contribute docs, plugins, and issue reports
 
 <!--

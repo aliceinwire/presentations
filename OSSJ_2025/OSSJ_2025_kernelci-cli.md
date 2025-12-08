@@ -218,7 +218,7 @@ kci-dev results hardware summary --name <vendor,board> --origin maestro --json
 kci-dev results tests --giturl <git url> --branch <branch> --commit <sha> --filter filter.yaml
 ```
 
-Maestro commands (need config/token)
+Maestro commands (trigger commands need config/token)
 
 ```bash
 kci-dev checkout --branch <branch> --giturl <git url> --commit <sha> --job-filter <regex> --watch
@@ -231,6 +231,7 @@ kci-dev maestro results --nodeid <node-id> --json
 <!--
 Explain that results commands need no tokens; Maestro ones do.
 Point out that `compare` and `hardware summary` are often the first useful entry points.
+compare is for comparing between commits with summary and regressions.
 -->
 
 ---
@@ -240,7 +241,7 @@ Point out that `compare` and `hardware summary` are often the first useful entry
 
 1. **Start your day in the terminal**
    - `kci-dev results summary --history`
-   - `kci-dev results hardware summary` for your key boards
+   - `kci-dev results hardware summary` for checking your boards
 
 2. **Spot something suspicious**
    - `kci-dev results boots|tests --status fail --download-logs`
@@ -375,6 +376,10 @@ Highlight that CLI output formats make these automations simple.
 <script src="https://asciinema.org/a/eYMpzYP4SGrQFWMoUzBfsRkJv.js" id="asciicast-eYMpzYP4SGrQFWMoUzBfsRkJv" async="true" data-size="medium" data-rows="20"></script>
 </div>
 
+<!-- _note:
+example of what we can do with kci-dev maestro
+-->
+
 ---
 
 <div style="max-width: 960px;max-height: 600px; margin: 0 auto; overflow: hidden;">
@@ -382,6 +387,8 @@ Highlight that CLI output formats make these automations simple.
 </div>
 
 <!-- _note:
+example of what we can do with kci-dev kcidb
+
 Here I explain what the three result states in kci-dev really mean.
 
 “pass” means we have strong evidence things are OK: the build/boot/tests actually ran to completion and all relevant checks are green. These are our known-good reference points when we look for regressions or do bisects.

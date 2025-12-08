@@ -606,3 +606,12 @@ Thank the audience and invite questions about specific workflows.
 Encourage them to ping on Matrix or GitHub after the session.
 -->
 
+---
+
+## Asciinema links
+
+kci-dev maestro
+https://asciinema.org/a/760568
+
+kci-dev KCIDB
+https://asciinema.org/a/760572

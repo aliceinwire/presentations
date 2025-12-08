@@ -556,6 +556,7 @@ Invite labs to pilot kci-deploy and provide feedback on installers.
 ## Roadmap & Collaboration #2
 
 - Caching for dashboard
+- Document bisection command
 - Triggering builds with local patches (uploaded somewhere)
 - More distro packages
 - Adding user agent information to kci-dev for prioritize kci-dev query
@@ -593,7 +594,7 @@ Mention community calls as a good venue for follow-up questions.
 ---
 # Thank You!
 
-Slides: https://aliceinwire.github.io/presentations/OSSJ_2025/
+Slides: https://aliceinwire.github.io/presentations/
 X: https://x.com/arisu_gyaru
 Instagram: https://www.instagram.com/gyaru_arisu/
 GitHub: https://github.com/aliceinwire

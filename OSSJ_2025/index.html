@@ -184,7 +184,7 @@ kci-dev results compare --giturl &lt;git url&gt; --branch &lt;branch&gt; &lt;old
 kci-dev results hardware summary --name &lt;vendor,board&gt; --origin maestro --json
 kci-dev results tests --giturl &lt;git url&gt; --branch &lt;branch&gt; --commit &lt;sha&gt; --filter filter.yaml
 </code></pre>
-<p>Maestro commands (need config/token)</p>
+<p>Maestro commands (trigger commands need config/token)</p>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-bash">kci-dev checkout --branch &lt;branch&gt; --giturl &lt;git url&gt; --commit &lt;sha&gt; --job-filter &lt;regex&gt; --watch
 kci-dev testretry --nodeid &lt;node-id&gt;
 kci-dev watch --nodeid &lt;node-id&gt; --job-filter &lt;regex&gt;
@@ -200,7 +200,7 @@ kci-dev maestro results --nodeid &lt;node-id&gt; --json
 <p><strong>Start your day in the terminal</strong></p>
 <ul>
 <li><code>kci-dev results summary --history</code></li>
-<li><code>kci-dev results hardware summary</code> for your key boards</li>
+<li><code>kci-dev results hardware summary</code> for checking your boards</li>
 </ul>
 </li>
 <li>
@@ -490,12 +490,16 @@ Emphasize how little configuration is needed for read-only results.</p></div><di
 Invite folks to try PyPI first, then explore Maestro commands when they have tokens.</p></div><div class="bespoke-marp-note" data-index="11" tabindex="0"><p>Reassure that installation is lightweight: venv + pip is enough.
 Mention that config is only needed when hitting Maestro; results commands are open.</p></div><div class="bespoke-marp-note" data-index="12" tabindex="0"><p>Encourage audience to enable completions for discoverability.
 Show quick demo of pressing tab to list subcommands if time permits.</p></div><div class="bespoke-marp-note" data-index="13" tabindex="0"><p>Explain that results commands need no tokens; Maestro ones do.
-Point out that `compare` and `hardware summary` are often the first useful entry points.</p></div><div class="bespoke-marp-note" data-index="14" tabindex="0"><p>Tell the story quickly: morning summary, chase failures, decide if it’s infra, then automate.
+Point out that `compare` and `hardware summary` are often the first useful entry points.
+compare is for comparing between commits with summary and regressions.</p></div><div class="bespoke-marp-note" data-index="14" tabindex="0"><p>Tell the story quickly: morning summary, chase failures, decide if it’s infra, then automate.
 Encourage saving commands to a script or chat message for team visibility.</p></div><div class="bespoke-marp-note" data-index="15" tabindex="0"><p>Share that quiet/JSON modes make it easy to integrate with `jq` and CI scripts.
 Mention color-coded history view and how it surfaces regressions quickly.</p></div><div class="bespoke-marp-note" data-index="19" tabindex="0"><p>Be transparent about current latency and that caching work is underway.
 Ask for patience and feedback—this is an area where contributors can help.</p></div><div class="bespoke-marp-note" data-index="20" tabindex="0"><p>Position kci-deploy as lowering setup time for new labs.
 Invite early adopters to share network/storage pain points.</p></div><div class="bespoke-marp-note" data-index="21" tabindex="0"><p>Give one concrete example for each pattern (e.g., nightly Matrix digest, pre-merge hook).
-Highlight that CLI output formats make these automations simple.</p></div><div class="bespoke-marp-note" data-index="23" tabindex="0"><p>_note:
+Highlight that CLI output formats make these automations simple.</p></div><div class="bespoke-marp-note" data-index="22" tabindex="0"><p>_note:
+example of what we can do with kci-dev maestro</p></div><div class="bespoke-marp-note" data-index="23" tabindex="0"><p>_note:
+example of what we can do with kci-dev kcidb
+
 Here I explain what the three result states in kci-dev really mean.
 
 “pass” means we have strong evidence things are OK: the build/boot/tests actually ran to completion and all relevant checks are green. These are our known-good reference points when we look for regressions or do bisects.

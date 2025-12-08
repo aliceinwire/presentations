@@ -72,11 +72,14 @@ Point out that CI fragmentation leads to context switching and delays.
 - Huge amount of data, but interaction is:
   - Mostly via web UI
   - Raw REST APIs
+  - In the last 7 days we did 7108 kernel builds
 - Need something ergonomic in the terminal
 
 <!--
 Remind audience that KernelCI is already rich; the gap is ergonomics, not coverage.
 Explain that the CLI layers on top of existing dashboards and APIs.
+In the last 7 days we did 7108 kernel builds
+https://api.kernelci.org/stats
 -->
 
 ---

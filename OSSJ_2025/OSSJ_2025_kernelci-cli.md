@@ -474,58 +474,6 @@ Here I explain what the three result states in kci-dev really mean.
 
 ---
 
-## Demo: from dashboard noise to a focused terminal workflow #1
-
-
-```bash
-# Configure once
-virtualenv .venv && source .venv/bin/activate
-pip install kci-dev
-kci-dev config     # writes ~/.config/kci-dev/kci-dev.toml
-
-# Morning health check
-kci-dev results summary \
-  --giturl https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git \
-  --branch master \
-  --history
-
-kci-dev results hardware summary \
-  --name mediatek,mt8195 \
-  --origin maestro \
-  --json
-
-```
-
-<!--
-Narrate commands live if possible; otherwise explain what each does and why the options matter.
-Stress that the same pattern works for any git tree and branch.
--->
-
----
-
-## Demo: from dashboard noise to a focused terminal workflow #2
-
-```bash
-# Investigate a failure
-kci-dev results boot --id maestro:<boot-node-id> --download-logs | less
-
-# Retry if needed
-kci-dev testretry --nodeid <node-id>
-
-# Look at raw Maestro nodes when needed
-kci-dev maestro results --nodeid <node-id> --json
-
-# (Optional) validate that dashboard & Maestro agree for the last week
-kci-dev maestro validate builds --all-checkouts --days 7 --table-output
-```
-
-<!--
-Explain how `--download-logs` keeps you out of the browser.
-Mention that `validate` helps catch mismatches between data sources.
--->
-
----
-
 ## Key takeaways
 
 - KernelCI already has the data – kci-dev makes it feel local to your terminal
@@ -616,3 +564,56 @@ https://asciinema.org/a/760568
 
 kci-dev KCIDB
 https://asciinema.org/a/760572
+
+---
+
+## Demo: from dashboard noise to a focused terminal workflow #1
+
+
+```bash
+# Configure once
+virtualenv .venv && source .venv/bin/activate
+pip install kci-dev
+kci-dev config     # writes ~/.config/kci-dev/kci-dev.toml
+
+# Morning health check
+kci-dev results summary \
+  --giturl https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git \
+  --branch master \
+  --history
+
+kci-dev results hardware summary \
+  --name mediatek,mt8195 \
+  --origin maestro \
+  --json
+
+```
+
+<!--
+Narrate commands live if possible; otherwise explain what each does and why the options matter.
+Stress that the same pattern works for any git tree and branch.
+-->
+
+---
+
+## Demo: from dashboard noise to a focused terminal workflow #2
+
+```bash
+# Investigate a failure
+kci-dev results boot --id maestro:<boot-node-id> --download-logs | less
+
+# Retry if needed
+kci-dev testretry --nodeid <node-id>
+
+# Look at raw Maestro nodes when needed
+kci-dev maestro results --nodeid <node-id> --json
+
+# (Optional) validate that dashboard & Maestro agree for the last week
+kci-dev maestro validate builds --all-checkouts --days 7 --table-output
+```
+
+<!--
+Explain how `--download-logs` keeps you out of the browser.
+Mention that `validate` helps catch mismatches between data sources.
+-->
+

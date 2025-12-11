@@ -3,18 +3,12 @@ marp: true
 theme: gyaru
 title: Welcome to Kernel Testing & Dependability MC
 paginate: true
-footer: "Arisu Tachibana – LPC 2025"
+footer: "LPC 2025"
 ---
 
 # Welcome to Kernel Testing & Dependability MC
 
-##### Arisu Tachibana
-
-<!-- _class: compact -->
-KernelCI Infra WG member
-kci-dev creator / maintainer
-Gentoo Kernel leader / CIP testing member
-Cybertrust Japan Co., Ltd.
+##### Arisu Tachibana, Sasha Levin, Shuah Khan, Guillaume Tucker
 
 ---
 

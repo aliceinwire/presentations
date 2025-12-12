@@ -66,7 +66,7 @@ html: true
 ## What kci-dev lets you do today
 
 - **Query results**: Get build/boot summaries, compare test results between revisions, filter by hardware, etc. – all via one CLI  
-- **Trigger tests**: Launch KernelCI jobs for your tree or branch on demand (no waiting for nightly runs)  
+- **Trigger tests**: Launch KernelCI jobs for your tree or branch on demand and do simple bisection (no waiting for nightly runs)  
 - **Fetch logs quickly**: Download and inspect boot logs or test output straight from the terminal  
 - **Integrate easily**: Scriptable JSON outputs for CI pipelines, plus shell completions for interactive use
 
@@ -77,23 +77,25 @@ html: true
 
 ## Real-World Context
 
-### **1. Developer Tree**
-- Trigger KernelCI jobs for any git tree or local development branch  
-- Example demo: using `kci-dev checkout` with `--giturl`, `--branch`, `--tipoftree`  
-- Used to validate feature branches before sending patches upstream
+<!-- _class: compact -->
+##### **1. Developer Tree**
+- Trigger KernelCI jobs for any tree in KernelCI
+- Example: using `kci-dev checkout` with `--giturl`, `--branch`, `--tipoftree`  
 
-### **2. CIP SLTS kernels**
+##### **2. CIP SLTS kernels**
 - Trigger SLTS kernel builds for CIP trees  
-- Demo example:
+- Example:
   `kci-dev checkout --giturl https://git.kernel.org/.../cip/linux-cip.git --branch linux-6.1.y-cip --tipoftree`
 - Validate long-term maintenance CI status directly from the terminal
 
-### **3. ChromiumOS coverage**
+---
+
+##### **3. ChromiumOS coverage**
 - Use `kci-dev maestro coverage` to retrieve kernel coverage info for ChromeOS kernels  
 - Terminal shows function/line coverage and URLs to the reports  
 - Graph views generated through `--graph-output` and opened locally
 
-### **4. Gentoo Kernel (gentoo-sources)**
+##### **4. Gentoo Kernel (gentoo-sources)**
 - Validate Gentoo patchset kernels using KernelCI  
 - Run builds/tests against gentoo-sources trees before publication  
 - Compare revisions using `kci-dev results compare`
@@ -130,7 +132,7 @@ Running job.............................
 
 - **Maintainer adoption**: Not all maintainers use kci-dev yet – some workflows (e.g. patch series on mailing lists) aren’t covered
 - **Context switching**: Still some need to visit dashboards for certain info (e.g. detailed triage or artifact browsing)
-- **Incomplete features**: New KernelCI data (like code coverage, bisect info) need better CLI support or docs
+- **Incomplete features**: New KernelCI data (like bisect info) need better CLI support or docs
 - **Performance concerns**: Large result sets can be slow to fetch; no offline caching means repeated queries are inefficient
 
 <!-- highlight adoption gaps, context switching, missing features, and performance pain. -->
@@ -179,26 +181,12 @@ Running job.............................
 
 ---
 
-
-## Community collaboration & discussion
-
-
-- **Early testers welcome**: Try new features early (e.g. beta releases) and give feedback to shape the roadmap
-- **Contribute and engage**: We invite community contributions – code, documentation, or packaging for your distro (every bit helps!)
-- **Join the conversation**: Participate in KernelCI community calls, chat on Discord, or the mailing list to discuss ideas and issues
-- **Shared ownership**: Collaborate on designs for new commands or workflows – maintainers and developers know their pain points best
-
-<!-- kci-dev is community-driven; invite feedback, contributions (code/docs/packaging), and joining KernelCI calls/Discord. -->
-
----
-
-
 ## Getting started after this talk
 
 
 - **Give kci-dev a try** on your own kernel tree this week (pip install and go!)
 - **Share your feedback**: Identify your top pain points in kernel testing and let us know if kci-dev doesn’t solve them yet
-- **Join the community**: Come to KernelCI community meetings or chat – help us prioritize what matters to you
+- **Join the community**: Come to KernelCI community meetings or chat – help us prioritize what matters to you https://discord.gg/KWbrbWEyqb
 - **Contribute**: Whether it’s a bug report, a documentation fix, or a code patch, all contributions are welcome and valued
 
 <!-- You can start improving your workflow right now by using kci-dev, and you can help improve kci-dev itself by providing feedbacks -->
@@ -208,9 +196,12 @@ Running job.............................
 
 # Thank You!
 
-
-**Slides:** https://aliceinwire.github.io/presentations/LPC_2025_TALK/
+- kci-dev
+**Documentation**: https://kci.dev
 **GitHub:** https://github.com/kernelci/kci-dev/
-**Questions welcome!** Your feedback will help shape the future of kci-dev.
+Your feedback will help shape the future of kci-dev
+
+- slides
+**Slides:** https://aliceinwire.github.io/presentations/LPC_2025_TALK/
 
 <!-- thank the audience, show contact links, and open for Q&A. -->

@@ -187,7 +187,7 @@ Running job.............................
 - What data from KernelCI do you *actually* look at during development?
 - Would patch-series testing (mbox / git range) help your workflow?
 - How often do you compare test results between revisions?
-- Do you want CI to auto-run on your tree, or only on-demand?
+- Do you want CI to auto-run on your tree, or only on-demand? Tree registration on KernelCI or local patches? self-service maestro deploy method?
 - What’s missing in kci-dev to make you use it daily?
 
 ---

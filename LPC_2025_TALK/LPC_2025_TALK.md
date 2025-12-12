@@ -195,7 +195,7 @@ Running job.............................
 ## Getting started after this talk
 
 
-- **Give kci-dev a try** on your own kernel tree this week (pip install and go!)
+- **Give kci-dev a try** on your own kernel tree this week (pip install kci-dev and go!)
 - **Share your feedback**: Identify your top pain points in kernel testing and let us know if kci-dev doesn’t solve them yet
 - **Join the community**: Come to KernelCI community meetings or chat – help us prioritize what matters to you https://discord.gg/KWbrbWEyqb
 - **Contribute**: Whether it’s a bug report, a documentation fix, or a code patch, all contributions are welcome and valued

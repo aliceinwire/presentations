@@ -75,6 +75,31 @@ html: true
 
 ---
 
+## Real-World Context
+
+### **1. Developer Tree**
+- Trigger KernelCI jobs for any git tree or local development branch  
+- Example demo: using `kci-dev checkout` with `--giturl`, `--branch`, `--tipoftree`  
+- Used to validate feature branches before sending patches upstream
+
+### **2. CIP SLTS kernels**
+- Trigger SLTS kernel builds for CIP trees  
+- Demo example:
+  `kci-dev checkout --giturl https://git.kernel.org/.../cip/linux-cip.git --branch linux-6.1.y-cip --tipoftree`
+- Validate long-term maintenance CI status directly from the terminal
+
+### **3. ChromiumOS coverage**
+- Use `kci-dev maestro coverage` to retrieve kernel coverage info for ChromeOS kernels  
+- Terminal shows function/line coverage and URLs to the reports  
+- Graph views generated through `--graph-output` and opened locally
+
+### **4. Gentoo Kernel (gentoo-sources)**
+- Validate Gentoo patchset kernels using KernelCI  
+- Run builds/tests against gentoo-sources trees before publication  
+- Compare revisions using `kci-dev results compare`
+
+---
+
 ## Triggering builds with job filter
 
 ```bash

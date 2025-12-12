@@ -12,27 +12,13 @@ footer: "LPC 2025"
 
 ---
 
-## UAPI testing with KUnit 
+- UAPI testing with KUnit - Thomas Weißschuh
 
-- Thomas Weißschuh
+- Kselftests augmented: running kernelspace tests from userspace - Ricardo Cañuelo
 
----
+- KFuzzTest: Targeted Fuzzing of Internal Kernel Functions - Ethan Graham
 
-## Kselftests augmented: running kernelspace tests from userspace 
-
-- Ricardo Cañuelo
-
----
-
-## KFuzzTest: Targeted Fuzzing of Internal Kernel Functions 
-
-- Ethan Graham
-
----
-
-## SYZOS: Practical KVM fuzzing 
-
-- Alexander Potapenko
+- SYZOS: Practical KVM fuzzing - Alexander Potapenko
 
 ---
 
@@ -42,33 +28,15 @@ footer: "LPC 2025"
 
 ---
 
-## syzbot ci: continuous patch series fuzzing 
+- syzbot ci: continuous patch series fuzzing - Aleksandr Nogikh
 
-- Aleksandr Nogikh
+- Automating Scope-Based Resource Cleanup with Coccinelle - Erick Muthama
 
----
+- The singularity is here for testing: genai advancements on kdevops - Luis Chamberlain
 
-## Automating Scope-Based Resource Cleanup with Coccinelle
+- KernelCI kci-dev: Closing the developer feedback loop - Arisu Tachibana
 
-- Erick Muthama
-
----
-
-## The singularity is here for testing: genai advancements on kdevops
-
-- Luis Chamberlain
-
----
-
-## KernelCI kci-dev: Closing the developer feedback loop
-
-- Arisu Tachibana
-
----
-
-## A fast path to benchmarking
-
-- Mark Brown
+- A fast path to benchmarking - Mark Brown
 
 ---
 

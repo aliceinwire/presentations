@@ -178,6 +178,17 @@ Running job.............................
 
 <!-- summarize priorities around maintainers, library API, 1.0 stability, and KernelCI sync. For example few days ago I had to fix kci-dev compare because dashboard api changed and was requiring boot_origin -->
 
+---
+
+## Questions for Kernel Developers & Maintainers
+
+- What slows you down today?
+- Do you need CI results earlier in your workflow? How early?
+- What data from KernelCI do you *actually* look at during development?
+- Would patch-series testing (mbox / git range) help your workflow?
+- How often do you compare test results between revisions?
+- Do you want CI to auto-run on your tree, or only on-demand?
+- What’s missing in kci-dev to make you use it daily?
 
 ---
 

@@ -91,7 +91,7 @@ html: true
 ---
 
 ##### **3. ChromiumOS coverage**
-- Use `kci-dev maestro coverage` to retrieve kernel coverage info for ChromiumOS kernels  
+- Use `kci-dev maestro coverage` to retrieve kernel coverage info 
 - Terminal shows function/line coverage and URLs to the reports  
 - Graph views generated through `--graph-output` and opened locally
 

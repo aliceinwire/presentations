@@ -168,13 +168,13 @@ Running job.............................
 ## Team priorities & milestones
 
 
-- **Make kci-dev maintainer-friendly**: Ensure kernel tree maintainers can seamlessly use it for their workflows (multiple branches, stable releases, etc.)
+- **Make kci-dev maintainer and developers friendly**: Ensure kernel tree maintainers can seamlessly use it for their workflows (multiple branches, stable releases, etc.)
 - **Enable library usage**: Provide a supported Python API so kci-dev can be imported as a module in other tools or CI systems
 - **Stability towards v1.0**: Focus on fixing bugs and polishing UX for a stable 1.0 release (address known issues, consistent outputs)
 - **Stay in sync with KernelCI**: Align with KernelCI’s new pipeline and features, so kci-dev remains fully compatible as the backend evolves
 
 
-<!-- summarize priorities around maintainers, library API, 1.0 stability, and KernelCI sync. -->
+<!-- summarize priorities around maintainers, library API, 1.0 stability, and KernelCI sync. For example few days ago I had to fix kci-dev compare because dashboard api changed and was requiring boot_origin -->
 
 
 ---

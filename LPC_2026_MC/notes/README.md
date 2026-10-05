@@ -76,6 +76,6 @@ The theme carries forward the repository's pink palette and JetBrains Mono
 font. It omits the old embedded background because that artwork contains
 LPC 2025's Tokyo date and venue. The original decks remain unchanged.
 
-From the repository root, run `make -C LPC_2026_TALK` with Marp CLI and a
+From the repository root, run `make -C LPC_2026_MC` with Marp CLI and a
 supported browser installed. The root `make` also discovers this deck. Notes
 live one level deeper so the existing build does not treat them as slide decks.

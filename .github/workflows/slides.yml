@@ -6,10 +6,13 @@ on:
     paths:
       - '**/*.md'
       - '**/*.css'
+      - '**/*.svg'
       - '**/diagrams/**'
       - '**/images/**'
       - 'Makefile'
+      - '**/Makefile'
       - 'presentation.mk'
+      - '.marprc.yml'
       - '.github/workflows/slides.yml'
   workflow_dispatch:
 
@@ -39,9 +42,8 @@ jobs:
           mkdir -p dist
 
           presentations=()
-          for md in */*.md; do
-            [ -f "$md" ] || continue
-            dir="${md%%/*}"
+          while IFS= read -r md; do
+            dir="$(dirname "$md")"
             base="$(basename "$md" .md)"
             html="$dir/$base.html"
             pdf="$dir/$base.pdf"
@@ -61,8 +63,13 @@ jobs:
               fi
             done
 
+            for asset in "$dir"/*.svg "$dir"/*.png "$dir"/*.jpg "$dir"/*.jpeg "$dir"/*.webp; do
+              [ -f "$asset" ] || continue
+              cp "$asset" "dist/$dir/"
+            done
+
             presentations+=("$dir|$base")
-          done
+          done < <(make --no-print-directory list)
 
           {
             echo '<!doctype html>'

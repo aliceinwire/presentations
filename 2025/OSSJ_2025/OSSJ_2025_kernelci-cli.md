@@ -446,9 +446,11 @@ Highlight that CLI output formats make these automations simple.
 
 ---
 
-<div style="max-width: 960px;max-height: 600px; margin: 0 auto; overflow: hidden;">
-<script src="https://asciinema.org/a/eYMpzYP4SGrQFWMoUzBfsRkJv.js" id="asciicast-eYMpzYP4SGrQFWMoUzBfsRkJv" async="true" data-size="medium" data-rows="20"></script>
-</div>
+## Demo: kci-dev Maestro
+
+Work with KernelCI jobs from the terminal.
+
+[Watch the Maestro recording](https://asciinema.org/a/eYMpzYP4SGrQFWMoUzBfsRkJv)
 
 <!-- _note:
 example of what we can do with kci-dev maestro
@@ -456,9 +458,11 @@ example of what we can do with kci-dev maestro
 
 ---
 
-<div style="max-width: 960px;max-height: 600px; margin: 0 auto; overflow: hidden;">
-<script src="https://asciinema.org/a/R4sEEcvQMNEacqbdgDFHLvFM9.js" id="asciicast-R4sEEcvQMNEacqbdgDFHLvFM9" async="true" data-size="medium" data-rows="20"></script>
-</div>
+## Demo: kci-dev KCIDB
+
+Explore KernelCI results from the terminal.
+
+[Watch the KCIDB recording](https://asciinema.org/a/R4sEEcvQMNEacqbdgDFHLvFM9)
 
 <!-- _note:
 example of what we can do with kci-dev kcidb

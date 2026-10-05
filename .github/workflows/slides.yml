@@ -73,36 +73,69 @@ jobs:
             presentations+=("$dir|$base")
           done < <(make --no-print-directory list)
 
-          {
-            echo '<!doctype html>'
-            echo '<html lang="en">'
-            echo '<head>'
-            echo '  <meta charset="UTF-8" />'
-            echo '  <meta name="viewport" content="width=device-width, initial-scale=1.0" />'
-            echo '  <title>Presentations</title>'
-            echo '  <style>body{font-family:Arial,sans-serif;margin:2rem;}h1{margin-bottom:0.5rem;}ul{line-height:1.8;}li{margin-bottom:0.25rem;}</style>'
-            echo '</head>'
-            echo '<body>'
-            echo '  <h1>Available presentations</h1>'
-            echo '  <ul>'
+          write_index() {
+            local archive="$1"
+            local title="Available presentations"
+            local entry dir base relative_dir pdf_path year
+            if [ -n "$archive" ]; then
+              title="$archive presentations"
+            fi
 
-            for entry in "${presentations[@]}"; do
-              dir="${entry%%|*}"
-              base="${entry##*|}"
-              pdf_path="./${dir}/${base}.pdf"
-
-              echo -n "    <li><strong>${dir}</strong>: <a href=\"./${dir}/\">HTML</a>"
-              if [ -f "dist/${dir}/${base}.pdf" ]; then
-                echo " | <a href=\"${pdf_path}\">PDF</a></li>"
-              else
-                echo '</li>'
+            {
+              echo '<!doctype html>'
+              echo '<html lang="en">'
+              echo '<head>'
+              echo '  <meta charset="UTF-8" />'
+              echo '  <meta name="viewport" content="width=device-width, initial-scale=1.0" />'
+              echo "  <title>${title}</title>"
+              echo '  <style>body{font-family:Arial,sans-serif;margin:2rem;}h1{margin-bottom:0.5rem;}ul{line-height:1.8;}li{margin-bottom:0.25rem;}</style>'
+              echo '</head>'
+              echo '<body>'
+              echo "  <h1>${title}</h1>"
+              if [ -n "$archive" ]; then
+                echo '  <p><a href="../">All presentations</a></p>'
               fi
-            done
+              echo '  <ul>'
 
-            echo '  </ul>'
-            echo '</body>'
-            echo '</html>'
-          } > dist/index.html
+              if [ -z "$archive" ]; then
+                for year in dist/[0-9][0-9][0-9][0-9]; do
+                  [ -d "$year" ] || continue
+                  year="${year##*/}"
+                  echo "    <li><a href=\"./${year}/\">${year}/</a></li>"
+                done
+              fi
+
+              for entry in "${presentations[@]}"; do
+                dir="${entry%%|*}"
+                base="${entry##*|}"
+                if [ -n "$archive" ]; then
+                  [[ "$dir" == "$archive/"* ]] || continue
+                  relative_dir="${dir#"$archive/"}"
+                else
+                  [[ "$dir" != */* ]] || continue
+                  relative_dir="$dir"
+                fi
+                pdf_path="./${relative_dir}/${base}.pdf"
+
+                echo -n "    <li><strong>${relative_dir}</strong>: <a href=\"./${relative_dir}/\">HTML</a>"
+                if [ -f "dist/${dir}/${base}.pdf" ]; then
+                  echo " | <a href=\"${pdf_path}\">PDF</a></li>"
+                else
+                  echo '</li>'
+                fi
+              done
+
+              echo '  </ul>'
+              echo '</body>'
+              echo '</html>'
+            } > "dist/${archive:+$archive/}index.html"
+          }
+
+          write_index ""
+          for year in dist/[0-9][0-9][0-9][0-9]; do
+            [ -d "$year" ] || continue
+            write_index "${year##*/}"
+          done
 
       - name: Deploy to GitHub Pages
         if: github.event_name != 'pull_request'

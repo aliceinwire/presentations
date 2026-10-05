@@ -27,6 +27,9 @@ details are in `LPC_2026_MC/notes/`.
 
 ## 2025 archive
 
+The published site's main page links to `2025/`, which lists the archived
+presentations with HTML and PDF links.
+
 - `2025/OSSJ_2025/`
 - `2025/LPC_2025_TALK/`
 - `2025/LPC_2025_MC/`

@@ -1,2 +1,3 @@
 html: true
 paginate: true
+allowLocalFiles: true

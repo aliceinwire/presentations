@@ -1,4 +1,4 @@
-MARPDOC := LPC_2026_TALK.md
+MARPDOC := LPC_2026_MC.md
 THEME := gyaru.css
 
 include ../presentation.mk

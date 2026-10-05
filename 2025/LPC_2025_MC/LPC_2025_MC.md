@@ -42,7 +42,7 @@ footer: "LPC 2025"
 
 # Thank You!
 
-Slides: https://aliceinwire.github.io/presentations/LPC_2025_MC/
+Slides: https://aliceinwire.github.io/presentations/2025/LPC_2025_MC/
 X: https://x.com/arisu_gyaru
 Instagram: https://www.instagram.com/gyaru_arisu/
 GitHub: https://github.com/aliceinwire

@@ -213,6 +213,6 @@ Running job.............................
 Your feedback will help shape the future of kci-dev
 
 - slides
-**Slides:** https://aliceinwire.github.io/presentations/LPC_2025_TALK/
+**Slides:** https://aliceinwire.github.io/presentations/2025/LPC_2025_TALK/
 
 <!-- thank the audience, show contact links, and open for Q&A. -->

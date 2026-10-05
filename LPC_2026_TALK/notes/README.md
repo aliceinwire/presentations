@@ -4,8 +4,8 @@
 
 **Speaker:** Arisu Tachibana
 
-**Format:** 12 slides, 15 minutes of prepared remarks, followed by discussion.
-The script is about 1,600 words. Allow time to point out the commands and pause
+**Format:** 13 slides, about 16 minutes at the suggested pace, followed by discussion.
+The timings are rehearsal guidance. Allow time to point out the commands and pause
 on the comparison and gate tables. Rehearse with a timer and adjust to your pace.
 Speaker notes also appear in the Marp Markdown comments and HTML presenter view.
 
@@ -14,17 +14,18 @@ Speaker notes also appear in the Marp Markdown comments and HTML presenter view.
 | Slide | Topic | Time |
 | --- | --- | --- |
 | 1 | Introduction | 00:00-00:40 |
-| 2 | Maintainer question | 00:40-01:45 |
-| 3 | Changes since LPC 2025 | 01:45-03:05 |
-| 4 | Python interface | 03:05-04:25 |
-| 5 | Patch submission | 04:25-05:55 |
-| 6 | Revision comparison | 05:55-07:25 |
-| 7 | Classification semantics | 07:25-08:55 |
-| 8 | Gate policy and coverage | 08:55-10:15 |
-| 9 | Service consistency | 10:15-11:30 |
-| 10 | Experimental MCP interface | 11:30-12:40 |
-| 11 | Proposed priorities | 12:40-14:05 |
-| 12 | Discussion questions | 14:05-15:00 |
+| 2 | Work since LPC 2025 | 00:40-01:40 |
+| 3 | Maintainer question | 01:40-02:45 |
+| 4 | Changes and versions | 02:45-04:05 |
+| 5 | Python interface | 04:05-05:25 |
+| 6 | Patch submission | 05:25-06:55 |
+| 7 | Revision comparison | 06:55-08:25 |
+| 8 | Classification semantics | 08:25-09:55 |
+| 9 | Gate policy and coverage | 09:55-11:15 |
+| 10 | Service consistency | 11:15-12:30 |
+| 11 | Experimental MCP interface | 12:30-13:40 |
+| 12 | Proposed priorities | 13:40-15:05 |
+| 13 | Discussion questions | 15:05-16:00 |
 
 ## Versions
 
@@ -41,13 +42,14 @@ hash to distinguish these examples from the release tag. Earlier releases alread
 had a `results compare` command with a different implementation.
 
 The priority order and proposed ownership split are discussion proposals.
-The comparison limitations on slide 9 describe this source snapshot and should
+The comparison limitations on slide 10 describe this source snapshot and should
 be refreshed if they are fixed before presenting.
 
 ## Examples
 
 The snippets explain the interfaces. They do not contain captured live test
-results. Supply a real Git URL, branch and full commit hashes for the comparison
+results. End-to-end patchset validation for this talk is still pending.
+Supply a real Git URL, branch and full commit hashes for the comparison
 examples. The Python example expects `GIT_URL`, `BRANCH` and `COMMIT` from its
 caller. Patchset submission needs a configured pipeline/token, an existing
 checkout node, local patches and supported job/test selections. Public Dashboard
@@ -64,8 +66,8 @@ slide in [SPEAKER_NOTES.md](SPEAKER_NOTES.md).
 [Detailed timetable](https://lpc.events/event/20/timetable/?view=standard)
 
 At retrieval, the contribution page and timetable disagreed on the scheduled
-time and duration. This deck follows the requested 15-minute speaking time
-and intentionally omits a scheduled start time. Confirm the final slot with
+time and duration. The timings are approximate, and the deck
+intentionally omits a scheduled start time. Confirm the final slot with
 the MC schedule before presenting.
 
 ## Theme and build

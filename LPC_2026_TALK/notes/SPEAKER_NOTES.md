@@ -4,21 +4,41 @@ kci-dev: What Changed, What Works, and What Kernel Developers Still Need
 
 Arisu Tachibana
 
-Prepared talk: 15 minutes. Discussion follows.
+Suggested pace: about 16 minutes. Discussion follows.
 
 ## 1. kci-dev
 
 00:00-00:40 (40 seconds)
 
-I created kci-dev to make KernelCI useful directly in a kernel developer's workflow, and I continue to lead the project. At last year's LPC, we discussed closing that feedback loop. Today I want to show what we can do now, where the interfaces still fall short, and which workflow we should finish together. I will keep the presentation to fifteen minutes, then open the discussion.
+I created kci-dev to make KernelCI useful directly in a kernel developer's workflow, and I continue to lead the project. At last year's LPC, we discussed closing that feedback loop. Today I want to show what we can do now, where the interfaces still fall short, and which workflow we should finish together. I will start with the work since last year, then leave room for discussion.
 
 Sources:
 https://lpc.events/event/20/contributions/2534/
 https://github.com/aliceinwire/presentations/blob/8653ff4d41ad3854f666aecec43d043a6400f33c/LPC_2025_TALK/LPC_2025_TALK.md
 
-## 2. A maintainer's question
+## 2. Our work since LPC 2025
 
-00:40-01:45 (65 seconds)
+00:40-01:40 (60 seconds)
+
+kci-dev connects kernel developers' tools to KernelCI. Since last year's LPC, our work has focused on making that connection reliable and easier to use.
+
+We fixed cases where watching a job or running a bisection could hang. Rejected retries now report failure, validation checks that result identifiers match, and JSON output gives scripts one readable result document.
+
+The reusable Python API lets other tools call kci-dev directly. External build reporting brings results from other build systems into KernelCI, while the patchset interface accepts patches against a known base. The interface is implemented; we still need a successful end-to-end run to validate the complete patch submission workflow for this talk.
+
+Sources:
+https://github.com/kernelci/kci-dev/pull/290
+https://github.com/kernelci/kci-dev/pull/301
+https://github.com/kernelci/kci-dev/pull/288
+https://github.com/kernelci/kci-dev/pull/294
+https://github.com/kernelci/kci-dev/pull/295
+https://github.com/kernelci/kci-dev/pull/277
+https://github.com/kernelci/kci-dev/pull/266
+https://github.com/kernelci/kci-dev/pull/287
+
+## 3. A maintainer's question
+
+01:40-02:45 (65 seconds)
 
 Imagine you are reviewing a patch series or preparing a stable update. You have a baseline and a candidate. KernelCI has results, but the decision still needs context. A failure count alone does not tell you whether the candidate introduced a problem. A different board, compiler or configuration can change what you are comparing. A missing test can also make the candidate look better than it really is.
 
@@ -28,9 +48,9 @@ Sources:
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/README.md
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py
 
-## 3. What changed since LPC 2025
+## 4. What changed since LPC 2025
 
-01:45-03:05 (80 seconds)
+02:45-04:05 (80 seconds)
 
 Last year's slides included a reusable library as a priority. By v0.1.11 we had a public Python client, alongside the command-line interface. That lets another application call kci-dev and work with Python objects. External build systems can also construct and submit KCIDB build results, with separate storage commands for their artifacts.
 
@@ -45,9 +65,9 @@ https://github.com/kernelci/kci-dev/blob/v0.1.11/docs/patchset.md
 https://github.com/kernelci/kci-dev/blob/v0.1.11/kcidev/subcommands/storage.py
 https://github.com/kernelci/kci-dev/blob/v0.1.11/docs/mcp.md
 
-## 4. A reusable Python interface
+## 5. A reusable Python interface
 
-03:05-04:25 (80 seconds)
+04:05-05:25 (80 seconds)
 
 This is the small integration example I want people to take away. The caller supplies a repository URL, branch and full commit hash. The public client makes the Dashboard request and returns the result as Python data. Public Dashboard queries do not require a KernelCI submission token.
 
@@ -59,11 +79,11 @@ Sources:
 https://github.com/kernelci/kci-dev/blob/v0.1.11/README.md#using-kci-dev-as-a-python-library
 https://github.com/kernelci/kci-dev/blob/v0.1.11/kcidev/api.py
 
-## 5. Patches on a known base
+## 6. Patches on a known base
 
-04:25-05:55 (90 seconds)
+05:25-06:55 (90 seconds)
 
-Patch submission is already available. First, create a checkout of the intended base revision using the checkout command. Its checkout_nodeid becomes CHECKOUT_NODE here. Then submit the patches in their intended order and select jobs that are available on that pipeline. The watch option can wait for the named test.
+The patchset interface is implemented; end-to-end validation for this talk is still pending. First, create a checkout of the intended base revision using the checkout command. Its checkout_nodeid becomes CHECKOUT_NODE here. Then submit the patches in their intended order and select jobs that are available on that pipeline. The watch option can wait for the named test.
 
 There are two submission forms. Local text patches go through patch, while patchurl sends URLs from a domain the pipeline permits. That includes Patchwork mbox URLs. A request uses one form or the other. The documented inline limits are thirty-two patches, up to ten mebibytes each, and binary patches are not supported.
 
@@ -73,9 +93,9 @@ Sources:
 https://github.com/kernelci/kci-dev/blob/v0.1.11/docs/patchset.md
 https://github.com/kernelci/kci-dev/blob/v0.1.11/kcidev/subcommands/patchset.py
 
-## 6. Comparing two revisions
+## 7. Comparing two revisions
 
-05:55-07:25 (90 seconds)
+06:55-08:25 (90 seconds)
 
 Now we have results for a baseline and a candidate. Current main can compare the two explicit commit hashes and return a structured report. I use explicit hashes here because a review needs to remain tied to the revisions we intended to compare. The default latest-two-checkouts mode is convenient for exploration, but its inputs can change as new results arrive.
 
@@ -88,9 +108,9 @@ https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a4
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py
 
-## 7. What the report tells us
+## 8. What the report tells us
 
-07:25-08:55 (90 seconds)
+08:25-09:55 (90 seconds)
 
 Here is how to read those categories. A pass becoming a fail or error can produce a regression. A failure becoming a pass can produce a fix. Failures on both sides are persistent. Results found on only one side become new or missing. History can refine the classification and mark a test unstable.
 
@@ -102,9 +122,9 @@ Sources:
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/tests/test_regression.py
 
-## 8. Gate policy and coverage
+## 9. Gate policy and coverage
 
-08:55-10:15 (80 seconds)
+09:55-11:15 (80 seconds)
 
 The gate command makes part of that policy executable. In this example I choose to fail on regressions and missing results. The default selects regression only. A policy violation returns one, while an incomplete comparison returns two. Command usage errors can also return two, so an integration should keep the report and diagnostic output.
 
@@ -116,9 +136,9 @@ Sources:
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/subcommands/results/__init__.py
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py
 
-## 9. Reliability across services
+## 10. Reliability across services
 
-10:15-11:30 (75 seconds)
+11:15-12:30 (75 seconds)
 
 KernelCI has several service boundaries. A job in Maestro and a result in the Dashboard need consistent identities and statuses. The maestro validate commands already help compare build and boot records, including missing identifiers and status mismatches. That gives us a way to investigate the data path as well as the kernel.
 
@@ -133,9 +153,9 @@ https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a4
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py
 
-## 10. MCP as an experimental interface
+## 11. MCP as an experimental interface
 
-11:30-12:40 (70 seconds)
+12:30-13:40 (70 seconds)
 
 The optional MCP server exposes KernelCI operations to compatible automation and AI clients. A client can explore results and known issues, inspect nodes, and, with the required configuration, request a checkout or retry. Those operations use the public Python client.
 
@@ -148,9 +168,9 @@ https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a4
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/mcp/tools_dashboard.py
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/mcp/tools_maestro.py
 
-## 11. Proposed priorities
+## 12. Proposed priorities
 
-12:40-14:05 (85 seconds)
+13:40-15:05 (85 seconds)
 
 My suggested first priority is comparison correctness, because other workflows will consume that output. Scope history to the candidate, preserve configuration across interfaces, and make incomplete data visible. We should agree on the cases that must pass before anyone relies on a release gate.
 
@@ -164,15 +184,15 @@ https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a4
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py
 The workstream order and ownership split are proposals for discussion.
 
-## 12. Decisions for this MC
+## 13. Decisions for this MC
 
-14:05-15:00 (55 seconds)
+15:05-16:00 (55 seconds)
 
 I would like us to leave this discussion with one workflow, an agreed evidence contract and people who can validate it against real kernel development. If patch review is the priority, let's choose a series workflow and define how its results reach the reviewer. If release review is the priority, let's choose a tree and write down its required coverage and failure policy.
 
 The project already has useful operations to build on. Your experience can help decide which connections matter most. Which workflow would make you use kci-dev regularly, and who would like to work through it with us?
 
-Pause here and invite discussion. The prepared talk ends at 15:00.
+Pause here and invite discussion. The suggested timing reaches 16:00; adjust the pace to leave room for discussion.
 
 Sources:
 https://kci.dev

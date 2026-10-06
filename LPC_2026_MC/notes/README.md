@@ -42,6 +42,17 @@ requirement in the kci-dev command-line tool.
   submission and result collection with jobs still active. No completed build
   comparison is claimed from that capture. Local report paths retain the
   redactions in the supplied output.
+- [Completed CIP evidence](evidence/patchwork-series-1178390-completed.json):
+  read-only recovery on 6 October of the submitted patchset and its two build
+  descendants, all `done/pass`. The stored patch artifact matches the Patchwork
+  diff byte for byte. Replaying public API snapshots through the pinned plugin
+  collector gives two matched passing builds, but `EVIDENCE_INCOMPLETE` for the
+  broader baseline comparison. The original local run directory was unavailable;
+  the saved excerpt distinguishes reconstructed metadata from observed nodes.
+- [Conflicting-result evidence](evidence/patchset-conflicting-results-2026-10-05.json):
+  the supplied tinyconfig smoke-test warning, stored results and exit code, with
+  a reproduction of the state classifier at the recorded client revision. This
+  smoke test is separate from the CIP Patchwork run and remains `NOT_VERIFIED`.
 - [Release-review evidence](evidence/release-review-2026-10-05.json): selected
   fields from published reports collected on 5 October 2026. It retains source
   URLs, exact commit selections, assessment, counts, observations, history
@@ -55,6 +66,11 @@ The public report site can update. The evidence files preserve the observations
 used by the slides. Counts are classifications of executions, rather than
 confirmed kernel defects. Required coverage and release approval are separate
 from those observations.
+
+[Walkthrough instructions](PATCHWORK_WALKTHROUGH.md) describe the recorded
+sequence and the recovered result. The [captured HTML snapshot](../examples/patchwork-series-1178390/report.html)
+opens the completed build evidence and its comparison summary without making
+API requests. It is published alongside the slides, with its JSON excerpt.
 
 ## Using the examples
 

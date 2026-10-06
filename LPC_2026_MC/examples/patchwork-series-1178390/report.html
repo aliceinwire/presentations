@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'">
+<title>CIP series 1178390: captured build and comparison results</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fff4fa;color:#301020;font:17px/1.55 system-ui,sans-serif}
+main{max-width:1120px;margin:48px auto;padding:0 24px}h1{font-size:38px;line-height:1.18;margin:10px 0 22px}h2{font-size:24px;color:#a50c48;margin-top:0}
+a{color:#a50c48;text-underline-offset:3px}a:focus-visible{outline:3px solid #a50c48;outline-offset:3px}code{font-size:.85em;overflow-wrap:anywhere}
+section{background:white;border:1px solid #ead4df;border-radius:12px;margin:24px 0;padding:26px}.eyebrow{text-transform:uppercase;font-size:13px;letter-spacing:.12em;font-weight:700}
+.badge{display:inline-block;border-radius:6px;background:#704100;color:white;padding:9px 14px;font-weight:700}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0}
+.card{background:white;border:1px solid #ead4df;border-radius:10px;padding:20px}.card strong{display:block;font-size:40px;color:#a50c48;line-height:1.15}.card span{display:block;margin-top:8px}
+.note{border-left:4px solid #b97416;padding-left:18px}table{border-collapse:collapse;width:100%;font-size:16px}th,td{padding:14px 10px;text-align:left;border-bottom:1px solid #ead4df;vertical-align:top}
+thead th{font-size:14px;color:#775868}small{display:block;color:#775868;font-size:13px;margin-top:6px}.pass{color:#23623b;font-weight:700}dl{display:grid;grid-template-columns:160px 1fr;gap:8px 18px}dt{font-weight:700}dd{margin:0;overflow-wrap:anywhere}
+.scroll{overflow-x:auto}footer{margin:28px 0;color:#775868;font-size:14px}@media(max-width:700px){main{margin:24px auto;padding:0 16px}h1{font-size:30px}.cards{grid-template-columns:1fr}section{padding:18px}dl{grid-template-columns:1fr;gap:4px}dd{margin-bottom:12px}}
+</style>
+</head>
+<body><main>
+<p class="eyebrow">LPC 2026 · kci-patchwork · recorded evidence</p>
+<h1>CIP series 1178390: the build completed</h1>
+<p>[5.10.y-cip,v3] PCI: rzg3s-host: Fix compilation warning</p>
+<p class="note">Read-only snapshot collected on 6 October 2026. The original local run directory was unavailable. Inputs were reconstructed from public API records, verified against the stored patch artifact, and replayed through the pinned plugin collector. No new jobs were submitted.</p>
+<div class="badge">EVIDENCE_INCOMPLETE</div>
+<div class="cards">
+<div class="card"><strong>3 / 3</strong><span>Patched-tree nodes done / pass</span></div>
+<div class="card"><strong>2</strong><span>Matched PASS to PASS comparisons</span></div>
+<div class="card"><strong>3,699</strong><span>Baseline entries missing in the patched run</span></div>
+</div>
+<section><h2>The recorded selection</h2><dl>
+<dt>Series</dt><dd><a href="https://patchwork.kernel.org/series/1178390/">1178390, version 3</a>, one patch</dd>
+<dt>Base checkout</dt><dd><a href="https://staging.kernelci.org:9000/node/6ab272040ed308c6c2d206c3"><code>6ab272040ed308c6c2d206c3</code></a></dd>
+<dt>Base revision</dt><dd><code>f6113c696e05dfdbf7af35c27b98b5084cc04b75</code></dd>
+<dt>Branch / job</dt><dd><code>linux-5.10.y-cip</code><br><code>kbuild-gcc-14-arm64-510-cip</code></dd>
+<dt>Patchset node</dt><dd><a href="https://staging.kernelci.org:9000/node/6ac44ef33a60498f8d8ab085"><code>6ac44ef33a60498f8d8ab085</code></a></dd>
+</dl></section>
+<section><h2>The submitted work finished</h2><div class="scroll"><table><thead><tr><th>Stage</th><th>State</th><th>Result</th></tr></thead><tbody><tr><th scope="row">Apply the frozen patch<small><a href="https://staging.kernelci.org:9000/node/6ac44ef33a60498f8d8ab085"><code>6ac44ef33a60498f8d8ab085</code></a></small></th><td>done</td><td class="pass">PASS</td></tr>
+<tr><th scope="row">Build the ARM64 kernel<small><a href="https://staging.kernelci.org:9000/node/6ac44f523a60498f8d8ab08f"><code>6ac44f523a60498f8d8ab08f</code></a></small></th><td>done</td><td class="pass">PASS</td></tr>
+<tr><th scope="row">Build kselftest binaries<small><a href="https://staging.kernelci.org:9000/node/6ac454373a60498f8d8ab467"><code>6ac454373a60498f8d8ab467</code></a></small></th><td>done</td><td class="pass">PASS</td></tr></tbody></table></div>
+<p>The kselftest child records compilation of test binaries. The patched tree contains no runtime test results.</p></section>
+<section><h2>Two comparable builds passed</h2><div class="scroll"><table><thead><tr><th>Observed build</th><th>Baseline</th><th>Patched</th></tr></thead><tbody><tr><th scope="row">Build the ARM64 kernel</th><td><a href="https://staging.kernelci.org:9000/node/6ab273eb0ed308c6c2d206f7"><code>6ab273eb0ed308c6c2d206f7</code></a><small>done / pass</small></td><td><a href="https://staging.kernelci.org:9000/node/6ac44f523a60498f8d8ab08f"><code>6ac44f523a60498f8d8ab08f</code></a><small>done / pass</small></td></tr>
+<tr><th scope="row">Build kselftest binaries</th><td><a href="https://staging.kernelci.org:9000/node/6ab278fe0ed308c6c2d20cad"><code>6ab278fe0ed308c6c2d20cad</code></a><small>done / pass</small></td><td><a href="https://staging.kernelci.org:9000/node/6ac454373a60498f8d8ab467"><code>6ac454373a60498f8d8ab467</code></a><small>done / pass</small></td></tr></tbody></table></div>
+<p>The collector matched job ancestry and execution configuration. Both pairs were classified <code>unchanged_pass</code>.</p></section>
+<section><h2>Why the review remains incomplete</h2>
+<p>The baseline job subtree also contains runtime jobs and tests. The collector retrieved all 3,739 baseline nodes and classified 3,725 comparison entries.</p>
+<table><thead><tr><th>Classification</th><th>Count</th></tr></thead><tbody>
+<tr><th scope="row">Unchanged pass</th><td>2</td></tr><tr><th scope="row">Missing</th><td>3,699</td></tr><tr><th scope="row">Ambiguous</th><td>9</td></tr><tr><th scope="row">Incomplete</th><td>15</td></tr>
+</tbody></table>
+<p>Other classification counts were zero. These categories describe comparison evidence; they are not counts of confirmed kernel defects.</p>
+<p><code>terminal=true</code>, <code>listing_complete=true</code>, <code>comparison.performed=true</code>, <code>comparison.complete=false</code>, exit <code>2</code>.</p>
+<p>Required coverage is <code>not_assessed</code> and <code>approved=false</code>. The selected builds succeeded; equivalent runtime coverage has not been established.</p></section>
+<section><h2>Which patch was built?</h2>
+<p>The <a href="https://patchwork.kernel.org/project/cip-dev/patch/20261002141124.2402765-1-claudiu.beznea@tuxon.dev/">Patchwork patch</a> and the <a href="https://files-staging.kernelci.org/patchset/arisut_arisut.com/6ab272040ed308c6c2d206c3-20261006012923-0.patch">pipeline patch artifact</a> contain the same 573 bytes.</p>
+<dl><dt>Content SHA-256</dt><dd><code>8240cab525488a49021afeaacccb5a496aedc7ff466219afbccfac5188c19c98</code></dd><dt>Pipeline patchset</dt><dd><code>7460423c03aa9618c060d2cbb468448771e3a18613250f3edcd9a228eaba80ea</code></dd></dl>
+<p>The parent checkout, source revision, job filters and pipeline hash were checked. The pipeline hash is separate from the full-byte SHA-256 comparison.</p></section>
+<section><h2>Inspect the captured evidence</h2>
+<p><a href="../../notes/evidence/patchwork-series-1178390-completed.json">JSON evidence excerpt</a> · <a href="https://github.com/aliceinwire/kci-patchwork/tree/1acedb7ab59a2bf8ab9934c4cf76727552c04b10">Collector source</a> · <a href="../../">Presentation</a></p>
+<p>The excerpt retains the selection, three submitted-tree nodes, summary counts, provenance and five selected comparison rows. The remaining comparison rows and full baseline listing are omitted. This page is a presentation snapshot, not the original local report.</p></section>
+<footer>Snapshot generated from the committed evidence excerpt. Live source links can change or expire.</footer>
+</main></body></html>

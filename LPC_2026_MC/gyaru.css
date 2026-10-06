@@ -208,3 +208,16 @@ section sup.cite:hover,
 section sup.cite:focus-within { opacity: 1; }
 section sup.cite a:hover,
 section sup.cite a:focus-visible { text-decoration: underline; }
+
+/* Recorded debugging and completed Patchwork results. */
+section.result-story p { font-size: 25px; }
+section.result-story table { font-size: 25px; margin: 20px 0 12px; }
+section.result-story th, section.result-story td { padding: 16px; }
+section.completed-run h2 { font-size: 38px; }
+section.completed-run table { font-size: 26px; }
+section.completed-run th, section.completed-run td { padding: 16px; }
+section.completed-run p { font-size: 23px; }
+section.comparison-story h2 { font-size: 37px; }
+section.comparison-story table { font-size: 25px; }
+section.comparison-story p { font-size: 24px; }
+section.comparison-story p:last-of-type { font-size: 22px; }

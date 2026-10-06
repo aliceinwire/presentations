@@ -1,0 +1,60 @@
+{
+  "source": "User-supplied 5 October 2026 staging smoke-test transcript and stored-result query",
+  "scope": "Separate inline two-patch tinyconfig smoke test; not Patchwork series 1178390.",
+  "client_version": "kci-dev, version 0.1.11",
+  "client_commit": "e4c00874f1bcfbd6a6f1cdd513320b2e95713a42",
+  "client_has_uncommitted_changes": false,
+  "job": "kbuild-gcc-14-x86-tinyconfig",
+  "base_commit": "48da85f091ccf4f552db628efd8fdd28dc8e9302",
+  "checkout_nodeid": "6ac39e46f1577420a6adb207",
+  "base_treeid": "eb116a9d7e9e4dde7894c760c2c57bd08cc4cf7c63bade9fef209461d5f5ba2e",
+  "baseline_api_result": {
+    "id": "6ac39e8ef1577420a6adb217",
+    "state": "available",
+    "result": "pass"
+  },
+  "watch_warning": "WARNING:root:Job kbuild-gcc-14-x86-tinyconfig failed with status: FAIL",
+  "verification_report": {
+    "status": "NOT_VERIFIED",
+    "patchset_nodeid": "6ac3a195f1577420a6adb373",
+    "treeid": "9d2a23acbf84effd7d3c940924c18b3de0bf6db229bc97c59ce0a450ea796223",
+    "patchset_hash": null,
+    "watch_exit_status": 0,
+    "checks": {
+      "watch_exit_zero": true,
+      "patchset_root": true,
+      "correct_parent": true,
+      "correct_tree": true,
+      "separate_tree": true,
+      "base_identity_preserved": true,
+      "patch_application_completed": true,
+      "patchset_hash_present": false,
+      "patched_tarball_present": true,
+      "two_patch_artifacts": false,
+      "selected_builds_passed": false,
+      "builds_used_patched_revision": false
+    },
+    "builds": [
+      {
+        "id": "6ac3a213f1577420a6adb3c1",
+        "name": "kbuild-gcc-14-x86-tinyconfig",
+        "state": "available",
+        "result": "pass"
+      }
+    ]
+  },
+  "source_analysis": {
+    "source_url": "https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/maestro_common.py",
+    "classification_lines": "144-172",
+    "warning_lines": "284-309",
+    "exit_lines": "339-347",
+    "reproduction": "Executed the unchanged maestro_check_node function extracted from the recorded client revision with the captured non-root node state and result.",
+    "classifier_results": {
+      "available/pass": "FAIL",
+      "closing/pass": "FAIL",
+      "done/pass": "DONE"
+    },
+    "interpretation": "The non-root classifier treats available/closing as FAIL, while the watch exit path returns zero for the selected test result pass. The captured output is consistent with these two paths.",
+    "limitation": "This source-level reproduction explains the conflicting signals; it does not establish patched-source provenance or close the original NOT_VERIFIED smoke test."
+  }
+}

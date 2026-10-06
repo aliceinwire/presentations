@@ -9,6 +9,8 @@ on:
       - '**/*.svg'
       - '**/diagrams/**'
       - '**/images/**'
+      - '**/examples/**'
+      - '**/notes/evidence/**'
       - 'Makefile'
       - '**/Makefile'
       - 'presentation.mk'
@@ -58,7 +60,7 @@ jobs:
               cp "$pdf" "dist/$dir/"
             fi
 
-            for assets in diagrams images; do
+            for assets in diagrams images examples notes/evidence; do
               if [ -d "$dir/$assets" ]; then
                 mkdir -p "dist/$dir/$assets"
                 cp -R "$dir/$assets/." "dist/$dir/$assets/"

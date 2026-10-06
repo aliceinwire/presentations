@@ -1,3 +1,4 @@
 # Ignore generated presentation outputs
 *.html
 *.pdf
+!LPC_2026_MC/examples/patchwork-series-1178390/report.html

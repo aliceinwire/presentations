@@ -18,6 +18,7 @@ footer: "Arisu Tachibana / LPC 2026"
 
 **Arisu Tachibana**
 kci-dev creator and project lead
+Senior Engineer, Cybertrust Japan Co., Ltd.
 
 Kernel Testing & Dependability MC / LPC 2026
 

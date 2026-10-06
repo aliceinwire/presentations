@@ -1,0 +1,319 @@
+{
+  "retrieved_on": "2026-10-06",
+  "scope": "Selected report fields and the displayed linux-6.6.y regression candidate. Other comparison items and supplemental evidence are omitted.",
+  "reports": [
+    {
+      "source": "https://aliceinwire.github.io/kci_release_review/release-kernel-linux-6-6-y-v6-6-158/report.json",
+      "excerpt": {
+        "finished_at": "2026-10-05T10:40:52.196588+00:00",
+        "selection": {
+          "giturl": "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git",
+          "branch": "linux-6.6.y",
+          "origin": "maestro",
+          "base": "79643295eba17affbd16ca97f3ef04c90266b28c",
+          "head": "a91a6aa9253c64936f0bd8273a2a3c11522ec9c3"
+        },
+        "assessment": {
+          "status": "REVIEW_REQUIRED",
+          "exit_code": 1,
+          "release_approved": false,
+          "required_coverage": "not_assessed"
+        },
+        "observations": {
+          "base": {
+            "builds": {
+              "fetched": true,
+              "total": 55,
+              "statuses": {
+                "PASS": 54,
+                "FAIL": 1
+              }
+            },
+            "boots": {
+              "fetched": true,
+              "total": 49,
+              "statuses": {
+                "PASS": 49
+              }
+            },
+            "tests": {
+              "fetched": true,
+              "total": 5873,
+              "statuses": {
+                "PASS": 4727,
+                "FAIL": 1093,
+                "SKIP": 53
+              }
+            }
+          },
+          "head": {
+            "builds": {
+              "fetched": true,
+              "total": 50,
+              "statuses": {
+                "PASS": 50
+              }
+            },
+            "boots": {
+              "fetched": true,
+              "total": 73,
+              "statuses": {
+                "PASS": 73
+              }
+            },
+            "tests": {
+              "fetched": true,
+              "total": 7380,
+              "statuses": {
+                "PASS": 5789,
+                "FAIL": 951,
+                "SKIP": 640
+              }
+            }
+          }
+        },
+        "history_lookup": {
+          "state": "fetched",
+          "history_size": 10,
+          "max_age_in_hours": 720,
+          "min_age_in_hours": 0,
+          "requested_head": "a91a6aa9253c64936f0bd8273a2a3c11522ec9c3",
+          "commit_hash": "a91a6aa9253c64936f0bd8273a2a3c11522ec9c3",
+          "checkout_start_time": "2026-10-03T11:23:57.264000Z",
+          "origin": "maestro",
+          "git_url": "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git",
+          "git_branch": "linux-6.6.y"
+        },
+        "incomplete_reasons": [],
+        "comparison": {
+          "base": "79643295eba17affbd16ca97f3ef04c90266b28c",
+          "head": "a91a6aa9253c64936f0bd8273a2a3c11522ec9c3",
+          "counts": {
+            "regression": 1,
+            "fixed": 1,
+            "unstable": 0,
+            "persistent_fail": 870,
+            "new": 2573,
+            "missing": 1047
+          },
+          "incomplete": false,
+          "items": [
+            {
+              "category": "regression",
+              "identity": {
+                "kind": "test",
+                "origin": "maestro",
+                "platform": "mt8195-cherry-tomato-r2",
+                "architecture": "arm64",
+                "compiler": "gcc-14",
+                "config": "defconfig+lab-setup+arm64-chromebook+CONFIG_MODULE_COMPRESS=n+CONFIG_MODULE_COMPRESS_NONE=y",
+                "path": "kernelci_watchdog_reset.wdt-reset.wdt-get-timeout"
+              },
+              "occurrence": 0,
+              "base_status": "PASS",
+              "head_status": "FAIL",
+              "base_id": "maestro:6aa951a120239ade903b8b85",
+              "head_id": "maestro:6ac10d6da3f195e1aa2b706c",
+              "known_issues": []
+            }
+          ]
+        }
+      }
+    },
+    {
+      "source": "https://aliceinwire.github.io/kci_release_review/release-cip-linux-6-12-y-cip-v6-12-111-cip32/report.json",
+      "excerpt": {
+        "finished_at": "2026-10-05T10:41:40.164554+00:00",
+        "selection": {
+          "giturl": "https://git.kernel.org/pub/scm/linux/kernel/git/cip/linux-cip.git",
+          "branch": "linux-6.12.y-cip",
+          "origin": "maestro",
+          "base": "9ac614bae427312bd04cbbd221d65afdb77353d0",
+          "head": "f721d8d6df5972522a35438cf356d6a41836aff1"
+        },
+        "assessment": {
+          "status": "NO_REVIEW_SIGNALS_IN_OBSERVED_RESULTS",
+          "exit_code": 0,
+          "release_approved": false,
+          "required_coverage": "not_assessed"
+        },
+        "observations": {
+          "base": {
+            "builds": {
+              "fetched": true,
+              "total": 6,
+              "statuses": {
+                "PASS": 6
+              }
+            },
+            "boots": {
+              "fetched": true,
+              "total": 0,
+              "statuses": {}
+            },
+            "tests": {
+              "fetched": true,
+              "total": 0,
+              "statuses": {}
+            }
+          },
+          "head": {
+            "builds": {
+              "fetched": true,
+              "total": 6,
+              "statuses": {
+                "PASS": 6
+              }
+            },
+            "boots": {
+              "fetched": true,
+              "total": 15,
+              "statuses": {
+                "PASS": 15
+              }
+            },
+            "tests": {
+              "fetched": true,
+              "total": 100,
+              "statuses": {
+                "PASS": 89,
+                "SKIP": 11
+              }
+            }
+          }
+        },
+        "history_lookup": {
+          "state": "fetched",
+          "history_size": 10,
+          "max_age_in_hours": 720,
+          "min_age_in_hours": 0,
+          "requested_head": "f721d8d6df5972522a35438cf356d6a41836aff1",
+          "commit_hash": "f721d8d6df5972522a35438cf356d6a41836aff1",
+          "checkout_start_time": "2026-09-28T22:45:02.451000Z",
+          "origin": "maestro",
+          "git_url": "https://git.kernel.org/pub/scm/linux/kernel/git/cip/linux-cip.git",
+          "git_branch": "linux-6.12.y-cip"
+        },
+        "incomplete_reasons": [],
+        "comparison": {
+          "base": "9ac614bae427312bd04cbbd221d65afdb77353d0",
+          "head": "f721d8d6df5972522a35438cf356d6a41836aff1",
+          "counts": {
+            "regression": 0,
+            "fixed": 0,
+            "unstable": 0,
+            "persistent_fail": 0,
+            "new": 115,
+            "missing": 0
+          },
+          "incomplete": false,
+          "items": []
+        }
+      }
+    },
+    {
+      "source": "https://aliceinwire.github.io/kci_release_review/stable-6-12/report.json",
+      "excerpt": {
+        "finished_at": "2026-10-05T10:39:07.389259+00:00",
+        "selection": {
+          "giturl": "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git",
+          "branch": "linux-6.12.y",
+          "origin": "maestro",
+          "base": "fa5b06866b643cce7072a4e7c6be7ee3f0f1b95c",
+          "head": "e2acc2211022246c77740d5df08265cc27eedcc5"
+        },
+        "assessment": {
+          "status": "EVIDENCE_INCOMPLETE",
+          "exit_code": 2,
+          "release_approved": false,
+          "required_coverage": "not_assessed"
+        },
+        "observations": {
+          "base": {
+            "builds": {
+              "fetched": true,
+              "total": 55,
+              "statuses": {
+                "PASS": 51,
+                "FAIL": 4
+              }
+            },
+            "boots": {
+              "fetched": true,
+              "total": 79,
+              "statuses": {
+                "PASS": 79
+              }
+            },
+            "tests": {
+              "fetched": true,
+              "total": 8362,
+              "statuses": {
+                "PASS": 7650,
+                "FAIL": 466,
+                "SKIP": 246
+              }
+            }
+          },
+          "head": {
+            "builds": {
+              "fetched": true,
+              "total": 50,
+              "statuses": {
+                "PASS": 50
+              }
+            },
+            "boots": {
+              "fetched": true,
+              "total": 45,
+              "statuses": {
+                "PASS": 45
+              }
+            },
+            "tests": {
+              "fetched": true,
+              "total": 13031,
+              "statuses": {
+                "PASS": 10950,
+                "FAIL": 638,
+                "SKIP": 1443
+              }
+            }
+          }
+        },
+        "history_lookup": {
+          "state": "error",
+          "history_size": 10,
+          "max_age_in_hours": 720,
+          "min_age_in_hours": 0,
+          "requested_head": "e2acc2211022246c77740d5df08265cc27eedcc5",
+          "commit_hash": "7aba70ab2e8d8ab3cd45abcaa15e1119a00dc42a",
+          "checkout_start_time": "2026-10-03T11:23:57.682000Z",
+          "origin": "maestro",
+          "git_url": "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git",
+          "git_branch": "linux-6.12.y",
+          "error": "KciDevError: Tree history does not match the selected head checkout (commit_hash); selected head e2acc2211022246c77740d5df08265cc27eedcc5, returned 7aba70ab2e8d8ab3cd45abcaa15e1119a00dc42a. Only the exact-commit result comparison is available."
+        },
+        "incomplete_reasons": [
+          "kci-dev marked the comparison incomplete (history or issue evidence is missing).",
+          "History lookup: KciDevError: Tree history does not match the selected head checkout (commit_hash); selected head e2acc2211022246c77740d5df08265cc27eedcc5, returned 7aba70ab2e8d8ab3cd45abcaa15e1119a00dc42a. Only the exact-commit result comparison is available.",
+          "Issue lookup limit left 370 result IDs unchecked."
+        ],
+        "comparison": {
+          "base": "fa5b06866b643cce7072a4e7c6be7ee3f0f1b95c",
+          "head": "e2acc2211022246c77740d5df08265cc27eedcc5",
+          "counts": {
+            "regression": 1,
+            "fixed": 36,
+            "unstable": 0,
+            "persistent_fail": 389,
+            "new": 5426,
+            "missing": 796
+          },
+          "incomplete": true,
+          "items": []
+        }
+      }
+    }
+  ]
+}

@@ -55,7 +55,33 @@ https://github.com/kernelci/kci-dev/blob/v0.1.11/docs/patchset.md
 https://github.com/kernelci/kci-dev/blob/v0.1.11/kcidev/subcommands/storage.py
 https://github.com/kernelci/kci-dev/blob/v0.1.11/docs/mcp.md
 
-## 5. A reusable Python interface
+## 5. Would you trust this result?
+
+Pause on the question before explaining the implementation. This is the inline two-patch tinyconfig smoke test from 5 October, separate from the CIP Patchwork series later in the walkthrough. The client reported version 0.1.11 at commit e4c0087 with no uncommitted changes. During both baseline and patched watching it printed a failure warning, even though the queried build records held result pass.
+
+For the patched build, the captured verification report contains node 6ac3a213f1577420a6adb3c1 with state available and result pass. The same report records watcher exit status zero. These are three signals from one workflow, and they do not say the same thing. Available is a lifecycle state; pass is an outcome. The exit code is a third interpretation made by the client.
+
+The script correctly retained an overall NOT_VERIFIED outcome. Several checks, including patchset hash and patched-revision provenance, were unsatisfied. A passing build record alone could not establish that the intended patched source was compiled. The question for a maintainer's automation is therefore which evidence has been collected and what conclusion that evidence supports. The next slide traces the inconsistent warning and exit code to their separate paths in the recorded client revision.
+
+Sources:
+https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchset-conflicting-results-2026-10-05.json
+https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/maestro_common.py#L144-L172
+https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/maestro_common.py#L284-L347
+
+## 6. Why those answers disagreed
+
+This explanation is tied to the exact source revision recorded by the smoke test. For a non-root node, maestro_check_node recognizes running, or done with a pass/fail result. Other states fall through to FAIL. Executing that unchanged function with the captured available/pass input reproduces FAIL; closing/pass does too. Changing the lifecycle state to done while keeping result pass produces DONE.
+
+The watching loop separately remembers the selected test's result. It emits its warning from the classifier output, removes the job from its waiting list, and later exits zero when the remembered test result is pass. That source path explains how a failure warning and a successful exit can coexist. This is a source-level reproduction of the recorded behavior, not a claim that a new watcher fix has been merged.
+
+The design requirement is to keep lifecycle state and test outcome explicit, and make warnings and exit status follow the same contract. A caller should retain the node ID, state, result and errors so an incomplete observation can be examined. That is part of the motivation for structured interfaces. It also leaves the separate provenance question intact: the original smoke test had not verified every link from the supplied patches to the built source. We should not reinterpret its NOT_VERIFIED result as successful end-to-end validation.
+
+Sources:
+https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/maestro_common.py#L144-L172
+https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/maestro_common.py#L284-L347
+https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchset-conflicting-results-2026-10-05.json
+
+## 7. A reusable Python interface
 
 This is the small integration example I want people to take away. The caller supplies a repository URL, branch and full commit hash. The public client makes the Dashboard request and returns the result as Python data. Public Dashboard queries do not require a KernelCI submission token.
 
@@ -67,7 +93,7 @@ Sources:
 https://github.com/kernelci/kci-dev/blob/v0.1.11/README.md#using-kci-dev-as-a-python-library
 https://github.com/kernelci/kci-dev/blob/v0.1.11/kcidev/api.py
 
-## 6. Example plugins using the Python API
+## 8. Example plugins using the Python API
 
 These are examples of plugins built around the reusable interface. Here, plugin means a separate application that imports kci-dev. Neither application requires a plugin registration mechanism inside the command-line tool. They can have their own commands, release cycles and report formats while sharing the same client operations.
 
@@ -81,20 +107,20 @@ https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf7672
 https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/client.py
 https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py
 
-## 7. Patches on a known base
+## 9. Patches on a known base
 
 This is the underlying command-line operation. First create or select a checkout of the intended base revision. Its checkout_nodeid becomes CHECKOUT_NODE here. Submit the patches in their intended order and select jobs available on that pipeline. The watch option can wait for the named test.
 
 There are two submission forms. Local text patches go through patch, while patchurl sends URLs from a domain the pipeline permits. A request uses one form or the other. The documented inline limits are thirty-two patches, up to ten mebibytes each, and binary patches are not supported.
 
-The application example adds the work around this operation. It freezes the series, remembers the base and returned identifiers, follows the resulting tree and prepares a report. Its captured CIP run later in the deck demonstrates submission and collection while jobs remain active. That particular capture does not yet establish the outcome of the patched build or its comparison with the baseline.
+The application example adds the work around this operation. It freezes the series, remembers the base and returned identifiers, follows the resulting tree and prepares a report. Its captured CIP run later in the deck demonstrates submission and collection while jobs remain active. That early capture does not establish the outcome of the patched build. The later read-only recovery in the walkthrough supplies its terminal build results and baseline comparison.
 
 Sources:
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/docs/patchset.md
 https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L102-L149
 User-provided CIP series 1178390 command and running-result excerpt, reproduced in notes/evidence/patchwork-series-1178390.json.
 
-## 8. Choosing the base and the jobs
+## 10. Choosing the base and the jobs
 
 The checkout argument is a KernelCI node identifier, rather than a Git branch name or a Patchwork series identifier. That node gives the pipeline a source revision and a tarball on which to apply the series. It also supplies the baseline that the application will later inspect.
 
@@ -106,7 +132,7 @@ Sources:
 https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/README.md#L104-L115
 https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L65-L100
 
-## 9. kci-patchwork: a series workflow
+## 11. kci-patchwork: a series workflow
 
 A Patchwork URL is a useful input because it identifies the series in the place where review already happens. The application accepts series links and project-list links with a series parameter, including the CIP example that follows. It can also use other servers that expose a compatible public Patchwork API.
 
@@ -119,7 +145,7 @@ https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf7672
 https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/patchwork.py#L207-L284
 https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L101-L147
 
-## 10. CIP series submission
+## 12. CIP series submission
 
 This is the command used for the captured run. The URL names series 1178390 in the cip-dev project. The explicit staging profile supplies the KernelCI endpoints and credentials. The checkout argument names the unpatched base, and the job filter selects the ARM64 CIP build.
 
@@ -132,32 +158,66 @@ User-provided command for CIP series 1178390.
 https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/README.md#L19-L47
 https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/__main__.py#L250-L345
 
-## 11. Captured Patchwork run
+## 13. First capture: the series was running
 
 This is an excerpt of the output supplied for the CIP run, not a simulated successful result. The application has observed two nodes, including one descendant. One result is pass and the other is unset. Their states are closing and running, and the terminal flag is false.
 
 Those fields explain why the application reports RUNNING with exit code three. They demonstrate that submission has progressed into result collection and that the tool can produce a structured report for the run. The summary does not identify the passing node as a completed build, so we should not interpret the single pass count that way.
 
-The comparison fields are equally useful. They explicitly say that baseline comparison has not been performed. The full output states that comparison starts once the patched tree has complete terminal results, and gives paths to report.html and report.json. A later status request can update that evidence. This capture supports the working submission and monitoring path, while leaving the eventual build and comparison outcome open.
+The comparison fields are equally useful. They explicitly say that baseline comparison has not been performed. The full output states that comparison starts once the patched tree has complete terminal results, and gives paths to report.html and report.json. A later status request can update that evidence. This early capture supports the working submission and monitoring path. The terminal readback later in the walkthrough supplies the eventual build and comparison observations.
 
 Sources:
 User-provided CIP run excerpt. Complete supplied JSON is retained in notes/evidence/patchwork-series-1178390.json.
 https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L168-L214
 https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/results.py#L9-L102
 
-## 12. Continuing the same Patchwork run
+## 14. Continuing the same Patchwork run
 
-These commands continue observation of the saved run. Status collects a snapshot, and watch continues polling. They use the recorded endpoints and submitted identifiers. Restarting observation should not require preparing or submitting the series again.
+For the recorded walkthrough, open the captured HTML evidence snapshot linked on this slide. It is a compact view of the recovered terminal results, with a link to the JSON evidence excerpt. It is clearly labelled as a reconstruction from public API snapshots, because the original local report was unavailable. The committed walkthrough notes explain how that collection was performed.
+
+These commands continue observation of the original saved run if it is available. Status collects a snapshot, and watch continues polling. They use the recorded endpoints and submitted identifiers. Restarting observation should not require preparing or submitting the series again.
 
 The application writes its attempt record before making the submission request. It refuses a repeated submission for that run directory, including when the original request has an uncertain outcome. That protection depends on preserving the directory. Preparing a different run directory is a separate operation and can create another submission.
 
 For an ordinary active run, status or watch refreshes the HTML and JSON reports. Once the patched tree has complete terminal results, collection also reads the saved baseline and compares matching results. If a request was interrupted before a reliable response, the application has an explicit reconciliation path for an operator to identify the original submission. This is a workflow concern that belongs around the library method, and the saved state makes it manageable.
 
 Sources:
+https://aliceinwire.github.io/presentations/LPC_2026_MC/examples/patchwork-series-1178390/report.html
+https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchwork-series-1178390-completed.json
 https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L126-L166
 https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L230-L317
 
-## 13. Patchset identity in the Python API
+## 15. CIP series 1178390: the build completed
+
+We can now follow the earlier running capture to terminal results. A read-only query found patchset node 6ac44ef33a60498f8d8ab085 under the exact recorded checkout, with the recorded ARM64 CIP job filter. Its tree contains the patch application node, kernel build 6ac44f523a60498f8d8ab08f and kselftest compilation node 6ac454373a60498f8d8ab467. All three were done with result pass when collected on 6 October. No new jobs were submitted to obtain this evidence.
+
+The association with series 1178390 is supported by more than the parent ID. Patchwork reports version three with one patch, ID 14863610, titled PCI: rzg3s-host: Fix compilation warning. The stored pipeline patch0 artifact and the Patchwork diff have identical contents: 573 bytes with SHA-256 8240cab525488a49021afeaacccb5a496aedc7ff466219afbccfac5188c19c98. The calculated pipeline patchset hash also matches the root and build metadata. The source tarball differs from the unpatched base tarball, and the parent, revision and job filters match the recorded command.
+
+These observations support successful patch application and the selected builds. The kselftest child here is compilation of test binaries, not a record of executing those tests on a target. The patch title describes its purpose; this snapshot does not independently establish that a particular compiler warning disappeared. The original local run directory was unavailable, so the final collection was reconstructed from public API snapshots and replayed through the pinned plugin collector. The committed report labels that provenance explicitly. The next question is what happens when we compare this build-only run with its much broader baseline.
+
+Sources:
+https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchwork-series-1178390-completed.json
+https://patchwork.kernel.org/api/1.2/series/1178390/
+https://patchwork.kernel.org/api/1.2/patches/14863610/
+https://staging.kernelci.org:9000/node/6ac44ef33a60498f8d8ab085
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L194-L237
+
+## 16. Three PASS nodes. Is the review complete?
+
+Ask the audience the title question before reading the status. Terminal means the submitted run has finished. A complete comparison makes a separate claim about the available evidence. In this snapshot, the kernel build and its kselftest compilation both match passing baseline results under the same ancestry and execution configuration. That gives two unchanged_pass comparisons.
+
+The plugin also reads the corresponding baseline job subtree, which contains 3,739 nodes across several runtime jobs and platforms. The submitted patched tree only contains the selected build and its compilation child. The collector retrieved every baseline page and classified 3,725 comparison entries: two unchanged passes, 3,699 missing entries, nine ambiguous entries and fifteen incomplete entries. Ambiguous and incomplete are evaluated before the simple missing category, so these are separate counts, not additional confirmed kernel failures. All other classification counts were zero.
+
+The unmodified collector at the pinned plugin revision therefore produced EVIDENCE_INCOMPLETE and exit code two, with terminal true, listing_complete true, comparison.performed true and comparison.complete false. This is the actual result of replaying the public snapshots through the collector. It is not a fabricated successful comparison or the output of a newly submitted run.
+
+The useful conclusion is precise: the requested builds succeeded, while the broader baseline comparison cannot establish equivalent runtime coverage. A reviewer can inspect the two passing pairs and the missing work in the captured HTML snapshot. Choosing the required jobs and platforms is part of the workflow contract. Expanding the test selection or narrowing an explicitly defined review scope is a decision for that workflow, not a reason to hide the incomplete result. Required coverage remains not_assessed and approved remains false in the report.
+
+Sources:
+https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchwork-series-1178390-completed.json
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/comparison.py#L82-L238
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/results.py#L175-L200
+
+## 17. Patchset identity in the Python API
 
 This abbreviated Python example shows the shared operation that kci-patchwork calls. The configured client submits ordered diff strings against the chosen base and returns the patchset node. The application persists the returned node and tree identifiers before later collection.
 
@@ -171,7 +231,7 @@ https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf7672
 https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L168-L187
 https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/comparison.py#L9-L79
 
-## 14. Comparing two revisions
+## 18. Comparing two revisions
 
 Now we have results for a baseline and a candidate. Current main can compare the two explicit commit hashes and return a structured report. I use explicit hashes here because a review needs to remain tied to the revisions we intended to compare. The default latest-two-checkouts mode is convenient for exploration, but its inputs can change as new results arrive.
 
@@ -184,7 +244,7 @@ https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a4
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py
 
-## 15. What the report tells us
+## 19. What the report tells us
 
 Here is how to read those categories. A pass becoming a fail or error can produce a regression. A failure becoming a pass can produce a fix. Failures on both sides are persistent. Results found on only one side become new or missing. History can refine the classification and mark a test unstable.
 
@@ -196,7 +256,7 @@ Sources:
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/tests/test_regression.py
 
-## 16. kci_release_review: tested revisions
+## 20. kci_release_review: tested revisions
 
 Release review starts with revisions that already have KernelCI results. The application takes explicit baseline and candidate hashes, together with the origin, repository and branch. It calls the public comparison method and preserves its classifications rather than implementing another copy of the Dashboard classifier.
 
@@ -210,7 +270,7 @@ https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d
 https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/daily.py
 https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/releases.py
 
-## 17. A report built on the shared client
+## 21. A report built on the shared client
 
 Here is the Python boundary inside the release-review application. ReviewClient subclasses KernelCIClient and records the result lists that the comparison actually consumed. It also bounds supplemental issue lookups and checks the identity of returned history. The underlying result requests and classification still come from kci-dev.
 
@@ -222,7 +282,7 @@ Sources:
 https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/client.py
 https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py
 
-## 18. Published release-review results
+## 22. Published release-review results
 
 This image comes from the published linux-6.6.y report. The report compares v6.6.157 with v6.6.158 and was collected on 5 October 2026. The full commit hashes and source URLs accompany the captured evidence. These values describe that report, rather than a forecast or an invented demonstration.
 
@@ -236,7 +296,7 @@ https://aliceinwire.github.io/kci_release_review/release-kernel-linux-6-6-y-v6-6
 https://aliceinwire.github.io/kci_release_review/summary.json
 Captured report data: notes/evidence/release-review-2026-10-05.json.
 
-## 19. One candidate to investigate
+## 23. One candidate to investigate
 
 This is the regression candidate behind the previous report's count of one. It is a watchdog timeout query test on the mt8195-cherry-tomato-r2 platform, using ARM64 and GCC 14. The baseline result is pass and the candidate result is fail. The report also retains the full configuration string, occurrence number and the two result identifiers.
 
@@ -248,7 +308,7 @@ Sources:
 https://aliceinwire.github.io/kci_release_review/release-kernel-linux-6-6-y-v6-6-158/report.json
 https://aliceinwire.github.io/kci_release_review/release-kernel-linux-6-6-y-v6-6-158/report.html
 
-## 20. A CIP result with no review signals
+## 24. A CIP result with no review signals
 
 The CIP report gives a different outcome from the stable example. For this pair, both revisions have six passing builds. The candidate also has fifteen passing boots and one hundred test results, of which eighty-nine pass and eleven are skipped. The baseline has no observed boots or tests in this capture.
 
@@ -260,7 +320,7 @@ Sources:
 https://aliceinwire.github.io/kci_release_review/release-cip-linux-6-12-y-cip-v6-12-111-cip32/report.html
 https://aliceinwire.github.io/kci_release_review/release-cip-linux-6-12-y-cip-v6-12-111-cip32/report.json
 
-## 21. Incomplete evidence stays visible
+## 25. Incomplete evidence stays visible
 
 This published comparison shows why it matters to preserve incompleteness. The explicit commit queries returned useful observations, including one regression candidate and thirty-six recoveries. However, the branch-history response points to a different head revision. The application rejects that history rather than allowing it to silently alter the selected comparison.
 
@@ -273,7 +333,7 @@ https://aliceinwire.github.io/kci_release_review/stable-6-12/report.html
 https://aliceinwire.github.io/kci_release_review/stable-6-12/report.json
 https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/client.py
 
-## 22. Gate policy and coverage
+## 26. Gate policy and coverage
 
 The gate command makes part of that policy executable. In this example I choose to fail on regressions and missing results. The default selects regression only. A policy violation returns one, while an incomplete comparison returns two. Command usage errors can also return two, so an integration should keep the report and diagnostic output.
 
@@ -285,7 +345,7 @@ Sources:
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/subcommands/results/__init__.py
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py
 
-## 23. What the plugins expose
+## 27. What the plugins expose
 
 The applications exercise the shared interface under real workflow constraints. The release-review adapter checks that history belongs to the selected candidate and makes a mismatch visible. It also passes configured endpoints into the client. Those protections are implemented in the application snapshot we inspected.
 
@@ -300,7 +360,7 @@ https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d
 https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/results.py#L106-L200
 https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/comparison.py#L82-L238
 
-## 24. A contract for the next plugin
+## 28. A contract for the next plugin
 
 These examples suggest a useful contract for the next integration. The client should provide consistent requests, explicit configuration, recoverable failures and structured results. The application should own how a user selects inputs, when work starts, and how the evidence reaches its intended audience.
 
@@ -315,7 +375,7 @@ https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d
 https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L253-L270
 https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py
 
-## 25. MCP as an experimental interface
+## 29. MCP as an experimental interface
 
 The optional MCP server exposes KernelCI operations to compatible automation and AI clients. A client can explore results and known issues, inspect nodes, and, with the required configuration, request a checkout or retry. Those operations use the public Python client.
 
@@ -328,7 +388,7 @@ https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a4
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/mcp/tools_dashboard.py
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/mcp/tools_maestro.py
 
-## 26. Proposed priorities
+## 30. Proposed priorities
 
 We now have concrete applications to improve, rather than only proposed integrations. Shared correctness remains a priority because every consumer depends on the meaning of the result. History identity and configuration propagation should be explicit guarantees, with tests that cover older revisions and incomplete data.
 
@@ -341,7 +401,7 @@ https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf7672
 https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py
 
-## 27. Decisions for this MC
+## 31. Decisions for this MC
 
 I would like us to choose a concrete maintainer workflow and the evidence it requires. We can now point to two applications that people can inspect and run: one begins with a Patchwork series, and the other begins with tested revisions. Both demonstrate why the reusable Python interface matters beyond the command line.
 

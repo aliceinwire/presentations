@@ -113,6 +113,65 @@ https://github.com/kernelci/kci-dev/blob/v0.1.11/docs/mcp.md
 
 ---
 
+<!-- _class: result-story -->
+
+## Would you trust this result?
+
+Recorded two-patch smoke test, staging.<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchset-conflicting-results-2026-10-05.json" aria-label="Reference 1">1</a></sup>
+
+| Signal | Captured value |
+| :--- | :--- |
+| Watcher warning | `failed with status: FAIL`<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchset-conflicting-results-2026-10-05.json" aria-label="Reference 1">1</a></sup> |
+| Stored build result | `state=available`, `result=pass`<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchset-conflicting-results-2026-10-05.json" aria-label="Reference 1">1</a></sup> |
+| Watcher exit status | `0`<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchset-conflicting-results-2026-10-05.json" aria-label="Reference 1">1</a></sup> |
+
+**Which signal should an automated decision use?**
+
+<!--
+Pause on the question before explaining the implementation. This is the inline two-patch tinyconfig smoke test from 5 October, separate from the CIP Patchwork series later in the walkthrough. The client reported version 0.1.11 at commit e4c0087 with no uncommitted changes. During both baseline and patched watching it printed a failure warning, even though the queried build records held result pass.
+
+For the patched build, the captured verification report contains node 6ac3a213f1577420a6adb3c1 with state available and result pass. The same report records watcher exit status zero. These are three signals from one workflow, and they do not say the same thing. Available is a lifecycle state; pass is an outcome. The exit code is a third interpretation made by the client.
+
+The script correctly retained an overall NOT_VERIFIED outcome. Several checks, including patchset hash and patched-revision provenance, were unsatisfied. A passing build record alone could not establish that the intended patched source was compiled. The question for a maintainer's automation is therefore which evidence has been collected and what conclusion that evidence supports. The next slide traces the inconsistent warning and exit code to their separate paths in the recorded client revision.
+
+Sources:
+https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchset-conflicting-results-2026-10-05.json
+https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/maestro_common.py#L144-L172
+https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/maestro_common.py#L284-L347
+-->
+
+---
+
+<!-- _class: result-story -->
+
+## Why those answers disagreed
+
+| Client path | Interpretation in the recorded revision |
+| :--- | :--- |
+| Non-root state classifier | `available/pass` becomes `FAIL`<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/maestro_common.py#L144-L172" aria-label="Reference 1">1</a></sup> |
+| Selected-test exit path | `result=pass` returns exit `0`<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/maestro_common.py#L339-L347" aria-label="Reference 2">2</a></sup> |
+
+Replaying the classifier reproduces the warning's decision.<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchset-conflicting-results-2026-10-05.json" aria-label="Reference 3">3</a></sup>
+
+**State, outcome and exit status need a consistent contract.**
+
+Patched-source verification remained incomplete in this smoke test.<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchset-conflicting-results-2026-10-05.json" aria-label="Reference 3">3</a></sup>
+
+<!--
+This explanation is tied to the exact source revision recorded by the smoke test. For a non-root node, maestro_check_node recognizes running, or done with a pass/fail result. Other states fall through to FAIL. Executing that unchanged function with the captured available/pass input reproduces FAIL; closing/pass does too. Changing the lifecycle state to done while keeping result pass produces DONE.
+
+The watching loop separately remembers the selected test's result. It emits its warning from the classifier output, removes the job from its waiting list, and later exits zero when the remembered test result is pass. That source path explains how a failure warning and a successful exit can coexist. This is a source-level reproduction of the recorded behavior, not a claim that a new watcher fix has been merged.
+
+The design requirement is to keep lifecycle state and test outcome explicit, and make warnings and exit status follow the same contract. A caller should retain the node ID, state, result and errors so an incomplete observation can be examined. That is part of the motivation for structured interfaces. It also leaves the separate provenance question intact: the original smoke test had not verified every link from the supplied patches to the built source. We should not reinterpret its NOT_VERIFIED result as successful end-to-end validation.
+
+Sources:
+https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/maestro_common.py#L144-L172
+https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/maestro_common.py#L284-L347
+https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchset-conflicting-results-2026-10-05.json
+-->
+
+---
+
 <!-- _class: code-slide -->
 
 ## A reusable Python interface
@@ -192,7 +251,7 @@ This is the underlying command-line operation. First create or select a checkout
 
 There are two submission forms. Local text patches go through patch, while patchurl sends URLs from a domain the pipeline permits. A request uses one form or the other. The documented inline limits are thirty-two patches, up to ten mebibytes each, and binary patches are not supported.
 
-The application example adds the work around this operation. It freezes the series, remembers the base and returned identifiers, follows the resulting tree and prepares a report. Its captured CIP run later in the deck demonstrates submission and collection while jobs remain active. That particular capture does not yet establish the outcome of the patched build or its comparison with the baseline.
+The application example adds the work around this operation. It freezes the series, remembers the base and returned identifiers, follows the resulting tree and prepares a report. Its captured CIP run later in the deck demonstrates submission and collection while jobs remain active. That early capture does not establish the outcome of the patched build. The later read-only recovery in the walkthrough supplies its terminal build results and baseline comparison.
 
 Sources:
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/docs/patchset.md
@@ -282,7 +341,7 @@ https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf7672
 
 <!-- _class: captured-output -->
 
-## Captured Patchwork run
+## First capture: the series was running
 
 ```json
 {
@@ -303,7 +362,7 @@ This is an excerpt of the output supplied for the CIP run, not a simulated succe
 
 Those fields explain why the application reports RUNNING with exit code three. They demonstrate that submission has progressed into result collection and that the tool can produce a structured report for the run. The summary does not identify the passing node as a completed build, so we should not interpret the single pass count that way.
 
-The comparison fields are equally useful. They explicitly say that baseline comparison has not been performed. The full output states that comparison starts once the patched tree has complete terminal results, and gives paths to report.html and report.json. A later status request can update that evidence. This capture supports the working submission and monitoring path, while leaving the eventual build and comparison outcome open.
+The comparison fields are equally useful. They explicitly say that baseline comparison has not been performed. The full output states that comparison starts once the patched tree has complete terminal results, and gives paths to report.html and report.json. A later status request can update that evidence. This early capture supports the working submission and monitoring path. The terminal readback later in the walkthrough supplies the eventual build and comparison observations.
 
 Sources:
 User-provided CIP run excerpt. Complete supplied JSON is retained in notes/evidence/patchwork-series-1178390.json.
@@ -313,7 +372,7 @@ https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf7672
 
 ---
 
-<!-- _class: code-slide -->
+<!-- _class: command-example -->
 
 ## Continuing the same Patchwork run
 
@@ -321,22 +380,91 @@ https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf7672
 RUN=runs/patchwork.kernel.org/series-1178390
 kci-patchwork status --run "$RUN"
 kci-patchwork watch --run "$RUN"
+xdg-open "$RUN/report.html"
 ```
 
-- `report.html`: readable results and baseline comparisons<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L126-L166" aria-label="Reference 1">1</a></sup>
-- `report.json`: nodes, classifications and collection errors<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L126-L166" aria-label="Reference 1">1</a></sup>
-- The saved run retains the submitted node and tree IDs.<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L230-L317" aria-label="Reference 2">2</a></sup>
+- `report.html`: results and comparisons; captured snapshot<sup class="cite"><a href="https://aliceinwire.github.io/presentations/LPC_2026_MC/examples/patchwork-series-1178390/report.html" aria-label="Reference 1">1</a>,<a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L126-L166" aria-label="Reference 2">2</a></sup>
+- `report.json`: nodes, classifications and collection errors<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L126-L166" aria-label="Reference 2">2</a></sup>
+- The saved run retains the submitted node and tree IDs.<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L230-L317" aria-label="Reference 3">3</a></sup>
 
 <!--
-These commands continue observation of the saved run. Status collects a snapshot, and watch continues polling. They use the recorded endpoints and submitted identifiers. Restarting observation should not require preparing or submitting the series again.
+For the recorded walkthrough, open the captured HTML evidence snapshot linked on this slide. It is a compact view of the recovered terminal results, with a link to the JSON evidence excerpt. It is clearly labelled as a reconstruction from public API snapshots, because the original local report was unavailable. The committed walkthrough notes explain how that collection was performed.
+
+These commands continue observation of the original saved run if it is available. Status collects a snapshot, and watch continues polling. They use the recorded endpoints and submitted identifiers. Restarting observation should not require preparing or submitting the series again.
 
 The application writes its attempt record before making the submission request. It refuses a repeated submission for that run directory, including when the original request has an uncertain outcome. That protection depends on preserving the directory. Preparing a different run directory is a separate operation and can create another submission.
 
 For an ordinary active run, status or watch refreshes the HTML and JSON reports. Once the patched tree has complete terminal results, collection also reads the saved baseline and compares matching results. If a request was interrupted before a reliable response, the application has an explicit reconciliation path for an operator to identify the original submission. This is a workflow concern that belongs around the library method, and the saved state makes it manageable.
 
 Sources:
+https://aliceinwire.github.io/presentations/LPC_2026_MC/examples/patchwork-series-1178390/report.html
+https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchwork-series-1178390-completed.json
 https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L126-L166
 https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L230-L317
+-->
+
+---
+
+<!-- _class: completed-run -->
+
+## CIP series 1178390: the build completed
+
+| Observed stage | Final state | Result |
+| :--- | :--- | :--- |
+| Apply the frozen patch | `done` | **PASS**<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchwork-series-1178390-completed.json" aria-label="Reference 1">1</a></sup> |
+| Build the ARM64 kernel | `done` | **PASS**<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchwork-series-1178390-completed.json" aria-label="Reference 1">1</a></sup> |
+| Build kselftest binaries | `done` | **PASS**<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchwork-series-1178390-completed.json" aria-label="Reference 1">1</a></sup> |
+
+Patchwork diff and pipeline artifact: **573 identical bytes**.<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchwork-series-1178390-completed.json" aria-label="Reference 1">1</a></sup>
+
+Read back on 6 October: `terminal=true`, three passing nodes.<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchwork-series-1178390-completed.json" aria-label="Reference 1">1</a></sup>
+
+<!--
+We can now follow the earlier running capture to terminal results. A read-only query found patchset node 6ac44ef33a60498f8d8ab085 under the exact recorded checkout, with the recorded ARM64 CIP job filter. Its tree contains the patch application node, kernel build 6ac44f523a60498f8d8ab08f and kselftest compilation node 6ac454373a60498f8d8ab467. All three were done with result pass when collected on 6 October. No new jobs were submitted to obtain this evidence.
+
+The association with series 1178390 is supported by more than the parent ID. Patchwork reports version three with one patch, ID 14863610, titled PCI: rzg3s-host: Fix compilation warning. The stored pipeline patch0 artifact and the Patchwork diff have identical contents: 573 bytes with SHA-256 8240cab525488a49021afeaacccb5a496aedc7ff466219afbccfac5188c19c98. The calculated pipeline patchset hash also matches the root and build metadata. The source tarball differs from the unpatched base tarball, and the parent, revision and job filters match the recorded command.
+
+These observations support successful patch application and the selected builds. The kselftest child here is compilation of test binaries, not a record of executing those tests on a target. The patch title describes its purpose; this snapshot does not independently establish that a particular compiler warning disappeared. The original local run directory was unavailable, so the final collection was reconstructed from public API snapshots and replayed through the pinned plugin collector. The committed report labels that provenance explicitly. The next question is what happens when we compare this build-only run with its much broader baseline.
+
+Sources:
+https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchwork-series-1178390-completed.json
+https://patchwork.kernel.org/api/1.2/series/1178390/
+https://patchwork.kernel.org/api/1.2/patches/14863610/
+https://staging.kernelci.org:9000/node/6ac44ef33a60498f8d8ab085
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L194-L237
+-->
+
+---
+
+<!-- _class: comparison-story -->
+
+## Three PASS nodes. Is the review complete?
+
+| Baseline comparison | Observed count |
+| :--- | ---: |
+| Matched PASS to PASS | **2**<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchwork-series-1178390-completed.json" aria-label="Reference 1">1</a></sup> |
+| Missing in the patched run | **3,699**<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchwork-series-1178390-completed.json" aria-label="Reference 1">1</a></sup> |
+| Ambiguous / incomplete comparisons | **9 / 15**<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchwork-series-1178390-completed.json" aria-label="Reference 1">1</a></sup> |
+
+Report: **EVIDENCE_INCOMPLETE**, exit `2`.<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchwork-series-1178390-completed.json" aria-label="Reference 1">1</a></sup>
+
+The selected builds passed. The baseline also contains runtime tests.<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchwork-series-1178390-completed.json" aria-label="Reference 1">1</a></sup>
+
+Choose required coverage before using the report to approve a series.
+
+<!--
+Ask the audience the title question before reading the status. Terminal means the submitted run has finished. A complete comparison makes a separate claim about the available evidence. In this snapshot, the kernel build and its kselftest compilation both match passing baseline results under the same ancestry and execution configuration. That gives two unchanged_pass comparisons.
+
+The plugin also reads the corresponding baseline job subtree, which contains 3,739 nodes across several runtime jobs and platforms. The submitted patched tree only contains the selected build and its compilation child. The collector retrieved every baseline page and classified 3,725 comparison entries: two unchanged passes, 3,699 missing entries, nine ambiguous entries and fifteen incomplete entries. Ambiguous and incomplete are evaluated before the simple missing category, so these are separate counts, not additional confirmed kernel failures. All other classification counts were zero.
+
+The unmodified collector at the pinned plugin revision therefore produced EVIDENCE_INCOMPLETE and exit code two, with terminal true, listing_complete true, comparison.performed true and comparison.complete false. This is the actual result of replaying the public snapshots through the collector. It is not a fabricated successful comparison or the output of a newly submitted run.
+
+The useful conclusion is precise: the requested builds succeeded, while the broader baseline comparison cannot establish equivalent runtime coverage. A reviewer can inspect the two passing pairs and the missing work in the captured HTML snapshot. Choosing the required jobs and platforms is part of the workflow contract. Expanding the test selection or narrowing an explicitly defined review scope is a decision for that workflow, not a reason to hide the incomplete result. Required coverage remains not_assessed and approved remains false in the report.
+
+Sources:
+https://github.com/aliceinwire/presentations/blob/3d5de050e6b6191210b6a61aab9ee92ef7b2c515/LPC_2026_MC/notes/evidence/patchwork-series-1178390-completed.json
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/comparison.py#L82-L238
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/results.py#L175-L200
 -->
 
 ---

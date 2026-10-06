@@ -20,10 +20,10 @@ for PDF export. Marp CLI and a supported browser must be installed.
 ## LPC 2026
 
 `LPC_2026_MC/` contains the kci-dev presentation for the Kernel Testing &
-Dependability MC, with speaker notes and approximate rehearsal timings.
+Dependability MC, with speaker notes and Python plugin examples.
 Build it with `make -C LPC_2026_MC`.
-The Markdown comments contain the speaker notes. Reference and rehearsal
-details are in `LPC_2026_MC/notes/`.
+The Markdown comments contain the speaker notes. References and captured
+example results are in `LPC_2026_MC/notes/`.
 
 ## 2025 archive
 

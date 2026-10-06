@@ -1,81 +1,73 @@
-# LPC 2026 rehearsal and references
+# LPC 2026 references and examples
 
 **Title:** kci-dev: What Changed, What Works, and What Kernel Developers Still Need
 
 **Speaker:** Arisu Tachibana
 
-**Format:** 13 slides, about 16 minutes at the suggested pace, followed by discussion.
-The timings are rehearsal guidance. Allow time to point out the commands and pause
-on the comparison and gate tables. Rehearse with a timer and adjust to your pace.
-Speaker notes also appear in the Marp Markdown comments and HTML presenter view.
+The deck introduces the work since LPC 2025, the reusable Python interface,
+and two example plugins: `kci-patchwork` and `kci_release_review`. It includes
+captured results, their interpretation and proposals for further work.
+Speaker notes appear in the Marp comments, HTML presenter view and
+[SPEAKER_NOTES.md](SPEAKER_NOTES.md).
 
-## Timing
+## Source snapshots
 
-| Slide | Topic | Time |
-| --- | --- | --- |
-| 1 | Introduction | 00:00-00:40 |
-| 2 | Work since LPC 2025 | 00:40-01:40 |
-| 3 | Maintainer question | 01:40-02:45 |
-| 4 | Changes and versions | 02:45-04:05 |
-| 5 | Python interface | 04:05-05:25 |
-| 6 | Patch submission | 05:25-06:55 |
-| 7 | Revision comparison | 06:55-08:25 |
-| 8 | Classification semantics | 08:25-09:55 |
-| 9 | Gate policy and coverage | 09:55-11:15 |
-| 10 | Service consistency | 11:15-12:30 |
-| 11 | Experimental MCP interface | 12:30-13:40 |
-| 12 | Proposed priorities | 13:40-15:05 |
-| 13 | Discussion questions | 15:05-16:00 |
+Sources were inspected on 6 October 2026.
 
-## Versions
-
-The research snapshot is 4 October 2026.
-
-- Presentations repository base: `8653ff4d41ad3854f666aecec43d043a6400f33c`.
-- kci-dev v0.1.11: `2113a3bc1fccb2fa9f719b1ca98442a4e96fc945`.
 - kci-dev main: `e4c00874f1bcfbd6a6f1cdd513320b2e95713a42`.
+- kci-patchwork: `34f7f2ac3d319372797ff79d0e199fb6a10dc925`.
+- kci_release_review: `b328d0a60e46a1c7062d36b2d062d0fcac7ac442`.
+- Both plugin dependency files pin kci-dev to
+  `ba6b7134f1296702182b6559b5a2320f3d6b40fa`.
 
-The Python client and patchset examples exist in v0.1.11. The six-category
-comparison report, `--format` option and `results gate` example use the main
-snapshot above. The version string in main still says 0.1.11, so use the commit
-hash to distinguish these examples from the release tag. Earlier releases already
-had a `results compare` command with a different implementation.
+The public Python client and patchset examples exist in v0.1.11. The structured
+comparison and gate examples refer to the inspected main snapshot. Its version
+string is also 0.1.11, so use the commit hash to distinguish it from the release
+tag. The plugins are standalone Python applications, without a registration
+requirement in the kci-dev command-line tool.
 
-The priority order and proposed ownership split are discussion proposals.
-The comparison limitations on slide 10 describe this source snapshot and should
-be refreshed if they are fixed before presenting.
+## Captured results
 
-## Examples
+- [Patchwork run excerpt](evidence/patchwork-series-1178390.json): the supplied
+  staging command for CIP series 1178390 and its JSON result. It demonstrates
+  submission and result collection with jobs still active. No completed build
+  comparison is claimed from that capture. Local report paths retain the
+  redactions in the supplied output.
+- [Release-review evidence](evidence/release-review-2026-10-05.json): selected
+  fields from published reports collected on 5 October 2026. It retains source
+  URLs, exact commit selections, assessment, counts, observations, history
+  information and the displayed regression candidate. Other comparison entries
+  and supplemental evidence are omitted from this excerpt.
+- `../images/release-review-counts.png`: a screenshot of the six count cards in
+  the published linux-6.6.y report. It uses the saved report HTML without altering
+  its values or styling. The slide remains readable without contacting the site.
 
-The snippets explain the interfaces. They do not contain captured live test
-results. End-to-end patchset validation for this talk is still pending.
-Supply a real Git URL, branch and full commit hashes for the comparison
-examples. The Python example expects `GIT_URL`, `BRANCH` and `COMMIT` from its
-caller. Patchset submission needs a configured pipeline/token, an existing
-checkout node, local patches and supported job/test selections. Public Dashboard
-queries do not need a submission token. KCIDB submission and storage have their
-own configured endpoints and credentials.
+The public report site can update. The evidence files preserve the observations
+used by the slides. Counts are classifications of executions, rather than
+confirmed kernel defects. Required coverage and release approval are separate
+from those observations.
 
-The prepared talk does not require a live demo. Source links accompany each
-slide in [SPEAKER_NOTES.md](SPEAKER_NOTES.md).
+## Using the examples
 
-## Conference listing
+The CIP submission command is a recorded staging example. Choose a suitable
+checkout and supported jobs before adapting it. Use `status` or `watch` with
+the saved run directory to continue collection. The slides do not require
+starting another submission.
+
+General code snippets expect caller-supplied repository, branch, commit hashes,
+client configuration or selected patch data. `selection` in the report example
+contains `origin`, `giturl`, `branch`, `base` and `head`. Public Dashboard reads
+do not need a submission token. Triggering pipeline jobs and submitting external
+builds require the corresponding configured endpoints and credentials.
+
+The priority order and proposed shared-interface contract are discussion
+proposals. Source links accompany each slide's notes.
+
+## Conference and build
 
 [Official contribution](https://lpc.events/event/20/contributions/2534/)
 
-[Detailed timetable](https://lpc.events/event/20/timetable/?view=standard)
-
-At retrieval, the contribution page and timetable disagreed on the scheduled
-time and duration. The timings are approximate, and the deck
-intentionally omits a scheduled start time. Confirm the final slot with
-the MC schedule before presenting.
-
-## Theme and build
-
-The theme carries forward the repository's pink palette and JetBrains Mono
-font. It omits the old embedded background because that artwork contains
-LPC 2025's Tokyo date and venue. The original decks remain unchanged.
-
-From the repository root, run `make -C LPC_2026_MC` with Marp CLI and a
-supported browser installed. The root `make` also discovers this deck. Notes
-live one level deeper so the existing build does not treat them as slide decks.
+The deck keeps the repository's pink palette and JetBrains Mono font. From the
+repository root, run `make -C LPC_2026_MC` with Marp CLI and a supported browser.
+The root `make` also discovers this deck. Notes live one level deeper so the
+build does not treat them as slide decks.

@@ -1,0 +1,29 @@
+{
+  "source": "User-provided CIP series 1178390 run excerpt",
+  "command": "kci-patchwork \"https://patchwork.kernel.org/project/cip-dev/list/?series=1178390\" --config ~/.config/kci-dev/kci-dev.toml --instance staging --checkout 6ab272040ed308c6c2d206c3 --job kbuild-gcc-14-arm64-510-cip --submit",
+  "result": {
+    "status": "RUNNING",
+    "exit_code": 3,
+    "terminal": false,
+    "counts": {
+      "total": 2,
+      "descendants": 1,
+      "states": {
+        "closing": 1,
+        "running": 1
+      },
+      "results": {
+        "pass": 1,
+        "unset": 1
+      }
+    },
+    "errors": [],
+    "comparison": {
+      "performed": false,
+      "complete": false,
+      "reason": "Comparison starts after the patched tree has complete terminal results."
+    },
+    "report_html": "--snip--/kci-patchwork/runs/patchwork.kernel.org/series-1178390/report.html",
+    "report_json": "--snip--/kci-patchwork/runs/patchwork.kernel.org/series-1178390/report.json"
+  }
+}

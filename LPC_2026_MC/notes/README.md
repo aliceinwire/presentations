@@ -15,10 +15,14 @@ Speaker notes appear in the Marp comments, HTML presenter view and
 Sources were inspected on 6 October 2026.
 
 - kci-dev main: `e4c00874f1bcfbd6a6f1cdd513320b2e95713a42`.
-- kci-patchwork: `34f7f2ac3d319372797ff79d0e199fb6a10dc925`.
+- kci-patchwork: [`1acedb7ab59a2bf8ab9934c4cf76727552c04b10`](https://github.com/aliceinwire/kci-patchwork/tree/1acedb7ab59a2bf8ab9934c4cf76727552c04b10).
 - kci_release_review: `b328d0a60e46a1c7062d36b2d062d0fcac7ac442`.
 - Both plugin dependency files pin kci-dev to
   `ba6b7134f1296702182b6559b5a2320f3d6b40fa`.
+
+The kci-patchwork source links were rechecked after its repository was recreated.
+The pinned files support the workflow descriptions in the slides. The captured
+results below are retained unchanged.
 
 The public Python client and patchset examples exist in v0.1.11. The structured
 comparison and gate examples refer to the inspected main snapshot. Its version

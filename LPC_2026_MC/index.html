@@ -12,7 +12,8 @@
 <h1 id="kci-dev">kci-dev:</h1>
 <h2 id="what-changed-what-works-and-what-kernel-developers-still-need">What Changed, What Works, and What Kernel Developers Still Need</h2>
 <p><strong>Arisu Tachibana</strong><br />
-kci-dev creator and project lead</p>
+kci-dev creator and project lead<br />
+Senior Engineer, Cybertrust Japan Co., Ltd.</p>
 <p>Kernel Testing &amp; Dependability MC / LPC 2026</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="2" data-paginate="true" data-footer="Arisu Tachibana / LPC 2026" data-theme="gyaru" lang="C" data-marpit-pagination="2" style="--paginate:true;--footer:Arisu Tachibana / LPC 2026;--theme:gyaru;" data-marpit-pagination-total="27" data-size="16:9">
@@ -541,8 +542,8 @@ kci-patchwork owns the Patchwork-specific work: resolving a URL, obtaining the c
 The library boundary does not make every workflow identical. Patchwork needs Maestro node and patchset identities. Release review compares explicit commits already represented in the Dashboard. Keeping that difference visible lets us reuse the service access without throwing away the identities each workflow needs. Both applications pin a specific library revision so their examples have a reproducible API contract.
 
 Sources:
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/docs/workflow.md
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/kci_patchwork/workflow.py
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L5-L12
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L230-L285
 https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/client.py
 https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py</p></div><div class="bespoke-marp-note" data-index="6" tabindex="0"><p>This is the underlying command-line operation. First create or select a checkout of the intended base revision. Its checkout_nodeid becomes CHECKOUT_NODE here. Submit the patches in their intended order and select jobs available on that pipeline. The watch option can wait for the named test.
 
@@ -552,7 +553,7 @@ The application example adds the work around this operation. It freezes the seri
 
 Sources:
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/docs/patchset.md
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/docs/workflow.md
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L102-L149
 User-provided CIP series 1178390 command and running-result excerpt, reproduced in notes/evidence/patchwork-series-1178390.json.</p></div><div class="bespoke-marp-note" data-index="7" tabindex="0"><p>The checkout argument is a KernelCI node identifier, rather than a Git branch name or a Patchwork series identifier. That node gives the pipeline a source revision and a tarball on which to apply the series. It also supplies the baseline that the application will later inspect.
 
 Choose the base from the tree the series targets. The most recent checkout on an unrelated branch is not a useful substitute. Preparation checks metadata and the source-tarball reference, but actual patch applicability belongs to the pipeline stage that applies the patches.
@@ -560,17 +561,17 @@ Choose the base from the tree the series targets. The most recent checkout on an
 Job selection is a separate decision. A small configuration is useful to exercise submission and compilation, but it may leave the modified driver disabled. For a CIP series, use the intended CIP revision and a supported job, then decide whether a boot or focused test is also needed. The captured command uses an ARM64 CIP build job. Its name alone does not establish coverage of every change in the series.
 
 Sources:
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/README.md
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/docs/workflow.md</p></div><div class="bespoke-marp-note" data-index="8" tabindex="0"><p>A Patchwork URL is a useful input because it identifies the series in the place where review already happens. The application accepts series links and project-list links with a series parameter, including the CIP example that follows. It can also use other servers that expose a compatible public Patchwork API.
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/README.md#L104-L115
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L65-L100</p></div><div class="bespoke-marp-note" data-index="8" tabindex="0"><p>A Patchwork URL is a useful input because it identifies the series in the place where review already happens. The application accepts series links and project-list links with a series parameter, including the CIP example that follows. It can also use other servers that expose a compatible public Patchwork API.
 
 A series can contain several patches. The application checks sequence information and requires a complete order rather than assuming that IDs or mail dates give the correct sequence. It writes the selected diffs and their checksums to the run directory, together with the series version and checkout metadata.
 
 Preparation can stop there for inspection. Adding submit starts the KernelCI operation and records the returned node and tree. Subsequent collection is tied to those identifiers. When the patched tree has terminal results, the application reads the original checkout and compares matching job subtrees. This gives a reviewer a report tied to a particular set of inputs.
 
 Sources:
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/README.md
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/kci_patchwork/patchwork.py
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/kci_patchwork/workflow.py</p></div><div class="bespoke-marp-note" data-index="9" tabindex="0"><p>This is the command used for the captured run. The URL names series 1178390 in the cip-dev project. The explicit staging profile supplies the KernelCI endpoints and credentials. The checkout argument names the unpatched base, and the job filter selects the ARM64 CIP build.
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/README.md#L56-L75
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/patchwork.py#L207-L284
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L101-L147</p></div><div class="bespoke-marp-note" data-index="9" tabindex="0"><p>This is the command used for the captured run. The URL names series 1178390 in the cip-dev project. The explicit staging profile supplies the KernelCI endpoints and credentials. The checkout argument names the unpatched base, and the job filter selects the ARM64 CIP build.
 
 The short URL-first command is equivalent to the run subcommand. With submit present, it prepares the local inputs, submits the patchset and watches the resulting nodes. Without submit, the same workflow produces a prepared run and reports for inspection without starting jobs.
 
@@ -578,8 +579,8 @@ The base node and job shown here belong to this recorded staging example. Someon
 
 Sources:
 User-provided command for CIP series 1178390.
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/README.md
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/kci_patchwork/__main__.py</p></div><div class="bespoke-marp-note" data-index="10" tabindex="0"><p>This is an excerpt of the output supplied for the CIP run, not a simulated successful result. The application has observed two nodes, including one descendant. One result is pass and the other is unset. Their states are closing and running, and the terminal flag is false.
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/README.md#L19-L47
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/__main__.py#L250-L345</p></div><div class="bespoke-marp-note" data-index="10" tabindex="0"><p>This is an excerpt of the output supplied for the CIP run, not a simulated successful result. The application has observed two nodes, including one descendant. One result is pass and the other is unset. Their states are closing and running, and the terminal flag is false.
 
 Those fields explain why the application reports RUNNING with exit code three. They demonstrate that submission has progressed into result collection and that the tool can produce a structured report for the run. The summary does not identify the passing node as a completed build, so we should not interpret the single pass count that way.
 
@@ -587,16 +588,16 @@ The comparison fields are equally useful. They explicitly say that baseline comp
 
 Sources:
 User-provided CIP run excerpt. Complete supplied JSON is retained in notes/evidence/patchwork-series-1178390.json.
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/docs/workflow.md
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/kci_patchwork/results.py</p></div><div class="bespoke-marp-note" data-index="11" tabindex="0"><p>These commands continue observation of the saved run. Status collects a snapshot, and watch continues polling. They use the recorded endpoints and submitted identifiers. Restarting observation should not require preparing or submitting the series again.
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L168-L214
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/results.py#L9-L102</p></div><div class="bespoke-marp-note" data-index="11" tabindex="0"><p>These commands continue observation of the saved run. Status collects a snapshot, and watch continues polling. They use the recorded endpoints and submitted identifiers. Restarting observation should not require preparing or submitting the series again.
 
 The application writes its attempt record before making the submission request. It refuses a repeated submission for that run directory, including when the original request has an uncertain outcome. That protection depends on preserving the directory. Preparing a different run directory is a separate operation and can create another submission.
 
 For an ordinary active run, status or watch refreshes the HTML and JSON reports. Once the patched tree has complete terminal results, collection also reads the saved baseline and compares matching results. If a request was interrupted before a reliable response, the application has an explicit reconciliation path for an operator to identify the original submission. This is a workflow concern that belongs around the library method, and the saved state makes it manageable.
 
 Sources:
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/docs/workflow.md
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/kci_patchwork/workflow.py</p></div><div class="bespoke-marp-note" data-index="12" tabindex="0"><p>This abbreviated Python example shows the shared operation that kci-patchwork calls. The configured client submits ordered diff strings against the chosen base and returns the patchset node. The application persists the returned node and tree identifiers before later collection.
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L126-L166
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L230-L317</p></div><div class="bespoke-marp-note" data-index="12" tabindex="0"><p>This abbreviated Python example shows the shared operation that kci-patchwork calls. The configured client submits ordered diff strings against the chosen base and returns the patchset node. The application persists the returned node and tree identifiers before later collection.
 
 A patchset retains the original Git commit hash and adds patchset identity. Consequently, a commit-only query is insufficient to distinguish the base from the patched source. kci-patchwork uses get_node and paginated get_nodes queries filtered to the returned tree. It checks the patchset hash and parent relationships before interpreting descendant results.
 
@@ -604,9 +605,9 @@ Its baseline comparison matches the relative job ancestry and execution configur
 
 Sources:
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/kci_patchwork/workflow.py
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/docs/workflow.md
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/kci_patchwork/comparison.py</p></div><div class="bespoke-marp-note" data-index="13" tabindex="0"><p>Now we have results for a baseline and a candidate. Current main can compare the two explicit commit hashes and return a structured report. I use explicit hashes here because a review needs to remain tied to the revisions we intended to compare. The default latest-two-checkouts mode is convenient for exploration, but its inputs can change as new results arrive.
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L194-L273
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L168-L187
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/comparison.py#L9-L79</p></div><div class="bespoke-marp-note" data-index="13" tabindex="0"><p>Now we have results for a baseline and a candidate. Current main can compare the two explicit commit hashes and return a structured report. I use explicit hashes here because a review needs to remain tied to the revisions we intended to compare. The default latest-two-checkouts mode is convenient for exploration, but its inputs can change as new results arrive.
 
 The implementation groups results by their execution identity. That includes the origin, platform, architecture, compiler, configuration and test path, with builds, boots and tests handled separately. It preserves repeated results instead of simply overwriting them.
 
@@ -694,8 +695,8 @@ Sources:
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/subcommands/results/__init__.py
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py
 https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/client.py
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/kci_patchwork/results.py
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/kci_patchwork/comparison.py</p></div><div class="bespoke-marp-note" data-index="23" tabindex="0"><p>These examples suggest a useful contract for the next integration. The client should provide consistent requests, explicit configuration, recoverable failures and structured results. The application should own how a user selects inputs, when work starts, and how the evidence reaches its intended audience.
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/results.py#L106-L200
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/comparison.py#L82-L238</p></div><div class="bespoke-marp-note" data-index="23" tabindex="0"><p>These examples suggest a useful contract for the next integration. The client should provide consistent requests, explicit configuration, recoverable failures and structured results. The application should own how a user selects inputs, when work starts, and how the evidence reaches its intended audience.
 
 Coverage and acceptance policy also belong to the workflow. A stable maintainer, a CIP reviewer and a subsystem developer may require different architectures or tests. Reusing the client should make those differences easier to express. It should not hide them behind a universal success label.
 
@@ -703,9 +704,9 @@ For a new application, start with an explicit source revision and endpoint, deci
 
 Sources:
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/pyproject.toml
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/pyproject.toml#L11-L15
 https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/requirements.txt
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/docs/workflow.md
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L253-L270
 https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py</p></div><div class="bespoke-marp-note" data-index="24" tabindex="0"><p>The optional MCP server exposes KernelCI operations to compatible automation and AI clients. A client can explore results and known issues, inspect nodes, and, with the required configuration, request a checkout or retry. Those operations use the public Python client.
 
 The interface is explicitly experimental. Tool names, arguments and response formats may change. Read-only queries and job-triggering tools carry different annotations, but those annotations are hints to the client, not an authorization system. The documented HTTP transport has no authentication layer, so local stdio is the straightforward option shown here.
@@ -722,7 +723,7 @@ For patch review, series discovery, frozen inputs and report generation already 
 Required coverage is a separate workstream for both applications. We need a way to record expected jobs and platforms and decide when a report has enough evidence for a maintainer's policy. Connecting the resulting report to patch review or release preparation should follow the maintainer's existing process. The priority order is a proposal for this MC to discuss.
 
 Sources:
-https://github.com/aliceinwire/kci-patchwork/blob/34f7f2ac3d319372797ff79d0e199fb6a10dc925/docs/workflow.md
+https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L102-L142
 https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py
 https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py</p></div><div class="bespoke-marp-note" data-index="26" tabindex="0"><p>I would like us to choose a concrete maintainer workflow and the evidence it requires. We can now point to two applications that people can inspect and run: one begins with a Patchwork series, and the other begins with tested revisions. Both demonstrate why the reusable Python interface matters beyond the command line.
 

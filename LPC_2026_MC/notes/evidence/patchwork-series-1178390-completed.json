@@ -1,0 +1,455 @@
+{
+  "source": "Read-only recovery of terminal CIP series 1178390 results on 6 October 2026",
+  "excerpt": true,
+  "provenance": {
+    "method": "Public API snapshots replayed through the unmodified kci-patchwork collector. Local run metadata was reconstructed, not recovered from the original invocation.",
+    "plugin_commit": "1acedb7ab59a2bf8ab9934c4cf76727552c04b10",
+    "collected_at": "2026-10-06T10:17:50.007409+00:00",
+    "new_submissions": 0,
+    "patchwork_diff_sha256": "8240cab525488a49021afeaacccb5a496aedc7ff466219afbccfac5188c19c98",
+    "pipeline_artifact_sha256": "8240cab525488a49021afeaacccb5a496aedc7ff466219afbccfac5188c19c98",
+    "patch_bytes_equal": true,
+    "baseline_requests": [
+      {
+        "source_url": "https://staging.kernelci.org:9000/latest/nodes/fast?treeid=06be0b6ae8d26d8279defc1a765598367b7def739bf1949b480138999da85e25&path=kbuild-gcc-14-arm64-510-cip&limit=1000&offset=0",
+        "fetched_at": "2026-10-06T10:17:57.761450+00:00"
+      },
+      {
+        "source_url": "https://staging.kernelci.org:9000/latest/nodes/fast?treeid=06be0b6ae8d26d8279defc1a765598367b7def739bf1949b480138999da85e25&path=kbuild-gcc-14-arm64-510-cip&limit=1000&offset=1000",
+        "fetched_at": "2026-10-06T10:18:05.877777+00:00"
+      },
+      {
+        "source_url": "https://staging.kernelci.org:9000/latest/nodes/fast?treeid=06be0b6ae8d26d8279defc1a765598367b7def739bf1949b480138999da85e25&path=kbuild-gcc-14-arm64-510-cip&limit=1000&offset=2000",
+        "fetched_at": "2026-10-06T10:18:13.375150+00:00"
+      },
+      {
+        "source_url": "https://staging.kernelci.org:9000/latest/nodes/fast?treeid=06be0b6ae8d26d8279defc1a765598367b7def739bf1949b480138999da85e25&path=kbuild-gcc-14-arm64-510-cip&limit=1000&offset=3000",
+        "fetched_at": "2026-10-06T10:18:22.776002+00:00"
+      }
+    ],
+    "series_url": "https://patchwork.kernel.org/api/1.2/series/1178390/",
+    "patch_url": "https://patchwork.kernel.org/api/1.2/patches/14863610/",
+    "patch_artifact_url": "https://files-staging.kernelci.org/patchset/arisut_arisut.com/6ab272040ed308c6c2d206c3-20261006012923-0.patch",
+    "base_snapshot": "https://staging.kernelci.org:9000/node/6ab272040ed308c6c2d206c3",
+    "patched_snapshot": "https://staging.kernelci.org:9000/latest/nodes/fast?treeid=9c4febb02e230b333fcd1f130072dd7a1e321a78e8782aefea860143c668cb4c&limit=200&offset=0"
+  },
+  "scope": "One ARM64 CIP kernel build and its kselftest compilation. The broader baseline contains runtime jobs and tests absent from the patched run.",
+  "selection": {
+    "schema_version": 1,
+    "created_at": "2026-10-06T10:17:50.007409+00:00",
+    "reconstruction": "Read-only reconstruction from public API snapshots; original local manifest and state were unavailable.",
+    "series": {
+      "id": 1178390,
+      "name": "[5.10.y-cip,v3] PCI: rzg3s-host: Fix compilation warning",
+      "version": 3,
+      "date": "2026-10-02T14:11:24",
+      "web_url": "https://patchwork.kernel.org/series/1178390/",
+      "total": 1,
+      "project": "cip-dev"
+    },
+    "checkout": {
+      "id": "6ab272040ed308c6c2d206c3",
+      "treeid": "06be0b6ae8d26d8279defc1a765598367b7def739bf1949b480138999da85e25",
+      "revision": {
+        "url": "https://git.kernel.org/pub/scm/linux/kernel/git/cip/linux-cip.git",
+        "branch": "linux-5.10.y-cip",
+        "commit": "f6113c696e05dfdbf7af35c27b98b5084cc04b75"
+      },
+      "state": "done",
+      "result": "pass",
+      "tarball": "https://files-staging.kernelci.org/linux-cip-linux-5.10.y-cip-v5.10.268-cip77-16-gf6113c696e05.tar.gz"
+    },
+    "endpoints": {
+      "api": "https://staging.kernelci.org:9000",
+      "pipeline": "https://staging.kernelci.org:9100"
+    },
+    "job_filter": [
+      "kbuild-gcc-14-arm64-510-cip"
+    ],
+    "platform_filter": [],
+    "expected_pipeline_patchset_hash": "7460423c03aa9618c060d2cbb468448771e3a18613250f3edcd9a228eaba80ea",
+    "patches": [
+      {
+        "position": 1,
+        "id": 14863610,
+        "name": "[5.10.y-cip,v3] PCI: rzg3s-host: Fix compilation warning",
+        "web_url": "https://patchwork.kernel.org/project/cip-dev/patch/20261002141124.2402765-1-claudiu.beznea@tuxon.dev/",
+        "sha256": "8240cab525488a49021afeaacccb5a496aedc7ff466219afbccfac5188c19c98",
+        "bytes": 573,
+        "file": "patches/0001-14863610.patch"
+      }
+    ]
+  },
+  "submission": {
+    "schema_version": 1,
+    "status": "submitted",
+    "manifest_sha256": "329d02ef19384b09e7ef6dea6832bc16f060fdd1f37365c59e9f03a2c07999f6",
+    "patchset_node_id": "6ac44ef33a60498f8d8ab085",
+    "treeid": "9c4febb02e230b333fcd1f130072dd7a1e321a78e8782aefea860143c668cb4c",
+    "updated_at": "2026-10-06T10:17:50.007409+00:00",
+    "reconstruction": "Existing submission identified by parent, filters, exact patch bytes and pipeline hash. No submit call was made."
+  },
+  "generated_at": "2026-10-06T10:17:50.009945+00:00",
+  "status": "EVIDENCE_INCOMPLETE",
+  "exit_code": 2,
+  "terminal": true,
+  "listing_complete": true,
+  "approved": false,
+  "required_coverage": "not_assessed",
+  "counts": {
+    "total": 3,
+    "descendants": 2,
+    "states": {
+      "done": 3
+    },
+    "results": {
+      "pass": 3
+    }
+  },
+  "patch_application": {
+    "state": "done",
+    "result": "pass",
+    "pipeline_patchset_hash": "7460423c03aa9618c060d2cbb468448771e3a18613250f3edcd9a228eaba80ea"
+  },
+  "errors": [],
+  "nodes": [
+    {
+      "id": "6ac44ef33a60498f8d8ab085",
+      "kind": "checkout",
+      "name": "patchset",
+      "path": [
+        "checkout",
+        "patchset"
+      ],
+      "parent": "6ab272040ed308c6c2d206c3",
+      "state": "done",
+      "result": "pass",
+      "treeid": "9c4febb02e230b333fcd1f130072dd7a1e321a78e8782aefea860143c668cb4c",
+      "created": "2026-10-06T01:29:23.196000",
+      "updated": "2026-10-06T02:03:02.638000",
+      "data": {
+        "kernel_revision": {
+          "url": "https://git.kernel.org/pub/scm/linux/kernel/git/cip/linux-cip.git",
+          "branch": "linux-5.10.y-cip",
+          "commit": "f6113c696e05dfdbf7af35c27b98b5084cc04b75",
+          "patchset": "7460423c03aa9618c060d2cbb468448771e3a18613250f3edcd9a228eaba80ea"
+        }
+      },
+      "artifacts": {
+        "patch0": "https://files-staging.kernelci.org/patchset/arisut_arisut.com/6ab272040ed308c6c2d206c3-20261006012923-0.patch",
+        "tarball": "https://files-staging.kernelci.org/linux-cip-linux-5.10.y-cip-v5.10.268-cip77-16-gf6113c696e05-7460423c03aa9-498f8d8ab085.tar.gz"
+      }
+    },
+    {
+      "id": "6ac44f523a60498f8d8ab08f",
+      "kind": "kbuild",
+      "name": "kbuild-gcc-14-arm64-510-cip",
+      "path": [
+        "checkout",
+        "patchset",
+        "kbuild-gcc-14-arm64-510-cip"
+      ],
+      "parent": "6ac44ef33a60498f8d8ab085",
+      "state": "done",
+      "result": "pass",
+      "treeid": "9c4febb02e230b333fcd1f130072dd7a1e321a78e8782aefea860143c668cb4c",
+      "created": "2026-10-06T01:30:58.032000",
+      "updated": "2026-10-06T02:02:31.708000",
+      "data": {
+        "arch": "arm64",
+        "defconfig": "defconfig",
+        "config_full": "defconfig+kselftest+lab-setup+cip://5.10.y-cip/arm64/cip_merged_defconfig",
+        "compiler": "gcc-14",
+        "fragments": [
+          "kselftest",
+          "lab-setup",
+          "cip://5.10.y-cip/arm64/cip_merged_defconfig"
+        ],
+        "platform": "kubernetes",
+        "runtime": "k8s-all",
+        "kernel_type": "image",
+        "kernel_revision": {
+          "url": "https://git.kernel.org/pub/scm/linux/kernel/git/cip/linux-cip.git",
+          "branch": "linux-5.10.y-cip",
+          "commit": "f6113c696e05dfdbf7af35c27b98b5084cc04b75",
+          "patchset": "7460423c03aa9618c060d2cbb468448771e3a18613250f3edcd9a228eaba80ea"
+        }
+      },
+      "artifacts": {
+        "build_log": "https://files-staging.kernelci.org/kbuild-gcc-14-arm64-510-cip-6ac44f523a60498f8d8ab08f/build.log.gz",
+        "metadata": "https://files-staging.kernelci.org/kbuild-gcc-14-arm64-510-cip-6ac44f523a60498f8d8ab08f/metadata.json",
+        "build_sh": "https://files-staging.kernelci.org/kbuild-gcc-14-arm64-510-cip-6ac44f523a60498f8d8ab08f/build.sh",
+        "kernel": "https://files-staging.kernelci.org/kbuild-gcc-14-arm64-510-cip-6ac44f523a60498f8d8ab08f/Image"
+      }
+    },
+    {
+      "id": "6ac454373a60498f8d8ab467",
+      "kind": "job",
+      "name": "kbuild-gcc-14-arm64-510-cip-kselftest",
+      "path": [
+        "checkout",
+        "patchset",
+        "kbuild-gcc-14-arm64-510-cip",
+        "kbuild-gcc-14-arm64-510-cip-kselftest"
+      ],
+      "parent": "6ac44f523a60498f8d8ab08f",
+      "state": "done",
+      "result": "pass",
+      "treeid": "9c4febb02e230b333fcd1f130072dd7a1e321a78e8782aefea860143c668cb4c",
+      "created": "2026-10-06T01:30:58.032000",
+      "updated": "2026-10-06T01:30:58.430000",
+      "data": {
+        "arch": "arm64",
+        "defconfig": "defconfig",
+        "config_full": "defconfig+kselftest+lab-setup+cip://5.10.y-cip/arm64/cip_merged_defconfig",
+        "compiler": "gcc-14",
+        "platform": "kubernetes",
+        "runtime": "k8s-all",
+        "kernel_type": "image",
+        "kernel_revision": {
+          "url": "https://git.kernel.org/pub/scm/linux/kernel/git/cip/linux-cip.git",
+          "branch": "linux-5.10.y-cip",
+          "commit": "f6113c696e05dfdbf7af35c27b98b5084cc04b75",
+          "patchset": "7460423c03aa9618c060d2cbb468448771e3a18613250f3edcd9a228eaba80ea"
+        }
+      },
+      "artifacts": {
+        "build_kselftest_log": "https://files-staging.kernelci.org/kbuild-gcc-14-arm64-510-cip-6ac44f523a60498f8d8ab08f/build_kselftest.log.gz"
+      }
+    }
+  ],
+  "comparison": {
+    "performed": true,
+    "complete": false,
+    "listing_complete": true,
+    "scope": "matching_observed_job_subtrees",
+    "baseline_checkout_id": "6ab272040ed308c6c2d206c3",
+    "baseline_treeid": "06be0b6ae8d26d8279defc1a765598367b7def739bf1949b480138999da85e25",
+    "counts": {
+      "regression": 0,
+      "existing_failure": 0,
+      "fixed": 0,
+      "unchanged_pass": 2,
+      "unchanged_skip": 0,
+      "new_failure": 0,
+      "new_result": 0,
+      "missing": 3699,
+      "incomparable": 0,
+      "ambiguous": 9,
+      "incomplete": 15
+    },
+    "errors": [],
+    "selected_baseline_nodes": 3739,
+    "job_paths": [
+      "kbuild-gcc-14-arm64-510-cip"
+    ],
+    "baseline_root": {
+      "id": "6ab272040ed308c6c2d206c3",
+      "kind": "checkout",
+      "name": "checkout",
+      "path": [
+        "checkout"
+      ],
+      "parent": null,
+      "state": "done",
+      "result": "pass",
+      "treeid": "06be0b6ae8d26d8279defc1a765598367b7def739bf1949b480138999da85e25",
+      "created": "2026-09-22T12:18:12.172000",
+      "updated": "2026-09-22T17:19:12.852000",
+      "data": {
+        "kernel_revision": {
+          "url": "https://git.kernel.org/pub/scm/linux/kernel/git/cip/linux-cip.git",
+          "branch": "linux-5.10.y-cip",
+          "commit": "f6113c696e05dfdbf7af35c27b98b5084cc04b75"
+        }
+      },
+      "artifacts": {
+        "tarball": "https://files-staging.kernelci.org/linux-cip-linux-5.10.y-cip-v5.10.268-cip77-16-gf6113c696e05.tar.gz"
+      }
+    },
+    "total_rows": 3725,
+    "selected_results": [
+      {
+        "name": "kbuild-gcc-14-arm64-510-cip",
+        "kind": "kbuild",
+        "path": [
+          "kbuild-gcc-14-arm64-510-cip"
+        ],
+        "context": {
+          "arch": "arm64",
+          "defconfig": "defconfig",
+          "config_full": "defconfig+kselftest+lab-setup+cip://5.10.y-cip/arm64/cip_merged_defconfig",
+          "compiler": "gcc-14",
+          "fragments": [
+            "kselftest",
+            "lab-setup",
+            "cip://5.10.y-cip/arm64/cip_merged_defconfig"
+          ],
+          "platform": "kubernetes",
+          "runtime": "k8s-all",
+          "kernel_type": "image"
+        },
+        "classification": "unchanged_pass",
+        "baseline": [
+          {
+            "id": "6ab273eb0ed308c6c2d206f7",
+            "state": "done",
+            "result": "pass"
+          }
+        ],
+        "patched": [
+          {
+            "id": "6ac44f523a60498f8d8ab08f",
+            "state": "done",
+            "result": "pass"
+          }
+        ]
+      },
+      {
+        "name": "kbuild-gcc-14-arm64-510-cip-kselftest",
+        "kind": "job",
+        "path": [
+          "kbuild-gcc-14-arm64-510-cip",
+          "kbuild-gcc-14-arm64-510-cip-kselftest"
+        ],
+        "context": {
+          "arch": "arm64",
+          "defconfig": "defconfig",
+          "config_full": "defconfig+kselftest+lab-setup+cip://5.10.y-cip/arm64/cip_merged_defconfig",
+          "compiler": "gcc-14",
+          "fragments": [
+            "kselftest",
+            "lab-setup",
+            "cip://5.10.y-cip/arm64/cip_merged_defconfig"
+          ],
+          "platform": "kubernetes",
+          "runtime": "k8s-all",
+          "kernel_type": "image"
+        },
+        "classification": "unchanged_pass",
+        "baseline": [
+          {
+            "id": "6ab278fe0ed308c6c2d20cad",
+            "state": "done",
+            "result": "pass"
+          }
+        ],
+        "patched": [
+          {
+            "id": "6ac454373a60498f8d8ab467",
+            "state": "done",
+            "result": "pass"
+          }
+        ]
+      },
+      {
+        "name": "job-gcc-14-arm64-510-cip",
+        "kind": "job",
+        "path": [
+          "kbuild-gcc-14-arm64-510-cip",
+          "job-gcc-14-arm64-510-cip"
+        ],
+        "context": {
+          "arch": "arm64",
+          "defconfig": "defconfig",
+          "config_full": "defconfig+kselftest+lab-setup+cip://5.10.y-cip/arm64/cip_merged_defconfig",
+          "compiler": "gcc-14",
+          "fragments": [
+            "kselftest",
+            "lab-setup",
+            "cip://5.10.y-cip/arm64/cip_merged_defconfig"
+          ],
+          "platform": "qemu-arm64",
+          "runtime": "lava-cip",
+          "kernel_type": "image",
+          "device": "qemu-cariad-02"
+        },
+        "classification": "missing",
+        "baseline": [
+          {
+            "id": "6ab278fe0ed308c6c2d20caf",
+            "state": "done",
+            "result": "pass"
+          }
+        ],
+        "patched": []
+      },
+      {
+        "name": "kselftest-futex-cip",
+        "kind": "job",
+        "path": [
+          "kbuild-gcc-14-arm64-510-cip",
+          "kselftest-futex-cip"
+        ],
+        "context": {
+          "arch": "arm64",
+          "defconfig": "defconfig",
+          "config_full": "defconfig+kselftest+lab-setup+cip://5.10.y-cip/arm64/cip_merged_defconfig",
+          "compiler": "gcc-14",
+          "fragments": [
+            "kselftest",
+            "lab-setup",
+            "cip://5.10.y-cip/arm64/cip_merged_defconfig"
+          ],
+          "platform": "qemu-arm64",
+          "runtime": "lava-cip",
+          "kernel_type": "image",
+          "device": "qemu-siemens-muc"
+        },
+        "classification": "ambiguous",
+        "baseline": [
+          {
+            "id": "6ab279000ed308c6c2d20cbb",
+            "state": "done",
+            "result": "incomplete"
+          },
+          {
+            "id": "6ab279a50ed308c6c2d20f07",
+            "state": "done",
+            "result": "incomplete"
+          },
+          {
+            "id": "6ab27a330ed308c6c2d21239",
+            "state": "done",
+            "result": "incomplete"
+          }
+        ],
+        "patched": []
+      },
+      {
+        "name": "kselftest-futex-cip",
+        "kind": "job",
+        "path": [
+          "kbuild-gcc-14-arm64-510-cip",
+          "kselftest-futex-cip"
+        ],
+        "context": {
+          "arch": "arm64",
+          "defconfig": "defconfig",
+          "config_full": "defconfig+kselftest+lab-setup+cip://5.10.y-cip/arm64/cip_merged_defconfig",
+          "compiler": "gcc-14",
+          "fragments": [
+            "kselftest",
+            "lab-setup",
+            "cip://5.10.y-cip/arm64/cip_merged_defconfig"
+          ],
+          "platform": "qemu-arm64",
+          "runtime": "lava-cip",
+          "kernel_type": "image",
+          "device": "qemu-iwamatsu-01"
+        },
+        "classification": "incomplete",
+        "baseline": [
+          {
+            "id": "6ab27b820ed308c6c2d2169b",
+            "state": "done",
+            "result": "incomplete"
+          }
+        ],
+        "patched": []
+      }
+    ],
+    "omitted_rows": 3720
+  },
+  "omissions": "Unselected comparison rows, the full baseline node listing and unrelated node metadata are omitted. This is an excerpt, not the original local run directory or the full collector report."
+}

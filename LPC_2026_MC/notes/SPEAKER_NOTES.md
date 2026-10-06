@@ -403,14 +403,17 @@ https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a4
 
 ## 31. Decisions for this MC
 
-I would like us to choose a concrete maintainer workflow and the evidence it requires. We can now point to two applications that people can inspect and run: one begins with a Patchwork series, and the other begins with tested revisions. Both demonstrate why the reusable Python interface matters beyond the command line.
+Close by asking which extensions would help people in the room. Invite concrete examples: a missing feature, a plugin they would use, or a manual step they want to automate. Ask what the input and useful result would be, so the discussion can lead to an implementable contribution.
 
-For a patch workflow, bring a series, an appropriate base and the builds or tests that exercise it. For release review, bring a tested revision pair and a statement of required coverage. Then we can compare what the tools produce with what the maintainer actually needs to decide.
+Then ask where the reusable Python library belongs in their existing tools. The Patchwork website is a possible integration point to discuss: what KernelCI evidence should a reviewer be able to see or request while looking at a series? The kci-patchwork example shown earlier is a standalone application. This question proposes future website integration; it does not claim that the library is already embedded in Patchwork. Other participants may have release tools or project-specific Python services where the same interface would fit.
 
-The remaining questions are specific enough to work on together. Which identity and completeness guarantees belong in the common client? Which choices should remain in the application? What result would persuade a maintainer to use the report in their normal review? Invite people who can provide real trees, tests or review feedback to help define and validate the next contribution.
+For MCP, ask how people would use it in an actual development workflow. Result queries, known-issue lookups and investigation of a failed job are examples already supported by the experimental interface. Ask which interactions would be useful and how any job-triggering actions should fit the operator's existing policy. Keep this grounded in the task people want to complete.
+
+Finally, ask what kci-dev should focus on next. The room may prioritize a stronger public API, additional integrations, more reliable automation or a different unmet need. Invite participants to identify a concrete first contribution and who could help validate it with a real workflow. The aim is to shape the project's direction from those needs.
 
 Sources:
+https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py
+https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/docs/mcp.md
 https://github.com/kernelci/kci-dev
 https://github.com/aliceinwire/kci-patchwork
 https://github.com/aliceinwire/kci_release_review
-https://aliceinwire.github.io/kci_release_review/

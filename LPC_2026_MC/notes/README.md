@@ -10,6 +10,10 @@ captured results, their interpretation and proposals for further work.
 Speaker notes appear in the Marp comments, HTML presenter view and
 [SPEAKER_NOTES.md](SPEAKER_NOTES.md).
 
+Each slide has a faint row of numbered source links at the bottom left.
+Hover or keyboard focus makes them clearer in HTML. They remain clickable in
+the PDF. The speaker notes retain detailed source lists.
+
 ## Source snapshots
 
 Sources were inspected on 6 October 2026.

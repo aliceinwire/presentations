@@ -10,6 +10,11 @@ captured results, their interpretation and proposals for further work.
 Speaker notes appear in the Marp comments, HTML presenter view and
 [SPEAKER_NOTES.md](SPEAKER_NOTES.md).
 
+Small, faint superscript numbers link the relevant phrases to their sources.
+Numbers restart on each slide and remain clickable in HTML and PDF. Hover or
+keyboard focus makes them clearer without showing a URL tooltip. The speaker
+notes retain detailed source lists.
+
 ## Source snapshots
 
 Sources were inspected on 6 October 2026.

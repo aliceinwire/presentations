@@ -20,9 +20,7 @@ footer: "Arisu Tachibana / LPC 2026"
 kci-dev creator and project lead
 Senior Engineer, Cybertrust Japan Co., Ltd.
 
-Kernel Testing & Dependability MC / LPC 2026
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://lpc.events/event/20/contributions/2534/" title="Source 1: https://lpc.events/event/20/contributions/2534/" aria-label="Source 1">[1]</a> <a href="https://github.com/aliceinwire/presentations/blob/8653ff4d41ad3854f666aecec43d043a6400f33c/LPC_2025_TALK/LPC_2025_TALK.md" title="Source 2: https://github.com/aliceinwire/presentations/blob/8653ff4d41ad3854f666aecec43d043a6400f33c/LPC_2025_TALK/LPC_2025_TALK.md" aria-label="Source 2">[2]</a></div>
+Kernel Testing & Dependability MC / LPC 2026<sup class="cite"><a href="https://lpc.events/event/20/contributions/2534/" aria-label="Reference 1">1</a></sup>
 
 <!--
 I created kci-dev to make KernelCI useful directly in a kernel developer's workflow, and I continue to lead the project. At last year's LPC, we discussed closing that feedback loop. Today I want to show what we can do now, where the interfaces still fall short, and which workflow we should finish together. I will start with the work since last year, then leave room for discussion.
@@ -36,12 +34,10 @@ https://github.com/aliceinwire/presentations/blob/8653ff4d41ad3854f666aecec43d04
 
 ## Our work since LPC 2025
 
-- **Reliable automation:** fixed hangs in job watching and bisection.
-- **Clearer results:** corrected false success reports, validation and JSON output.
-- **Python API:** lets existing tools use kci-dev without parsing terminal output.
-- **Broader workflows:** added external build reporting and patch submission.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/kernelci/kci-dev/pull/290" title="Source 1: https://github.com/kernelci/kci-dev/pull/290" aria-label="Source 1">[1]</a> <a href="https://github.com/kernelci/kci-dev/pull/301" title="Source 2: https://github.com/kernelci/kci-dev/pull/301" aria-label="Source 2">[2]</a> <a href="https://github.com/kernelci/kci-dev/pull/288" title="Source 3: https://github.com/kernelci/kci-dev/pull/288" aria-label="Source 3">[3]</a> <a href="https://github.com/kernelci/kci-dev/pull/294" title="Source 4: https://github.com/kernelci/kci-dev/pull/294" aria-label="Source 4">[4]</a> <a href="https://github.com/kernelci/kci-dev/pull/295" title="Source 5: https://github.com/kernelci/kci-dev/pull/295" aria-label="Source 5">[5]</a> <a href="https://github.com/kernelci/kci-dev/pull/277" title="Source 6: https://github.com/kernelci/kci-dev/pull/277" aria-label="Source 6">[6]</a> <a href="https://github.com/kernelci/kci-dev/pull/266" title="Source 7: https://github.com/kernelci/kci-dev/pull/266" aria-label="Source 7">[7]</a> <a href="https://github.com/kernelci/kci-dev/pull/287" title="Source 8: https://github.com/kernelci/kci-dev/pull/287" aria-label="Source 8">[8]</a></div>
+- **Reliable automation:** fixed hangs in job watching<sup class="cite"><a href="https://github.com/kernelci/kci-dev/pull/290" aria-label="Reference 1">1</a></sup> and bisection.<sup class="cite"><a href="https://github.com/kernelci/kci-dev/pull/301" aria-label="Reference 2">2</a></sup>
+- **Clearer results:** corrected false success reports<sup class="cite"><a href="https://github.com/kernelci/kci-dev/pull/288" aria-label="Reference 3">3</a></sup>, validation<sup class="cite"><a href="https://github.com/kernelci/kci-dev/pull/294" aria-label="Reference 4">4</a></sup> and JSON output.<sup class="cite"><a href="https://github.com/kernelci/kci-dev/pull/295" aria-label="Reference 5">5</a></sup>
+- **Python API:** lets existing tools use kci-dev without parsing terminal output.<sup class="cite"><a href="https://github.com/kernelci/kci-dev/pull/277" aria-label="Reference 6">6</a></sup>
+- **Broader workflows:** added external build reporting<sup class="cite"><a href="https://github.com/kernelci/kci-dev/pull/266" aria-label="Reference 7">7</a></sup> and patch submission.<sup class="cite"><a href="https://github.com/kernelci/kci-dev/pull/287" aria-label="Reference 8">8</a></sup>
 
 <!--
 kci-dev connects kernel developers' tools to KernelCI. Since last year's LPC, our work has focused on making that connection reliable and easier to use.
@@ -71,9 +67,7 @@ https://github.com/kernelci/kci-dev/pull/287
 - Which failures appeared with my change?
 - Do we have enough evidence to act?
 
-kci-dev brings KernelCI data into scripts and review workflows.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/README.md" title="Source 1: https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/README.md" aria-label="Source 1">[1]</a> <a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py" title="Source 2: https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py" aria-label="Source 2">[2]</a></div>
+kci-dev brings KernelCI data into scripts and review workflows.<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/README.md" aria-label="Reference 1">1</a>,<a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py" aria-label="Reference 2">2</a></sup>
 
 <!--
 Imagine you are reviewing a patch series or preparing a stable update. You have a baseline and a candidate. KernelCI has results, but the decision still needs context. A failure count alone does not tell you whether the candidate introduced a problem. A different board, compiler or configuration can change what you are comparing. A missing test can also make the candidate look better than it really is.
@@ -93,16 +87,14 @@ https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a4
 
 | Available by v0.1.11 | What it enables |
 | :--- | :--- |
-| Python client | Import kci-dev into other tools |
-| KCIDB submission + storage | Report external builds and upload artifacts |
-| Patchset submission | Test local patches or allowed patch URLs |
-| Validation + workflow fixes | Check consistency and improve automation |
+| Python client | Import kci-dev into other tools<sup class="cite"><a href="https://github.com/kernelci/kci-dev/tree/v0.1.11" aria-label="Reference 1">1</a></sup> |
+| KCIDB submission + storage | Report external builds and upload artifacts<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/v0.1.11/kcidev/subcommands/storage.py" aria-label="Reference 2">2</a></sup> |
+| Patchset submission | Test local patches or allowed patch URLs<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/v0.1.11/docs/patchset.md" aria-label="Reference 3">3</a></sup> |
+| Validation + workflow fixes | Check consistency and improve automation<sup class="cite"><a href="https://github.com/kernelci/kci-dev/tree/v0.1.11" aria-label="Reference 1">1</a></sup> |
 
-**Current main:** structured comparison reports and CI gates
+**Current main:** structured comparison reports and CI gates<sup class="cite"><a href="https://github.com/kernelci/kci-dev/compare/v0.1.11...e4c00874f1bcfbd6a6f1cdd513320b2e95713a42" aria-label="Reference 4">4</a></sup>
 
-Source snapshot: 6 October 2026, `e4c0087`. MCP remains experimental.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/kernelci/kci-dev/tree/v0.1.11" title="Source 1: https://github.com/kernelci/kci-dev/tree/v0.1.11" aria-label="Source 1">[1]</a> <a href="https://github.com/kernelci/kci-dev/compare/v0.1.11...e4c00874f1bcfbd6a6f1cdd513320b2e95713a42" title="Source 2: https://github.com/kernelci/kci-dev/compare/v0.1.11...e4c00874f1bcfbd6a6f1cdd513320b2e95713a42" aria-label="Source 2">[2]</a> <a href="https://github.com/kernelci/kci-dev/blob/v0.1.11/docs/patchset.md" title="Source 3: https://github.com/kernelci/kci-dev/blob/v0.1.11/docs/patchset.md" aria-label="Source 3">[3]</a> <a href="https://github.com/kernelci/kci-dev/blob/v0.1.11/kcidev/subcommands/storage.py" title="Source 4: https://github.com/kernelci/kci-dev/blob/v0.1.11/kcidev/subcommands/storage.py" aria-label="Source 4">[4]</a> <a href="https://github.com/kernelci/kci-dev/blob/v0.1.11/docs/mcp.md" title="Source 5: https://github.com/kernelci/kci-dev/blob/v0.1.11/docs/mcp.md" aria-label="Source 5">[5]</a></div>
+Source snapshot: 6 October 2026, `e4c0087`. MCP remains experimental.<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/v0.1.11/docs/mcp.md" aria-label="Reference 5">5</a></sup>
 
 <!--
 Last year's slides included a reusable library as a priority. By v0.1.11 we had a public Python client, alongside the command-line interface. That lets another application call kci-dev and work with Python objects. External build systems can also construct and submit KCIDB build results, with separate storage commands for their artifacts.
@@ -135,10 +127,8 @@ summary = client.get_summary(
 )
 ```
 
-Dashboard queries return Python objects.
-`submit_build(...)` reports an external build to KCIDB.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/kernelci/kci-dev/blob/v0.1.11/README.md#using-kci-dev-as-a-python-library" title="Source 1: https://github.com/kernelci/kci-dev/blob/v0.1.11/README.md#using-kci-dev-as-a-python-library" aria-label="Source 1">[1]</a> <a href="https://github.com/kernelci/kci-dev/blob/v0.1.11/kcidev/api.py" title="Source 2: https://github.com/kernelci/kci-dev/blob/v0.1.11/kcidev/api.py" aria-label="Source 2">[2]</a></div>
+Dashboard queries return Python objects.<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/v0.1.11/README.md#using-kci-dev-as-a-python-library" aria-label="Reference 1">1</a></sup>
+`submit_build(...)` reports an external build to KCIDB.<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/v0.1.11/kcidev/api.py" aria-label="Reference 2">2</a></sup>
 
 <!--
 This is the small integration example I want people to take away. The caller supplies a repository URL, branch and full commit hash. The public client makes the Dashboard request and returns the result as Python data. Public Dashboard queries do not require a KernelCI submission token.
@@ -160,12 +150,10 @@ https://github.com/kernelci/kci-dev/blob/v0.1.11/kcidev/api.py
 
 | Application | Workflow it adds | Shared client methods |
 | :--- | :--- | :--- |
-| `kci-patchwork` | Test a Patchwork series on a known base | `trigger_patchset`, `get_node`, `get_nodes` |
-| `kci_release_review` | Compare tested revisions and publish reports | `compare_results`, `get_build`, `get_test`, `get_log` |
+| `kci-patchwork` | Test a Patchwork series on a known base | `trigger_patchset`, `get_node`, `get_nodes`<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L5-L12" aria-label="Reference 1">1</a>,<a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L230-L285" aria-label="Reference 2">2</a></sup> |
+| `kci_release_review` | Compare tested revisions and publish reports | `compare_results`, `get_build`, `get_test`, `get_log`<sup class="cite"><a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/client.py" aria-label="Reference 3">3</a>,<a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py" aria-label="Reference 4">4</a></sup> |
 
-Standalone Python applications importing `KernelCIClient`.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L5-L12" title="Source 1: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L5-L12" aria-label="Source 1">[1]</a> <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L230-L285" title="Source 2: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L230-L285" aria-label="Source 2">[2]</a> <a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/client.py" title="Source 3: https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/client.py" aria-label="Source 3">[3]</a> <a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py" title="Source 4: https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py" aria-label="Source 4">[4]</a></div>
+Standalone Python applications importing `KernelCIClient`.<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L5-L12" aria-label="Reference 1">1</a>,<a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/client.py" aria-label="Reference 3">3</a></sup>
 
 <!--
 These are examples of plugins built around the reusable interface. Here, plugin means a separate application that imports kci-dev. Neither application requires a plugin registration mechanism inside the command-line tool. They can have their own commands, release cycles and report formats while sharing the same client operations.
@@ -195,11 +183,9 @@ kci-dev patchset --nodeid "$CHECKOUT_NODE" \
   --watch --test "$TEST_PATH"
 ```
 
-Requires an existing checkout and a configured pipeline/token.
+Requires an existing checkout and a configured pipeline/token.<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/docs/patchset.md" aria-label="Reference 1">1</a>,<a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L102-L149" aria-label="Reference 2">2</a></sup>
 
-`--patchurl` accepts allowed URLs, including Patchwork mbox URLs.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/docs/patchset.md" title="Source 1: https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/docs/patchset.md" aria-label="Source 1">[1]</a> <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L102-L149" title="Source 2: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L102-L149" aria-label="Source 2">[2]</a> <a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/patchwork-series-1178390.json" title="Source 3: https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/patchwork-series-1178390.json" aria-label="Source 3">[3]</a></div>
+`--patchurl` accepts allowed URLs, including Patchwork mbox URLs.<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/docs/patchset.md" aria-label="Reference 1">1</a></sup>
 
 <!--
 This is the underlying command-line operation. First create or select a checkout of the intended base revision. Its checkout_nodeid becomes CHECKOUT_NODE here. Submit the patches in their intended order and select jobs available on that pipeline. The watch option can wait for the named test.
@@ -218,14 +204,12 @@ User-provided CIP series 1178390 command and running-result excerpt, reproduced 
 
 ## Choosing the base and the jobs
 
-- The checkout identifies the unpatched source revision and tarball.
-- The series must apply to that revision.
-- Job filters select builds and tests available on that instance.
-- The configuration must exercise the code the series changes.
+- The checkout identifies the unpatched source revision and tarball.<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L65-L100" aria-label="Reference 1">1</a></sup>
+- The series must apply to that revision.<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L65-L100" aria-label="Reference 1">1</a></sup>
+- Job filters select builds and tests available on that instance.<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L65-L100" aria-label="Reference 1">1</a></sup>
+- The configuration must exercise the code the series changes.<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/README.md#L104-L115" aria-label="Reference 2">2</a></sup>
 
-A passing build provides evidence for the configuration that ran.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/README.md#L104-L115" title="Source 1: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/README.md#L104-L115" aria-label="Source 1">[1]</a> <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L65-L100" title="Source 2: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L65-L100" aria-label="Source 2">[2]</a></div>
+A passing build provides evidence for the configuration that ran.<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/README.md#L104-L115" aria-label="Reference 2">2</a></sup>
 
 <!--
 The checkout argument is a KernelCI node identifier, rather than a Git branch name or a Patchwork series identifier. That node gives the pipeline a source revision and a tarball on which to apply the series. It also supplies the baseline that the application will later inspect.
@@ -243,14 +227,12 @@ https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf7672
 
 ## kci-patchwork: a series workflow
 
-1. Resolve the Patchwork URL to a complete series.
-2. Validate patch order and freeze the exact diffs.
-3. Record the base, selected jobs and submission identifiers.
-4. Collect the patched tree and compare completed results.
+1. Resolve the Patchwork URL to a complete series.<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/README.md#L56-L75" aria-label="Reference 1">1</a></sup>
+2. Validate patch order and freeze the exact diffs.<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/patchwork.py#L207-L284" aria-label="Reference 2">2</a></sup>
+3. Record the base, selected jobs and submission identifiers.<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L101-L147" aria-label="Reference 3">3</a></sup>
+4. Collect the patched tree and compare completed results.<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/results.py#L106-L200" aria-label="Reference 4">4</a></sup>
 
-`manifest.json` records the inputs. HTML and JSON reports retain the evidence.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/README.md#L56-L75" title="Source 1: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/README.md#L56-L75" aria-label="Source 1">[1]</a> <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/patchwork.py#L207-L284" title="Source 2: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/patchwork.py#L207-L284" aria-label="Source 2">[2]</a> <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L101-L147" title="Source 3: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L101-L147" aria-label="Source 3">[3]</a></div>
+`manifest.json` records the inputs.<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L101-L147" aria-label="Reference 3">3</a></sup> HTML and JSON reports retain the evidence.<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L189-L192" aria-label="Reference 5">5</a></sup>
 
 <!--
 A Patchwork URL is a useful input because it identifies the series in the place where review already happens. The application accepts series links and project-list links with a series parameter, including the CIP example that follows. It can also use other servers that expose a compatible public Patchwork API.
@@ -281,9 +263,7 @@ kci-patchwork \
   --submit
 ```
 
-Captured command: one series, an explicit base and a selected CIP build.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/patchwork-series-1178390.json" title="Source 1: https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/patchwork-series-1178390.json" aria-label="Source 1">[1]</a> <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/README.md#L19-L47" title="Source 2: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/README.md#L19-L47" aria-label="Source 2">[2]</a> <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/__main__.py#L250-L345" title="Source 3: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/__main__.py#L250-L345" aria-label="Source 3">[3]</a></div>
+Captured command: one series, an explicit base and a selected CIP build.<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/patchwork-series-1178390.json" aria-label="Reference 1">1</a>,<a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/README.md#L19-L47" aria-label="Reference 2">2</a>,<a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/__main__.py#L250-L345" aria-label="Reference 3">3</a></sup>
 
 <!--
 This is the command used for the captured run. The URL names series 1178390 in the cip-dev project. The explicit staging profile supplies the KernelCI endpoints and credentials. The checkout argument names the unpatched base, and the job filter selects the ARM64 CIP build.
@@ -315,10 +295,8 @@ https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf7672
 }
 ```
 
-Submission and result collection are active.
-The completed build comparison is still pending in this capture.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/patchwork-series-1178390.json" title="Source 1: https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/patchwork-series-1178390.json" aria-label="Source 1">[1]</a> <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L168-L214" title="Source 2: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L168-L214" aria-label="Source 2">[2]</a> <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/results.py#L9-L102" title="Source 3: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/results.py#L9-L102" aria-label="Source 3">[3]</a></div>
+Submission and result collection are active.<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/patchwork-series-1178390.json" aria-label="Reference 1">1</a>,<a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/results.py#L9-L102" aria-label="Reference 2">2</a></sup>
+The completed build comparison is still pending in this capture.<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/patchwork-series-1178390.json" aria-label="Reference 1">1</a>,<a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L168-L214" aria-label="Reference 3">3</a></sup>
 
 <!--
 This is an excerpt of the output supplied for the CIP run, not a simulated successful result. The application has observed two nodes, including one descendant. One result is pass and the other is unset. Their states are closing and running, and the terminal flag is false.
@@ -345,11 +323,9 @@ kci-patchwork status --run "$RUN"
 kci-patchwork watch --run "$RUN"
 ```
 
-- `report.html`: readable results and baseline comparisons
-- `report.json`: nodes, classifications and collection errors
-- The saved run retains the submitted node and tree IDs.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L126-L166" title="Source 1: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L126-L166" aria-label="Source 1">[1]</a> <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L230-L317" title="Source 2: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L230-L317" aria-label="Source 2">[2]</a></div>
+- `report.html`: readable results and baseline comparisons<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L126-L166" aria-label="Reference 1">1</a></sup>
+- `report.json`: nodes, classifications and collection errors<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L126-L166" aria-label="Reference 1">1</a></sup>
+- The saved run retains the submitted node and tree IDs.<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L230-L317" aria-label="Reference 2">2</a></sup>
 
 <!--
 These commands continue observation of the saved run. Status collects a snapshot, and watch continues polling. They use the recorded endpoints and submitted identifiers. Restarting observation should not require preparing or submitting the series again.
@@ -378,10 +354,8 @@ patchset = response["node"]
 root = client.get_node(patchset["id"])
 ```
 
-Patched and unpatched trees can share a Git commit hash.
-Collection also uses the patchset hash, tree ID and parent chain.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py" title="Source 1: https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py" aria-label="Source 1">[1]</a> <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L194-L273" title="Source 2: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L194-L273" aria-label="Source 2">[2]</a> <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L168-L187" title="Source 3: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L168-L187" aria-label="Source 3">[3]</a> <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/comparison.py#L9-L79" title="Source 4: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/comparison.py#L9-L79" aria-label="Source 4">[4]</a></div>
+Patched and unpatched trees can share a Git commit hash.<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py" aria-label="Reference 1">1</a>,<a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L168-L187" aria-label="Reference 2">2</a></sup>
+Collection also uses the patchset hash, tree ID and parent chain.<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/workflow.py#L194-L273" aria-label="Reference 3">3</a>,<a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/comparison.py#L9-L79" aria-label="Reference 4">4</a></sup>
 
 <!--
 This abbreviated Python example shows the shared operation that kci-patchwork calls. The configured client submits ordered diff strings against the chosen base and returns the patchset node. The application persists the returned node and tree identifiers before later collection.
@@ -409,12 +383,10 @@ kci-dev results compare \
   --format json "$BASE" "$HEAD"
 ```
 
-**Current main:** explicit full commit hashes and structured output
+**Current main:** explicit full commit hashes and structured output<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/docs/results.md" aria-label="Reference 1">1</a>,<a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py" aria-label="Reference 2">2</a></sup>
 
-Matches origin, platform, arch, compiler, config and path.
-Keeps repeated results and their IDs.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/docs/results.md" title="Source 1: https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/docs/results.md" aria-label="Source 1">[1]</a> <a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py" title="Source 2: https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py" aria-label="Source 2">[2]</a> <a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py" title="Source 3: https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py" aria-label="Source 3">[3]</a></div>
+Matches origin, platform, arch, compiler, config and path.<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py" aria-label="Reference 3">3</a></sup>
+Keeps repeated results and their IDs.<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py" aria-label="Reference 3">3</a></sup>
 
 <!--
 Now we have results for a baseline and a candidate. Current main can compare the two explicit commit hashes and return a structured report. I use explicit hashes here because a review needs to remain tied to the revisions we intended to compare. The default latest-two-checkouts mode is convenient for exploration, but its inputs can change as new results arrive.
@@ -437,17 +409,15 @@ https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a4
 
 | Category | Interpretation |
 | :--- | :--- |
-| `regression` | PASS becomes FAIL/ERROR, or history signal |
-| `fixed` | Recovery to PASS |
-| `persistent_fail` | Failure on both revisions |
-| `unstable` | History signal or another status change |
-| `new` | Result appears only in HEAD |
-| `missing` | Result appears only in BASE |
+| `regression` | PASS becomes FAIL/ERROR, or history signal<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py" aria-label="Reference 1">1</a></sup> |
+| `fixed` | Recovery to PASS<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py" aria-label="Reference 1">1</a></sup> |
+| `persistent_fail` | Failure on both revisions<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py" aria-label="Reference 1">1</a></sup> |
+| `unstable` | History signal or another status change<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py" aria-label="Reference 1">1</a>,<a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/tests/test_regression.py" aria-label="Reference 2">2</a></sup> |
+| `new` | Result appears only in HEAD<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py" aria-label="Reference 1">1</a></sup> |
+| `missing` | Result appears only in BASE<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py" aria-label="Reference 1">1</a></sup> |
 
 **A regression label needs investigation.**
-`FAIL` and `ERROR` both count as failures in this classifier.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py" title="Source 1: https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py" aria-label="Source 1">[1]</a> <a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/tests/test_regression.py" title="Source 2: https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/tests/test_regression.py" aria-label="Source 2">[2]</a></div>
+`FAIL` and `ERROR` both count as failures in this classifier.<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py" aria-label="Reference 1">1</a></sup>
 
 <!--
 Here is how to read those categories. A pass becoming a fail or error can produce a regression. A failure becoming a pass can produce a fix. Failures on both sides are persistent. Results found on only one side become new or missing. History can refine the classification and mark a test unstable.
@@ -465,14 +435,12 @@ https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a4
 
 ## kci_release_review: tested revisions
 
-- Select a baseline and candidate by full commit hash.
-- Reuse kci-dev's comparison and result classifications.
-- Collect selected result details and bounded log excerpts.
-- Publish portable HTML with the complete JSON report.
+- Select a baseline and candidate by full commit hash.<sup class="cite"><a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py" aria-label="Reference 1">1</a></sup>
+- Reuse kci-dev's comparison and result classifications.<sup class="cite"><a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py" aria-label="Reference 1">1</a></sup>
+- Collect selected result details and bounded log excerpts.<sup class="cite"><a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py" aria-label="Reference 1">1</a></sup>
+- Publish portable HTML with the complete JSON report.<sup class="cite"><a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/html_report.py" aria-label="Reference 2">2</a></sup>
 
-The application queries existing results through the Python API.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py" title="Source 1: https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py" aria-label="Source 1">[1]</a> <a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/html_report.py" title="Source 2: https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/html_report.py" aria-label="Source 2">[2]</a> <a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/daily.py" title="Source 3: https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/daily.py" aria-label="Source 3">[3]</a> <a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/releases.py" title="Source 4: https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/releases.py" aria-label="Source 4">[4]</a></div>
+The application queries existing results through the Python API.<sup class="cite"><a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py" aria-label="Reference 1">1</a></sup>
 
 <!--
 Release review starts with revisions that already have KernelCI results. The application takes explicit baseline and candidate hashes, together with the origin, repository and branch. It calls the public comparison method and preserves its classifications rather than implementing another copy of the Dashboard classifier.
@@ -504,10 +472,8 @@ report = collect_report(
 )
 ```
 
-`ReviewClient` extends `KernelCIClient`.
-`collect_report()` calls `compare_results()` and keeps its evidence.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/client.py" title="Source 1: https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/client.py" aria-label="Source 1">[1]</a> <a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py" title="Source 2: https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py" aria-label="Source 2">[2]</a></div>
+`ReviewClient` extends `KernelCIClient`.<sup class="cite"><a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/client.py" aria-label="Reference 1">1</a></sup>
+`collect_report()` calls `compare_results()` and keeps its evidence.<sup class="cite"><a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py" aria-label="Reference 2">2</a></sup>
 
 <!--
 Here is the Python boundary inside the release-review application. ReviewClient subclasses KernelCIClient and records the result lists that the comparison actually consumed. It also bounds supplemental issue lookups and checks the identity of returned history. The underlying result requests and classification still come from kci-dev.
@@ -527,15 +493,13 @@ https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d
 
 ## Published release-review results
 
-**linux-6.6.y: v6.6.157 to v6.6.158**
+**linux-6.6.y: v6.6.157 to v6.6.158**<sup class="cite"><a href="https://aliceinwire.github.io/kci_release_review/release-kernel-linux-6-6-y-v6-6-158/report.html" aria-label="Reference 1">1</a>,<a href="https://aliceinwire.github.io/kci_release_review/summary.json" aria-label="Reference 2">2</a></sup>
 
 ![Published report counts: 1 regression, 1 fixed, 0 unstable, 870 persistent failures, 2573 new, 1047 missing](images/release-review-counts.png)
 
-Status: **REVIEW_REQUIRED**. Report collected on 5 October 2026.
+Status: **REVIEW_REQUIRED**. Report collected on 5 October 2026.<sup class="cite"><a href="https://aliceinwire.github.io/kci_release_review/release-kernel-linux-6-6-y-v6-6-158/report.json" aria-label="Reference 3">3</a>,<a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/release-review-2026-10-05.json#L5-L122" aria-label="Reference 4">4</a></sup>
 
 [Open the published reports](https://aliceinwire.github.io/kci_release_review/)
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://aliceinwire.github.io/kci_release_review/release-kernel-linux-6-6-y-v6-6-158/report.html" title="Source 1: https://aliceinwire.github.io/kci_release_review/release-kernel-linux-6-6-y-v6-6-158/report.html" aria-label="Source 1">[1]</a> <a href="https://aliceinwire.github.io/kci_release_review/release-kernel-linux-6-6-y-v6-6-158/report.json" title="Source 2: https://aliceinwire.github.io/kci_release_review/release-kernel-linux-6-6-y-v6-6-158/report.json" aria-label="Source 2">[2]</a> <a href="https://aliceinwire.github.io/kci_release_review/summary.json" title="Source 3: https://aliceinwire.github.io/kci_release_review/summary.json" aria-label="Source 3">[3]</a> <a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/release-review-2026-10-05.json#L5-L122" title="Source 4: https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/release-review-2026-10-05.json#L5-L122" aria-label="Source 4">[4]</a></div>
 
 <!--
 This image comes from the published linux-6.6.y report. The report compares v6.6.157 with v6.6.158 and was collected on 5 October 2026. The full commit hashes and source URLs accompany the captured evidence. These values describe that report, rather than a forecast or an invented demonstration.
@@ -557,19 +521,17 @@ Captured report data: notes/evidence/release-review-2026-10-05.json.
 
 ## One candidate to investigate
 
-`kernelci_watchdog_reset.wdt-reset.wdt-get-timeout`
+`kernelci_watchdog_reset.wdt-reset.wdt-get-timeout`<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/release-review-2026-10-05.json#L100-L118" aria-label="Reference 1">1</a></sup>
 
 | Context | Captured result |
 | :--- | :--- |
-| Platform | `mt8195-cherry-tomato-r2` |
-| Architecture / compiler | ARM64 / GCC 14 |
-| Baseline | PASS |
-| Candidate | FAIL |
-| Known issues | Not checked in this report |
+| Platform | `mt8195-cherry-tomato-r2`<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/release-review-2026-10-05.json#L100-L118" aria-label="Reference 1">1</a></sup> |
+| Architecture / compiler | ARM64 / GCC 14<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/release-review-2026-10-05.json#L100-L118" aria-label="Reference 1">1</a></sup> |
+| Baseline | PASS<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/release-review-2026-10-05.json#L100-L118" aria-label="Reference 1">1</a></sup> |
+| Candidate | FAIL<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/release-review-2026-10-05.json#L100-L118" aria-label="Reference 1">1</a></sup> |
+| Known issues | Not checked in this report<sup class="cite"><a href="https://aliceinwire.github.io/kci_release_review/release-kernel-linux-6-6-y-v6-6-158/report.json" aria-label="Reference 2">2</a></sup> |
 
-The report links both result IDs for follow-up.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://aliceinwire.github.io/kci_release_review/release-kernel-linux-6-6-y-v6-6-158/report.json" title="Source 1: https://aliceinwire.github.io/kci_release_review/release-kernel-linux-6-6-y-v6-6-158/report.json" aria-label="Source 1">[1]</a> <a href="https://aliceinwire.github.io/kci_release_review/release-kernel-linux-6-6-y-v6-6-158/report.html" title="Source 2: https://aliceinwire.github.io/kci_release_review/release-kernel-linux-6-6-y-v6-6-158/report.html" aria-label="Source 2">[2]</a> <a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/release-review-2026-10-05.json#L100-L118" title="Source 3: https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/release-review-2026-10-05.json#L100-L118" aria-label="Source 3">[3]</a></div>
+The report links both result IDs for follow-up.<sup class="cite"><a href="https://aliceinwire.github.io/kci_release_review/release-kernel-linux-6-6-y-v6-6-158/report.html" aria-label="Reference 3">3</a></sup>
 
 <!--
 This is the regression candidate behind the previous report's count of one. It is a watchdog timeout query test on the mt8195-cherry-tomato-r2 platform, using ARM64 and GCC 14. The baseline result is pass and the candidate result is fail. The report also retains the full configuration string, occurrence number and the two result identifiers.
@@ -589,18 +551,16 @@ https://aliceinwire.github.io/kci_release_review/release-kernel-linux-6-6-y-v6-6
 
 ## A CIP result with no review signals
 
-**v6.12.108-cip31 to v6.12.111-cip32**
+**v6.12.108-cip31 to v6.12.111-cip32**<sup class="cite"><a href="https://aliceinwire.github.io/kci_release_review/release-cip-linux-6-12-y-cip-v6-12-111-cip32/report.html" aria-label="Reference 1">1</a></sup>
 
 | Observed results | Baseline | Candidate |
 | :--- | :--- | :--- |
-| Builds | 6 PASS | 6 PASS |
-| Boots | 0 | 15 PASS |
-| Tests | 0 | 89 PASS, 11 SKIP |
+| Builds | 6 PASS | 6 PASS<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/release-review-2026-10-05.json#L124-L213" aria-label="Reference 2">2</a></sup> |
+| Boots | 0 | 15 PASS<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/release-review-2026-10-05.json#L124-L213" aria-label="Reference 2">2</a></sup> |
+| Tests | 0 | 89 PASS, 11 SKIP<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/release-review-2026-10-05.json#L124-L213" aria-label="Reference 2">2</a></sup> |
 
-**115 new entries**, with no observed failures or missing results.
-Required coverage remains unassessed.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://aliceinwire.github.io/kci_release_review/release-cip-linux-6-12-y-cip-v6-12-111-cip32/report.html" title="Source 1: https://aliceinwire.github.io/kci_release_review/release-cip-linux-6-12-y-cip-v6-12-111-cip32/report.html" aria-label="Source 1">[1]</a> <a href="https://aliceinwire.github.io/kci_release_review/release-cip-linux-6-12-y-cip-v6-12-111-cip32/report.json" title="Source 2: https://aliceinwire.github.io/kci_release_review/release-cip-linux-6-12-y-cip-v6-12-111-cip32/report.json" aria-label="Source 2">[2]</a> <a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/release-review-2026-10-05.json#L124-L213" title="Source 3: https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/release-review-2026-10-05.json#L124-L213" aria-label="Source 3">[3]</a></div>
+**115 new entries**, with no observed failures or missing results.<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/release-review-2026-10-05.json#L124-L213" aria-label="Reference 2">2</a></sup>
+Required coverage remains unassessed.<sup class="cite"><a href="https://aliceinwire.github.io/kci_release_review/release-cip-linux-6-12-y-cip-v6-12-111-cip32/report.json" aria-label="Reference 3">3</a></sup>
 
 <!--
 The CIP report gives a different outcome from the stable example. For this pair, both revisions have six passing builds. The candidate also has fifteen passing boots and one hundred test results, of which eighty-nine pass and eleven are skipped. The baseline has no observed boots or tests in this capture.
@@ -620,14 +580,12 @@ https://aliceinwire.github.io/kci_release_review/release-cip-linux-6-12-y-cip-v6
 
 **linux-6.12.y: v6.12.110 to v6.12.111**
 
-- The report retains 1 regression candidate and 36 recoveries.
-- Returned tree history belongs to a different candidate.
-- The issue budget leaves 370 result IDs unchecked.
+- The report retains 1 regression candidate and 36 recoveries.<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/release-review-2026-10-05.json#L215-L317" aria-label="Reference 1">1</a></sup>
+- Returned tree history belongs to a different candidate.<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/release-review-2026-10-05.json#L215-L317" aria-label="Reference 1">1</a></sup>
+- The issue budget leaves 370 result IDs unchecked.<sup class="cite"><a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/release-review-2026-10-05.json#L215-L317" aria-label="Reference 1">1</a></sup>
 
-Status: **EVIDENCE_INCOMPLETE**, exit code `2`.
-The exact-commit results remain available for review.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://aliceinwire.github.io/kci_release_review/stable-6-12/report.html" title="Source 1: https://aliceinwire.github.io/kci_release_review/stable-6-12/report.html" aria-label="Source 1">[1]</a> <a href="https://aliceinwire.github.io/kci_release_review/stable-6-12/report.json" title="Source 2: https://aliceinwire.github.io/kci_release_review/stable-6-12/report.json" aria-label="Source 2">[2]</a> <a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/client.py" title="Source 3: https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/client.py" aria-label="Source 3">[3]</a> <a href="https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/release-review-2026-10-05.json#L215-L317" title="Source 4: https://github.com/aliceinwire/presentations/blob/d229b41811446f79a7810160a7c98e86b7b1f3de/LPC_2026_MC/notes/evidence/release-review-2026-10-05.json#L215-L317" aria-label="Source 4">[4]</a></div>
+Status: **EVIDENCE_INCOMPLETE**, exit code `2`.<sup class="cite"><a href="https://aliceinwire.github.io/kci_release_review/stable-6-12/report.html" aria-label="Reference 2">2</a>,<a href="https://aliceinwire.github.io/kci_release_review/stable-6-12/report.json" aria-label="Reference 3">3</a></sup>
+The exact-commit results remain available for review.<sup class="cite"><a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/client.py" aria-label="Reference 4">4</a></sup>
 
 <!--
 This published comparison shows why it matters to preserve incompleteness. The explicit commit queries returned useful observations, including one regression candidate and thirty-six recoveries. However, the branch-history response points to a different head revision. The application rejects that history rather than allowing it to silently alter the selected comparison.
@@ -657,13 +615,11 @@ kci-dev results gate \
 
 | Exit | Meaning in current main |
 | :--- | :--- |
-| `0` | No selected category triggered the policy |
-| `1` | A selected category triggered the policy |
-| `2` | Incomplete comparison or command error |
+| `0` | No selected category triggered the policy<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/subcommands/results/__init__.py" aria-label="Reference 1">1</a></sup> |
+| `1` | A selected category triggered the policy<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/subcommands/results/__init__.py" aria-label="Reference 1">1</a></sup> |
+| `2` | Incomplete comparison or command error<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/subcommands/results/__init__.py" aria-label="Reference 1">1</a></sup> |
 
-Expected coverage still needs an explicit test plan.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/subcommands/results/__init__.py" title="Source 1: https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/subcommands/results/__init__.py" aria-label="Source 1">[1]</a> <a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py" title="Source 2: https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py" aria-label="Source 2">[2]</a></div>
+Expected coverage still needs an explicit test plan.<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/libs/regression.py" aria-label="Reference 2">2</a></sup>
 
 <!--
 The gate command makes part of that policy executable. In this example I choose to fail on regressions and missing results. The default selects regression only. A policy violation returns one, while an incomplete comparison returns two. Command usage errors can also return two, so an integration should keep the report and diagnostic output.
@@ -681,14 +637,12 @@ https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a4
 
 ## What the plugins expose
 
-- Release review checks that history belongs to the selected head.
-- Patch review keeps patchset and baseline node identities separate.
-- Reports preserve partial results, skipped work and collection errors.
-- Shared API fixes can benefit every application using the client.
+- Release review checks that history belongs to the selected head.<sup class="cite"><a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/client.py" aria-label="Reference 1">1</a></sup>
+- Patch review keeps patchset and baseline node identities separate.<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/results.py#L106-L200" aria-label="Reference 2">2</a>,<a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/comparison.py#L82-L238" aria-label="Reference 3">3</a></sup>
+- Reports preserve partial results, skipped work and collection errors.<sup class="cite"><a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/client.py" aria-label="Reference 1">1</a>,<a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/results.py#L106-L200" aria-label="Reference 2">2</a></sup>
+- Shared API fixes can benefit every application using the client.<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py" aria-label="Reference 4">4</a></sup>
 
-Consistent configuration and result identity remain core requirements.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/subcommands/results/__init__.py" title="Source 1: https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/subcommands/results/__init__.py" aria-label="Source 1">[1]</a> <a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py" title="Source 2: https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py" aria-label="Source 2">[2]</a> <a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/client.py" title="Source 3: https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/client.py" aria-label="Source 3">[3]</a> <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/results.py#L106-L200" title="Source 4: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/results.py#L106-L200" aria-label="Source 4">[4]</a> <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/comparison.py#L82-L238" title="Source 5: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/kci_patchwork/comparison.py#L82-L238" aria-label="Source 5">[5]</a></div>
+Consistent configuration and result identity remain core requirements.<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/subcommands/results/__init__.py" aria-label="Reference 5">5</a>,<a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py" aria-label="Reference 4">4</a></sup>
 
 <!--
 The applications exercise the shared interface under real workflow constraints. The release-review adapter checks that history belongs to the selected candidate and makes a mismatch visible. It also passes configured endpoints into the client. Those protections are implemented in the application snapshot we inspected.
@@ -713,14 +667,12 @@ https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf7672
 
 | Shared kci-dev interface | Application responsibility |
 | :--- | :--- |
-| Service requests and typed failures | Input selection and recovery |
-| Explicit endpoint configuration | Credential and instance choices |
-| Result identities and classifications | Required coverage and review policy |
-| Structured Python data | Reports and integration with other tools |
+| Service requests and typed failures<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py" aria-label="Reference 1">1</a></sup> | Input selection and recovery |
+| Explicit endpoint configuration<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py" aria-label="Reference 1">1</a></sup> | Credential and instance choices |
+| Result identities and classifications<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py" aria-label="Reference 1">1</a></sup> | Required coverage and review policy |
+| Structured Python data<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py" aria-label="Reference 1">1</a></sup> | Reports and integration with other tools<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L253-L270" aria-label="Reference 2">2</a>,<a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py" aria-label="Reference 3">3</a></sup> |
 
-Pin the library revision and retain the inputs behind each report.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py" title="Source 1: https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py" aria-label="Source 1">[1]</a> <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/pyproject.toml#L11-L15" title="Source 2: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/pyproject.toml#L11-L15" aria-label="Source 2">[2]</a> <a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/requirements.txt" title="Source 3: https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/requirements.txt" aria-label="Source 3">[3]</a> <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L253-L270" title="Source 4: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L253-L270" aria-label="Source 4">[4]</a> <a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py" title="Source 5: https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py" aria-label="Source 5">[5]</a></div>
+Pin the library revision<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/pyproject.toml#L11-L15" aria-label="Reference 4">4</a>,<a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/requirements.txt" aria-label="Reference 5">5</a></sup> and retain the inputs behind each report.<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L253-L270" aria-label="Reference 2">2</a>,<a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py" aria-label="Reference 3">3</a></sup>
 
 <!--
 These examples suggest a useful contract for the next integration. The client should provide consistent requests, explicit configuration, recoverable failures and structured results. The application should own how a user selects inputs, when work starts, and how the evidence reaches its intended audience.
@@ -746,13 +698,11 @@ pip install 'kci-dev[mcp]'
 kci-dev mcp
 ```
 
-- Query results, hardware and known issues
-- Inspect Maestro nodes with configured API access
-- Trigger or retry jobs with pipeline access and a token
+- Query results, hardware and known issues<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/mcp/tools_dashboard.py" aria-label="Reference 1">1</a></sup>
+- Inspect Maestro nodes with configured API access<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/mcp/tools_maestro.py" aria-label="Reference 2">2</a></sup>
+- Trigger or retry jobs with pipeline access and a token<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/mcp/tools_maestro.py" aria-label="Reference 2">2</a></sup>
 
-Tool names and response formats can change.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/docs/mcp.md" title="Source 1: https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/docs/mcp.md" aria-label="Source 1">[1]</a> <a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/mcp/tools_dashboard.py" title="Source 2: https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/mcp/tools_dashboard.py" aria-label="Source 2">[2]</a> <a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/mcp/tools_maestro.py" title="Source 3: https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/mcp/tools_maestro.py" aria-label="Source 3">[3]</a></div>
+Tool names and response formats can change.<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/docs/mcp.md" aria-label="Reference 3">3</a></sup>
 
 <!--
 The optional MCP server exposes KernelCI operations to compatible automation and AI clients. A client can explore results and known issues, inspect nodes, and, with the required configuration, request a checkout or retry. Those operations use the public Python client.
@@ -775,14 +725,12 @@ https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a4
 
 | Workstream | Concrete next contribution |
 | :--- | :--- |
-| Shared API correctness | Scope history and propagate configuration |
-| Patch review | Validate completed comparisons on real series |
-| Required coverage | Define jobs, platforms and completion rules |
-| Review integration | Connect reports to maintainer workflows |
+| Shared API correctness | Scope history and propagate configuration<sup class="cite"><a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py" aria-label="Reference 1">1</a></sup> |
+| Patch review | Validate completed comparisons on real series<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L102-L142" aria-label="Reference 2">2</a></sup> |
+| Required coverage | Define jobs, platforms and completion rules<sup class="cite"><a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py" aria-label="Reference 3">3</a></sup> |
+| Review integration | Connect reports to maintainer workflows<sup class="cite"><a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py" aria-label="Reference 3">3</a></sup> |
 
-Both example plugins provide starting points for this work.
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L102-L142" title="Source 1: https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L102-L142" aria-label="Source 1">[1]</a> <a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py" title="Source 2: https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py" aria-label="Source 2">[2]</a> <a href="https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py" title="Source 3: https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a42/kcidev/api.py" aria-label="Source 3">[3]</a></div>
+Both example plugins provide starting points for this work.<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork/blob/1acedb7ab59a2bf8ab9934c4cf76727552c04b10/docs/workflow.md#L102-L142" aria-label="Reference 2">2</a>,<a href="https://github.com/aliceinwire/kci_release_review/blob/b328d0a60e46a1c7062d36b2d062d0fcac7ac442/kci_release_review/report.py" aria-label="Reference 3">3</a></sup>
 
 <!--
 We now have concrete applications to improve, rather than only proposed integrations. Shared correctness remains a priority because every consumer depends on the meaning of the result. History identity and configuration propagation should be explicit guarantees, with tests that cover older revisions and incomplete data.
@@ -803,14 +751,12 @@ https://github.com/kernelci/kci-dev/blob/e4c00874f1bcfbd6a6f1cdd513320b2e95713a4
 
 ## Decisions for this MC
 
-- Which real series or release should we validate next?
+- Which real series or release should we validate next?<sup class="cite"><a href="https://aliceinwire.github.io/kci_release_review/" aria-label="Reference 1">1</a></sup>
 - Which jobs and platforms are required for that workflow?
 - Which guarantees should become part of the shared Python API?
 - Who can review the resulting evidence with us?
 
-[kci-dev](https://github.com/kernelci/kci-dev) / [kci-patchwork](https://github.com/aliceinwire/kci-patchwork) / [kci_release_review](https://github.com/aliceinwire/kci_release_review)
-
-<div class="slide-refs" aria-label="Slide references">References: <a href="https://github.com/kernelci/kci-dev" title="Source 1: https://github.com/kernelci/kci-dev" aria-label="Source 1">[1]</a> <a href="https://github.com/aliceinwire/kci-patchwork" title="Source 2: https://github.com/aliceinwire/kci-patchwork" aria-label="Source 2">[2]</a> <a href="https://github.com/aliceinwire/kci_release_review" title="Source 3: https://github.com/aliceinwire/kci_release_review" aria-label="Source 3">[3]</a> <a href="https://aliceinwire.github.io/kci_release_review/" title="Source 4: https://aliceinwire.github.io/kci_release_review/" aria-label="Source 4">[4]</a></div>
+kci-dev<sup class="cite"><a href="https://github.com/kernelci/kci-dev" aria-label="Reference 2">2</a></sup> / kci-patchwork<sup class="cite"><a href="https://github.com/aliceinwire/kci-patchwork" aria-label="Reference 3">3</a></sup> / kci_release_review<sup class="cite"><a href="https://github.com/aliceinwire/kci_release_review" aria-label="Reference 4">4</a></sup>
 
 <!--
 I would like us to choose a concrete maintainer workflow and the evidence it requires. We can now point to two applications that people can inspect and run: one begins with a Patchwork series, and the other begins with tested revisions. Both demonstrate why the reusable Python interface matters beyond the command line.
